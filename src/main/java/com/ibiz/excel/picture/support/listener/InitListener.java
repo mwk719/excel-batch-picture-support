@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
  * @date 2020/7/310:46
  */
 public class InitListener extends AbstractContentListener {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public void invoke(Sheet sheet) {
         repositories.forEach(r -> r.write(sheet));
