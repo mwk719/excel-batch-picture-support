@@ -7,7 +7,9 @@ import com.ibiz.excel.picture.support.model.Picture;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.module.RelationShip;
 import com.ibiz.excel.picture.support.util.FileUtil;
+import com.ibiz.excel.picture.support.util.MD5Digester;
 import com.ibiz.excel.picture.support.util.StringUtils;
+import org.apache.tools.ant.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,14 +54,25 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
      * @param picture
      */
     private void copyPictureAppendDrawingRelsXML(Sheet sheet, Picture picture) {
-        File media = sheet.getSheetContext().getRepositoryHolder().get(Alias.MEDIA).getFile();
-        int drawingSequence = sheet.getDrawingSequence();
-        File destPicture = new File(media, "image"+ drawingSequence + ".png");
-        File srcPicture = new File(picture.getPicturePath());
         try {
+            File srcPicture = new File(picture.getPicturePath());
+            String md5 = MD5Digester.digestMD5(srcPicture);
+            Integer drawingSequence = sheet.getWorkbook().getImageCache().get(md5);
+            if (Objects.nonNull(drawingSequence)) {
+                RelationShip relationShip = new RelationShip("rId" + drawingSequence, WorkbookConstant.MEDIA_IMAGE_TYPE, "../media/image" + drawingSequence +".png");
+                picture.setRembed(drawingSequence);
+                sheet.setDrawingSequence((drawingSequence + 1));
+                target.append(CovertUtil.covert(relationShip));
+                return;
+            }
+            File media = sheet.getSheetContext().getRepositoryHolder().get(Alias.MEDIA).getFile();
+            drawingSequence = sheet.getDrawingSequence();
+            File destPicture = new File(media, "image"+ drawingSequence + ".png");
             FileUtil.copyFile(srcPicture, destPicture);
             picture.setRembed(drawingSequence);
             RelationShip relationShip = new RelationShip("rId" + drawingSequence, WorkbookConstant.MEDIA_IMAGE_TYPE, "../media/image" + drawingSequence +".png");
+            //先把drawingSequence放入缓存,因为从缓存中获取时设置drawingSequence再+1对应图片。实际图片的drawingSequence不变
+            sheet.getWorkbook().getImageCache().put(md5, drawingSequence);
             drawingSequence++;
             sheet.setDrawingSequence(drawingSequence);
             target.append(CovertUtil.covert(relationShip));

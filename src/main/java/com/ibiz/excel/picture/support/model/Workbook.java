@@ -7,9 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @auther 喻场
@@ -35,7 +33,15 @@ public class Workbook {
     /**目的文件*/
     private File destFile;
     private boolean close;
+    /***
+     * 一个excel文件的所有image被所有sheet公用
+     * 图片缓存,key为图片字节流md5 ,  value为图片生成的编号
+     */
+    private Map<String, Integer> imageCache = new HashMap<>();
 
+    public Map<String, Integer> getImageCache() {
+        return imageCache;
+    }
     private Workbook() {
         this(100);
     }
