@@ -61,7 +61,6 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
             if (Objects.nonNull(drawingSequence)) {
                 RelationShip relationShip = new RelationShip("rId" + drawingSequence, WorkbookConstant.MEDIA_IMAGE_TYPE, "../media/image" + drawingSequence +".png");
                 picture.setRembed(drawingSequence);
-                sheet.setDrawingSequence((drawingSequence + 1));
                 target.append(CovertUtil.covert(relationShip));
                 return;
             }
