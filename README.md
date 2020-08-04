@@ -19,6 +19,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 ## 下面对EXCEL的操作做具体介绍
 
 EXCEL由几大组件构建而成，具体部分：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715114523625.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3ljaGFuZzU3Nw==,size_16,color_FFFFFF,t_70)
 工作文件实例
 1. workbook代表一个excel工作文件
