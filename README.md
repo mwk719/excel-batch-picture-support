@@ -28,10 +28,14 @@ EXCEL由几大组件构建而成，具体部分：
 4. Cell 具体单元格数据
 5. MergeCell 合并单元格信息，指定了合并起始行和结束行，起始列和结束列
 6. Picture 为图片信息，一个Sheet有n个Picture
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715114920961.png)
+
 **注解**
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715114042664.png)
+
 需要导出的字段使用ExportModel注解，程序会自动识别标题，合并单元格，插入图片
+
 ```java
 
 /**
@@ -61,10 +65,15 @@ public @interface ExportModel {
 > close 写入剩余内存中的数据到流， 写入组件尾部信息，关闭工作文件
 
 init, write, close分别对应了三种事件，程序使用事件驱动机制，当监听器监听到组件在执行对应注册事件时分别进行相应操作
+
 **事件**
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715122312288.png)
+
 **监听器**
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715122604342.png)
+
 部分代码
 
 ```java
