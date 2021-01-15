@@ -17,7 +17,7 @@ import java.util.UUID;
  * @author MinWeikai
  * @date 2021-01-15 09:46:32
  */
-public class DemoPicture {
+public class PicturesDemo {
 	static final String CURRENT_PATH = "E:\\test\\";
 
 	private final static String IMG_PATH = "E:\\test\\img\\";
