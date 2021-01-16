@@ -58,6 +58,11 @@ public class Cell {
         this(0,cellNumber);
     }
 
+    public Cell(int cellNumber, String value) {
+        this.cellNumber = cellNumber;
+        this.value = value;
+    }
+
     public int getCellNumber() {
         return cellNumber;
     }
