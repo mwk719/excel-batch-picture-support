@@ -37,7 +37,7 @@ public class CustomTitleDemo {
 		String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
 		List<Cell> nameCells = new ArrayList<>();
 		for (int i = 0; i < excelName.length; i++) {
-			nameCells.add(new Cell(i, excelName[i]));
+			nameCells.add(new Cell(0, i).setValue(excelName[i]));
 		}
 		row.setCells(nameCells);
 
@@ -47,7 +47,7 @@ public class CustomTitleDemo {
 		List<Picture> pictures = sheet.getPictures();
 		for (int i = 0; i < excelName.length; i++) {
 			if (i < 2) {
-				valueCells.add(new Cell(i, "文本"));
+				valueCells.add(new Cell(1, i).setValue("文本"));
 			} else {
 				//有图片的行,行高设置为100
 				row.setHeight(WorkbookConstant.PICTURE_ROW_HEIGHT);

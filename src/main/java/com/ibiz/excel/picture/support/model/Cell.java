@@ -50,17 +50,13 @@ public class Cell {
         return value;
     }
 
-    public void setValue(String value) {
+    public Cell setValue(String value) {
         this.value = value;
+        return this;
     }
 
     public Cell(int cellNumber) {
         this(0,cellNumber);
-    }
-
-    public Cell(int cellNumber, String value) {
-        this.cellNumber = cellNumber;
-        this.value = value;
     }
 
     public int getCellNumber() {
