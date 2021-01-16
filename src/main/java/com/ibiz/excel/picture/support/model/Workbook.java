@@ -1,12 +1,13 @@
 package com.ibiz.excel.picture.support.model;
 
+import cn.hutool.core.util.ZipUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.util.FileUtil;
-import com.ibiz.excel.picture.support.util.CompressorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.OutputStream;
 import java.util.*;
 
 /**
@@ -81,7 +82,7 @@ public class Workbook {
         }
         sheets.forEach(Sheet::close);
         //把文件打包成xlsx
-        CompressorUtil.compress(filePath, destPath);
+        ZipUtil.zip(filePath, destPath);
         destFile = new File(destPath);
         deleteFile(filePath);
         logger.info("dest excel path:{}", destPath);

@@ -50,8 +50,9 @@ public class Cell {
         return value;
     }
 
-    public void setValue(String value) {
+    public Cell setValue(String value) {
         this.value = value;
+        return this;
     }
 
     public Cell(int cellNumber) {

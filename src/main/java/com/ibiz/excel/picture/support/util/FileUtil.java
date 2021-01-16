@@ -47,14 +47,12 @@ public class FileUtil {
     }
 
     public static void writeToOutput(File source, OutputStream output) {
-        try {
-            byte[] buf = new byte[2048];
-            FileInputStream fis = new FileInputStream(source);
+        byte[] buf = new byte[1024];
+        try(BufferedInputStream fis = new BufferedInputStream(new FileInputStream(source))) {
             while (fis.read(buf) != -1) {
                 output.write(buf);
             }
-            fis.close();
-        } catch (IOException e) {
+        }catch (IOException e) {
             throw new RuntimeException("write to output error , destFile path:" + source.getAbsolutePath(), e);
         }
     }
