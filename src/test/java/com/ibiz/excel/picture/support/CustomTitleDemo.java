@@ -49,7 +49,7 @@ public class CustomTitleDemo {
 		List<Picture> pictures = sheet.getPictures();
 		for (int i = 0; i < excelName.length; i++) {
 			if (i < 2) {
-				valueCells.add(new Cell(i, "文本"));
+				valueCells.add(new Cell(1, i).setValue("文本"));
 			} else {
 				//有图片的行,行高设置为100
 				row.setHeight(WorkbookConstant.PICTURE_ROW_HEIGHT);
@@ -68,8 +68,6 @@ public class CustomTitleDemo {
 		System.out.println("file cost time :" + (end.getTime() - start.getTime()));
 		os.close();
 	}
-
-
 
 
 	private static File createFile() {
