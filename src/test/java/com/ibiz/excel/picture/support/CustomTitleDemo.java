@@ -1,16 +1,13 @@
 package com.ibiz.excel.picture.support;
 
+import cn.hutool.core.io.FileUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 自定义标题，填入文本和图片
@@ -33,21 +30,26 @@ public class CustomTitleDemo {
 		Sheet sheet = workBook.createSheet("测试");
 
 		// 第一行放标题
-		Row row = sheet.createRow(0);
+		Row rowHead = sheet.createRow(0);
 		String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
 		List<Cell> nameCells = new ArrayList<>();
+		int n = 0;
 		for (int i = 0; i < excelName.length; i++) {
-			nameCells.add(new Cell(0, i).setValue(excelName[i]));
+			nameCells.add(new Cell(0, n).setValue(excelName[i]));
+			if (Objects.equals(excelName[i], "图片1")) {
+				n = n + 9;
+			}
+			n++;
 		}
-		row.setCells(nameCells);
+		rowHead.setCells(nameCells);
 
 		// 第二行放文本图片
-		row = sheet.createRow(1);
+		Row row = sheet.createRow(1);
 		List<Cell> valueCells = new ArrayList<>();
 		List<Picture> pictures = sheet.getPictures();
 		for (int i = 0; i < excelName.length; i++) {
 			if (i < 2) {
-				valueCells.add(new Cell(1, i).setValue("文本"));
+				valueCells.add(new Cell(i, "文本"));
 			} else {
 				//有图片的行,行高设置为100
 				row.setHeight(WorkbookConstant.PICTURE_ROW_HEIGHT);
@@ -57,9 +59,8 @@ public class CustomTitleDemo {
 		}
 		row.setCells(valueCells);
 
-
 		File file = createFile();
-		OutputStream os = new FileOutputStream(file);
+		BufferedOutputStream os = FileUtil.getOutputStream(file);
 		workBook.write(os);
 		workBook.close();
 		Date end = new Date();
@@ -67,6 +68,8 @@ public class CustomTitleDemo {
 		System.out.println("file cost time :" + (end.getTime() - start.getTime()));
 		os.close();
 	}
+
+
 
 
 	private static File createFile() {
