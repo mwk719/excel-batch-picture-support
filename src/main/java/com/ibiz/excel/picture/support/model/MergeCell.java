@@ -1,29 +1,70 @@
 package com.ibiz.excel.picture.support.model;
 
 /**
- * @auther 喻场
- * @date 2020/7/217:36
+ * 合并单元格
+ *
+ * @author MinWeikai
+ * @date 2021-01-19 09:18:15
  */
 public class MergeCell {
-    private int startRowNumber; //合并单元格起始行
-    private int endRowNumber; //合并单元格结束行
 
-    public MergeCell startRowNumber(int startRowNumber) {
-        this.startRowNumber = startRowNumber;
-        return this;
-    }
+	private int firstRow;
+	private int firstCol;
+	private int lastRow;
+	private int lastCol;
 
-    public MergeCell endRowNumber(int endRowNumber) {
-        this.endRowNumber = endRowNumber;
-        return this;
-    }
+	public MergeCell() {
+	}
 
-    public int getStartRowNumber() {
-        return startRowNumber;
-    }
+	/**
+	 * 构造此合并单元格对象可以进行合并
+	 *
+	 * @param firstRow
+	 * @param firstCol
+	 * @param lastRow
+	 * @param lastCol
+	 */
+	public MergeCell(int firstRow, int firstCol, int lastRow, int lastCol) {
+		this.firstRow = firstRow;
+		this.firstCol = firstCol;
+		this.lastRow = lastRow;
+		this.lastCol = lastCol;
+	}
 
-    public int getEndRowNumber() {
-        return endRowNumber;
-    }
+	public int getFirstRow() {
+		return firstRow;
+	}
+
+	public MergeCell setFirstRow(int firstRow) {
+		this.firstRow = firstRow;
+		return this;
+	}
+
+	public int getFirstCol() {
+		return firstCol;
+	}
+
+	public MergeCell setFirstCol(int firstCol) {
+		this.firstCol = firstCol;
+		return this;
+	}
+
+	public int getLastRow() {
+		return lastRow;
+	}
+
+	public MergeCell setLastRow(int lastRow) {
+		this.lastRow = lastRow;
+		return this;
+	}
+
+	public int getLastCol() {
+		return lastCol;
+	}
+
+	public MergeCell setLastCol(int lastCol) {
+		this.lastCol = lastCol;
+		return this;
+	}
 
 }

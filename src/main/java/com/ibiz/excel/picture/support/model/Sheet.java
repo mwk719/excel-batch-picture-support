@@ -37,7 +37,7 @@ public class Sheet {
     private String sheetName;   //默认sheet1
     private int drawingSequence = 1;	//图片id序号	对应drawing1.xml.rels Id后的数字
     private int sharedStringSequence = -1;	//单元格值序号	sharedString.xml对应<si>标签序号
-    private boolean autoMergeCell = Boolean.FALSE;	//是否自动合并单元格
+    private boolean autoMergeCell = Boolean.TRUE;	//是否自动合并单元格
     private boolean hasFlush;   //是否已经执行过flush
     private boolean hasWriteHead; //是否已经写标题
     private final List<String> closeAlias = Arrays.asList(Alias.APP, Alias.WORKBOOK_XML);
