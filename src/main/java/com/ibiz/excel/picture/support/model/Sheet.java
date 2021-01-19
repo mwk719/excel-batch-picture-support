@@ -289,8 +289,14 @@ public class Sheet {
         this.columnHelpers = Collections.singletonList(new ColumnHelper(columnIndex, width));
     }
 
+
     public Sheet addColumnHelper(ColumnHelper columnHelper){
         this.columnHelpers.add(columnHelper);
+        return this;
+    }
+
+    public Sheet addAllColumnHelper(List<ColumnHelper> columnHelpers){
+        this.columnHelpers.addAll(columnHelpers);
         return this;
     }
 

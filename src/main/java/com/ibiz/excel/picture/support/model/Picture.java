@@ -12,6 +12,12 @@ public class Picture {
     private int toRow;	//图片结束行	Row.rowNumber
     /**当前系统中图片的绝对路径*/
     private String picturePath;	//图片路径
+
+    /**
+     * 图片宽度
+     */
+    private int width;
+
     public Picture(){
     }
 
@@ -22,6 +28,16 @@ public class Picture {
         this.toRow = fromRow;
         this.toCol = fromCol+1;
         this.picturePath = picturePath;
+    }
+
+    public Picture(int fromCol, int fromRow, int width, String picturePath) {
+	    super();
+	    this.fromRow = fromRow;
+	    this.fromCol = fromCol;
+	    this.toRow = fromRow;
+	    this.toCol = fromCol;
+	    this.picturePath = picturePath;
+	    this.width = width;
     }
 
     public String getPicturePath() {
@@ -72,4 +88,12 @@ public class Picture {
         this.rembed = rembed;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public Picture setWidth(int width) {
+        this.width = width;
+        return this;
+    }
 }
