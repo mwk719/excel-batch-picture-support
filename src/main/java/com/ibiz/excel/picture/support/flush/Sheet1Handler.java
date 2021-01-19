@@ -32,7 +32,9 @@ public class Sheet1Handler implements InvocationHandler {
 				//未刷新过说明没有写入过流,这里主要为了写表头
 				//如果写过了,则从脚标1开始,原因是为了对比合并单元格在row1中保存上一次刷新的最后一条数据
 				int subIndex = !sheet.hasFlush() ? 0 : 1;
-				setMergeCell(sheet, rows);
+				this.setMergeCell(sheet, rows);
+				//设置宽度
+				this.setColumnWidth(sheet, subIndex);
 				rows.subList(subIndex, rows.size()).stream().forEach(r -> writeSheetXML(r));
 			}
 		} else if (method.getName().equals("close")) {
@@ -40,6 +42,32 @@ public class Sheet1Handler implements InvocationHandler {
 			setMergeContent(sheet);
 		}
 		return method.invoke(target, args);
+	}
+
+	/**
+	 * 设置列宽度
+	 *
+	 * @param sheet
+	 * @param subIndex
+	 */
+	private void setColumnWidth(Sheet sheet, int subIndex) {
+		if (subIndex == 0) {
+			StringBuilder content = new StringBuilder();
+			content.append("<cols>")
+					// 默认宽度
+					.append("<col min=\"1\" max=\"4\" width=\"23.5\"/>");
+			// 自定义的宽度
+			sheet.getColumnHelpers().stream().forEach(column ->
+					content.append("<col min=\"")
+					.append(column.getColumnIndex())
+					.append("\" max=\"")
+					.append(column.getColumnIndex())
+					.append("\" width=\"")
+					.append(column.getWidth())
+					.append("\" customWidth=\"1\"/>"));
+			content.append("</cols><sheetData>");
+			target.append(content.toString());
+		}
 	}
 
 	/**
@@ -135,8 +163,6 @@ public class Sheet1Handler implements InvocationHandler {
 				.append(c.getColDataNumber())
 				.append("</v></c>")
 		);
-
-
 		content.append("</row>");
 		target.append(content.toString());
 	}

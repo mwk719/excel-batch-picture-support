@@ -63,6 +63,11 @@ public class Sheet {
      * 对应excel column {"A"}  A列行相同的值要合并*/
     private Set<String> colCells = new HashSet<>();
 
+    /**
+     * 单元格辅助类
+     */
+    private List<ColumnHelper> columnHelpers = new ArrayList<>();
+
     public List<Picture> getPictures() {
         return pictures;
     }
@@ -273,5 +278,23 @@ public class Sheet {
             rows.addAll(list);
             pictures.clear();
         }
+    }
+
+    /**
+     * 设置单元格宽度
+     * @param columnIndex 坐标
+     * @param width 宽度
+     */
+    public void setColumnWidth(int columnIndex, int width){
+        this.columnHelpers = Collections.singletonList(new ColumnHelper(columnIndex, width));
+    }
+
+    public Sheet addColumnHelper(ColumnHelper columnHelper){
+        this.columnHelpers.add(columnHelper);
+        return this;
+    }
+
+    public List<ColumnHelper> getColumnHelpers() {
+        return columnHelpers;
     }
 }
