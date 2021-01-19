@@ -16,6 +16,12 @@ public class Row {
      */
     private int height;	//列高
     private List<Cell> cells = new ArrayList<>();
+
+    /**
+     * 该行样式
+     */
+    private RowStyle rowStyle;
+
     public Row(){
         this(1);
     }
@@ -51,5 +57,14 @@ public class Row {
 
     public void clear(){
         this.cells.clear();
+    }
+
+    public RowStyle getRowStyle() {
+        return rowStyle;
+    }
+
+    public Row setRowStyle(RowStyle rowStyle) {
+        this.rowStyle = rowStyle;
+        return this;
     }
 }
