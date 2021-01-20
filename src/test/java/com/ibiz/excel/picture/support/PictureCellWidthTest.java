@@ -41,7 +41,7 @@ public class PictureCellWidthTest {
 		// 第二行放标题
 		row = sheet.createRow(1)
 				//配置该行颜色，现在默认只有绿色
-				.setRowStyle(new RowStyle(FgColorEnum.GREEN));
+				.setRowStyle(new RowStyle(StyleEnum.GREEN_B));
 		List<Cell> cells = new ArrayList<>();
 		for (int i = 0; i < excelName.length; i++) {
 			Cell cell = new Cell(1, i).setValue(excelName[i]);

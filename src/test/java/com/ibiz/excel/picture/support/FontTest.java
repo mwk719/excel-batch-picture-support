@@ -9,25 +9,36 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * 单元格自定义宽度
+ * 字体控制
  *
  * @author MinWeikai
- * @date 2021-01-19 14:47:39
+ * @date 2021/1/20 11:45
  */
-public class CellWidthTest {
+public class FontTest {
 
-	static final String CURRENT_PATH = "E:\\test\\";
+	private static final String CURRENT_PATH = "E:\\test\\";
+
+	private final static String IMG_PATH = CURRENT_PATH + "img\\";
+
+	private final static String IMG_PATH_1 = IMG_PATH + "ia_1900002528.jpeg";
+	private final static String IMG_PATH_2 = IMG_PATH + "ia_1200000645.jpg";
 
 	public static void main(String[] args) throws IOException {
 		Date start = new Date();
 		Workbook workBook = Workbook.getInstance(1);
 		Sheet sheet = workBook.createSheet("测试");
-		// 设置宽度
-		sheet.setColumnWidth(1, 50);
+
+		// 需要在创建行前预设宽度
+		sheet.addColumnHelper(new ColumnHelper(1, 10))
+				.addColumnHelper(new ColumnHelper(3, 50))
+				.addColumnHelper(new ColumnHelper(4, 50));
 
 		// 第一行表头
-		Row row = sheet.createRow(0);
-		String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
+		Row row = sheet.createRow(0)
+				//字体20
+				.setRowStyle(new RowStyle(StyleEnum.F20))
+				;
+		String[] excelName = {"序号", "文本2", "图片1", "图片2", "图片3"};
 		sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
 		row.setCells(Collections.singletonList(new Cell(0, 0).setValue("表头")));
 
@@ -42,12 +53,25 @@ public class CellWidthTest {
 		}
 		row.setCells(cells);
 
-		// 第三行放内容
+		// 第三行放内容和图片
 		row = sheet.createRow(2);
+
 		cells = new ArrayList<>();
+		List<Picture> pictures = sheet.getPictures();
+		//序号
+		cells.add(new Cell(2, 0).setValue("1"));
 		for (int i = 0; i < excelName.length; i++) {
-			Cell cell = new Cell(2, i).setValue("文本" + i);
-			cells.add(cell);
+			if (i < 2) {
+				cells.add(new Cell(2, i).setValue("文本" + i));
+			} else {
+				//有图片的行,行高设置为100
+				row.setHeight(80);
+				//每个单元格增加一个图片
+				//pictures.add(new Picture(i, row.getRowNumber(),1000000 , IMG_PATH_1));
+				//在第三列添加多张图片
+				pictures.add(new Picture(3, row.getRowNumber(), 1000000, IMG_PATH_1));
+				pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_2));
+			}
 		}
 		row.setCells(cells);
 

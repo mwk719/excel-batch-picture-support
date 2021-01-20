@@ -1,15 +1,14 @@
 package com.ibiz.excel.picture.support.flush;
 
-import com.ibiz.excel.picture.support.util.CovertUtil;
 import com.ibiz.excel.picture.support.constants.Alias;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.Picture;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.module.RelationShip;
+import com.ibiz.excel.picture.support.util.CovertUtil;
 import com.ibiz.excel.picture.support.util.FileUtil;
 import com.ibiz.excel.picture.support.util.MD5Digester;
 import com.ibiz.excel.picture.support.util.StringUtils;
-import org.apache.tools.ant.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 图片
@@ -58,10 +58,10 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
             File srcPicture = new File(picture.getPicturePath());
             String md5 = MD5Digester.digestMD5(srcPicture);
             Integer drawingSequence = sheet.getWorkbook().getImageCache().get(md5);
+            // 已存在的图片
             if (Objects.nonNull(drawingSequence)) {
-                RelationShip relationShip = new RelationShip("rId" + drawingSequence, WorkbookConstant.MEDIA_IMAGE_TYPE, "../media/image" + drawingSequence +".png");
+                // 记录索引
                 picture.setRembed(drawingSequence);
-                target.append(CovertUtil.covert(relationShip));
                 return;
             }
             File media = sheet.getSheetContext().getRepositoryHolder().get(Alias.MEDIA).getFile();

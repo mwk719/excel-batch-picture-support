@@ -1,25 +1,26 @@
 package com.ibiz.excel.picture.support.model;
 
 /**
- * 填充色枚举类
+ * 读取内置字体
  *
  * @author MinWeikai
- * @date 2021/1/19 14:10
+ * @date 2021/1/20 11:57
  */
-public enum FgColorEnum {
+public enum  FontEnum {
 
 	/**
-	 * 绿色填充色
+	 * font size 20
 	 */
-	GREEN(3);
+	F20(22),
 
+	F10(3)
+	;
 	/**
-	 * 填充色id
 	 * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
 	 */
 	private Integer fillId;
 
-	FgColorEnum(Integer fillId) {
+	FontEnum(Integer fillId) {
 		this.fillId = fillId;
 	}
 
