@@ -61,7 +61,7 @@ public class FontTest {
 		//序号
 		cells.add(new Cell(2, 0).setValue("1"));
 		for (int i = 0; i < excelName.length; i++) {
-			if (i < 2) {
+			if (i  == 1) {
 				cells.add(new Cell(2, i).setValue("文本" + i));
 			} else {
 				//有图片的行,行高设置为100
