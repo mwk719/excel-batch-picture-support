@@ -39,7 +39,7 @@ public class Styles {
             "<font><sz val=\"11\"/><color rgb=\"FFFA7D00\"/><name val=\"宋体\"/><charset val=\"0\"/><scheme val=\"minor\"/></font>" +
             "<font><sz val=\"11\"/><color rgb=\"FF006100\"/><name val=\"宋体\"/><charset val=\"0\"/><scheme val=\"minor\"/></font>" +
             "<font><b/><sz val=\"10\"/><color theme=\"1\"/><name val=\"宋体\"/><family val=\"3\"/><charset val=\"134\"/><scheme val=\"minor\"/></font>" +
-            "<font><b/><sz val=\"20\"/><color theme=\"1\"/><name val=\"华文楷体\"/><family val=\"3\"/><charset val=\"134\"/></font>"+
+            "<font><b/><sz val=\"20\"/><color theme=\"4\" tint=\"-0.249977111117893\"/><name val=\"华文楷体\"/><family val=\"3\"/><charset val=\"134\"/></font>"+
             "</fonts>" +
             "<fills count=\"36\">" +
             "<fill><patternFill patternType=\"none\"/></fill><fill><patternFill patternType=\"gray125\"/></fill>" +
