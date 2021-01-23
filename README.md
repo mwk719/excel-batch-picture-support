@@ -1,27 +1,54 @@
-## Excel支持大量图片导出
+# Excel支持大量图片导出
 
-**背景**
+## 背景
 
 用户在导出统计数据时需要导出大量图片.目前用的比较多的poi导出能支持批量导出大量数据(不包括自媒体).但是当需要导出大量图片时,即使设置了flushSize ,但是对于图片对象却没有效果,图片在内存中无法释放,写的图片越多,占用内存越大,导致频繁GC,甚至OOM
 
-**思路**
+### 思路
+
 excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 这些组件分别对应了不同的数据单元.只要把数据分别写入对应的组件,最后构建成一个需要的excel文件.
 
-**功能**
+## 功能
+
 采用流式方法写入文件，不会导致内存堆积而占用太多系统资源，有效避免频繁GC问题
+
 1. 支持自动合并单元格
 2. 使用流式处理,支持大量图片导出
 3. 支持注解导出,在实体上添加注解,自动生成标题
 
-**测试**
-经测试，可以生成几个G的文件。（保证生成的文件没问题，文件是否能打开由使用者计算机决定）
-## 下面对EXCEL的操作做具体介绍
+### 测试
 
-EXCEL由几大组件构建而成，具体部分：
+经测试，可以生成几个G的文件。（保证生成的文件没问题，文件是否能打开由使用者计算机决定）
+
+## 快速使用
+
+1. ### Maven导入
+
+   在项目的pom.xml的dependencies中加入以下内容:
+
+```xml
+<dependency>
+    <groupId>top.minwk</groupId>
+    <artifactId>excel-x</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
+2. ### 示例
+
+   [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/master/src/test/java/com/ibiz/excel/picture/support)
+
+## 组件介绍
+
+EXCEL由几大组件构建而成
+
+### 具体部分：
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200715114523625.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3ljaGFuZzU3Nw==,size_16,color_FFFFFF,t_70)
-工作文件实例
+
+### 工作文件实例
+
 1. workbook代表一个excel工作文件
 2. Sheet对应文件中多个sheet页
 3. Row 为sheet页中的行数据，包含多个Cell单元格
