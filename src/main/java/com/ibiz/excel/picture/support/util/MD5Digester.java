@@ -24,23 +24,20 @@ public class MD5Digester {
     }
     /**
      * 文件流md5
-     * @param is InputStream
+     * @param inputStream InputStream
      * @return  md5
      */
-    public static String digestMD5(InputStream is) {
-        try {
+    public static String digestMD5(InputStream inputStream) {
+        try(InputStream is = inputStream) {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             byte[] buffer = new byte[8192];
-            int len = 0;
+            int len;
             while (-1 != (len = is.read(buffer))) {
                 digest.update(buffer, 0, len);
             }
             byte[] md5hash = digest.digest();
             return encodeHexStr(md5hash);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
