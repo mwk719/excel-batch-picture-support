@@ -31,13 +31,27 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 <dependency>
     <groupId>top.minwk</groupId>
     <artifactId>excel-x</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
 2. ### 示例
 
    [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/master/src/test/java/com/ibiz/excel/picture/support)
+
+3. ### 版本更迭
+
+   #### 1.0.2(2021.01.26)
+
+   -  修复MD5时未关闭流
+
+   #### 1.0.1(2021.01.23)
+
+   - 添加合并单元列值
+   - 添加设置单元格背景色
+   - 添加可自定义单元格宽度
+   - 添加设置字体，目前有默认字体
+   - 修复office打开提示需修复的问题
 
 ## 组件介绍
 
