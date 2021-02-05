@@ -37,7 +37,10 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 2. ### 示例
 
-   [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/master/src/test/java/com/ibiz/excel/picture/support)
+   - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/master/src/test/java/com/ibiz/excel/picture/support)
+   - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
+
+   ## 组件介绍
 
 3. ### 版本更迭
 
@@ -52,8 +55,6 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
    - 添加可自定义单元格宽度
    - 添加设置字体，目前有默认字体
    - 修复office打开提示需修复的问题
-
-## 组件介绍
 
 EXCEL由几大组件构建而成
 
