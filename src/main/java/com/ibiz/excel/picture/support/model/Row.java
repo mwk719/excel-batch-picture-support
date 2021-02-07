@@ -49,6 +49,16 @@ public class Row {
         this.cells = cells;
     }
 
+    /**
+     * 自动配置行对应的单元格
+     *
+     * @param cells
+     */
+    public void autoRowCells(List<Cell> cells) {
+        cells.parallelStream().forEach(cell-> cell.autoSetRowNumber(rowNumber));
+        this.cells = cells;
+    }
+
     public Cell createCell(int cellNumber){
         Cell cell = new Cell(rowNumber,cellNumber);
         cells.add(cell);
