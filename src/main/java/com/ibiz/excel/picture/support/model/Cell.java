@@ -5,13 +5,40 @@ package com.ibiz.excel.picture.support.model;
  * @date 2020/7/217:31
  */
 public class Cell {
-    private final String[] CELL_NUMBER_LINE = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+    private final String[] CELL_NUMBER_LINE = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private int cellNumber;//第几列
     private int rowNumber;//行号
     private String colNumber = "";//列号 例 A1  B1
     private String col = ""; //单元格列 例 A B AA AB
     private int colDataNumber;  //列对应值序号
-    private String value;	//单元格值
+    private String value;    //单元格值
+
+    public Cell(int cellNumber) {
+        this.cellNumber = cellNumber;
+    }
+
+    public Cell(int rowNumber, int cellNumber) {
+        super();
+        this.rowNumber = rowNumber;
+        this.cellNumber = cellNumber;
+        this.autoSetCell(rowNumber, cellNumber);
+    }
+
+    /**
+     * 自动设置Cell顺序
+     *
+     * @param rowNumber
+     * @param cellNumber
+     */
+    public void autoSetCell(int rowNumber, int cellNumber) {
+        int line = cellNumber;
+        if (cellNumber >= CELL_NUMBER_LINE.length) {
+            line = cellNumber - CELL_NUMBER_LINE.length;
+            colNumber += "A";
+        }
+        col += colNumber + CELL_NUMBER_LINE[line];
+        colNumber += CELL_NUMBER_LINE[line] + (rowNumber + 1);
+    }
 
     public String getColNumber() {
         return colNumber;
@@ -25,21 +52,22 @@ public class Cell {
         this.colDataNumber = colDataNumber;
     }
 
-    public int getRowNumber() {
+    public Integer getRowNumber() {
         return rowNumber;
     }
 
-    public Cell(int rowNumber,int cellNumber) {
-        super();
+    public void setRowNumber(int rowNumber) {
         this.rowNumber = rowNumber;
-        this.cellNumber = cellNumber;
-        int line = cellNumber;
-        if(cellNumber >= CELL_NUMBER_LINE.length){
-            line = cellNumber - CELL_NUMBER_LINE.length;
-            colNumber += "A";
-        }
-        col += colNumber + CELL_NUMBER_LINE[line];
-        colNumber += CELL_NUMBER_LINE[line] + (rowNumber + 1);
+    }
+
+    /**
+     * 设置RowNumber并自动排序
+     *
+     * @param rowNumber
+     */
+    public void autoSetRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
+        this.autoSetCell(rowNumber, this.cellNumber);
     }
 
     public String getCol() {
@@ -53,10 +81,6 @@ public class Cell {
     public Cell setValue(String value) {
         this.value = value;
         return this;
-    }
-
-    public Cell(int cellNumber) {
-        this(0,cellNumber);
     }
 
     public int getCellNumber() {
