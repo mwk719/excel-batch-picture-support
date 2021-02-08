@@ -37,7 +37,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 2. ### 示例
 
-   [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/master/src/test/java/com/ibiz/excel/picture/support)
+   [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)
 
 3. ### 版本更迭
 
