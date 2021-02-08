@@ -18,10 +18,10 @@ public class FontTest {
 
 	private static final String CURRENT_PATH = "E:\\test\\";
 
-	private final static String IMG_PATH = CURRENT_PATH + "img1\\";
+	private final static String IMG_PATH = CURRENT_PATH + "img\\";
 
-	private final static String IMG_PATH_1 = IMG_PATH + "ia_1200000644.jpg";
-	private final static String IMG_PATH_2 = IMG_PATH + "ia_1700001489.jpg";
+	private final static String IMG_PATH_1 = IMG_PATH + "1.jpg";
+	private final static String IMG_PATH_2 = IMG_PATH + "2.jpg";
 
 	public static void main(String[] args) throws IOException {
 		Date start = new Date();
@@ -84,7 +84,6 @@ public class FontTest {
 		System.out.println("file capital :" + (file.length() / 1024 / 1024) + "M  name :" + file.getName());
 		System.out.println("file cost time :" + (end.getTime() - start.getTime()));
 		os.close();
-		FileUtil.del(new File(IMG_PATH_1));
 	}
 
 

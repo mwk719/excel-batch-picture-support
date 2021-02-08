@@ -1,29 +1,31 @@
-package com.ibiz.excel.picture.support;
+package com.ibiz.excel.picture.support.example;
 
 import cn.hutool.core.io.FileUtil;
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
- * 简化设置EasyUseExample3
+ * 简化设置EasyUseExample1
  * 1. 需要文本列表信息
- * 2. 需要单元格填充多张图片
- * 3. 需要表头
+ * 2. 需要单元格填充单个图片
  *
  * @author MinWeikai
  * @date 2021-02-07 16:47:17
  */
-public class EasyUseExample3 {
+public class EasyUseExample1 {
     static final String CURRENT_PATH = "E:\\test\\";
 
     private final static String IMG_PATH = CURRENT_PATH + "img\\";
 
     private final static String IMG_PATH_1 = IMG_PATH + "1.jpg";
-    private final static String IMG_PATH_2 = IMG_PATH + "2.jpg";
 
 
     public static void main(String[] args) throws IOException {
@@ -31,23 +33,11 @@ public class EasyUseExample3 {
         Workbook workBook = Workbook.getInstance(1);
         Sheet sheet = workBook.createSheet("测试");
 
-        // 需要在创建行前预设宽度
-        sheet.addColumnHelper(new ColumnHelper(1, 10))
-                .addColumnHelper(new ColumnHelper(3, 50))
-                .addColumnHelper(new ColumnHelper(4, 50))
-                .addColumnHelper(new ColumnHelper(5, 50));
-
-        // 第一行表头
-        Row row = sheet.createRow(0)
-                //字体20
-                .setRowStyle(new RowStyle(StyleEnum.F20));
-        row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
-
-        // 第二行放标题
+        // 第一行放标题
         String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
         //要进行合并的列
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
-        row = sheet.createRow(1)
+        Row row = sheet.createRow(1)
                 //配置该行颜色，现在默认只有绿色
                 .setRowStyle(new RowStyle(StyleEnum.GREEN_B));
         List<Cell> cells = new ArrayList<>();
@@ -56,7 +46,7 @@ public class EasyUseExample3 {
         }
         row.autoRowCells(cells);
 
-        // 第三行放内容
+        // 第二行放内容
         row = sheet.createRow(2);
         List<Picture> pictures = sheet.getPictures();
         cells = new ArrayList<>();
@@ -65,15 +55,9 @@ public class EasyUseExample3 {
                 cells.add(new Cell(i).setValue("文本"));
             } else {
                 //有图片的行,行高设置为100
-                row.setHeight(80);
-                //每个单元格增加一个图片
-                //pictures.add(new Picture(i, row.getRowNumber(),1000000 , IMG_PATH_1));
-
-                //在第二列添加多张图片
-                pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_1));
-                //在第三列添加多张图片
-                pictures.add(new Picture(3, row.getRowNumber(), 1000000, IMG_PATH_2));
-                pictures.add(new Picture(4, row.getRowNumber(), 1000000, IMG_PATH_1));
+                row.setHeight(WorkbookConstant.PICTURE_ROW_HEIGHT);
+                //增加图片
+                pictures.add(new Picture(row.getRowNumber(), i, IMG_PATH_1));
             }
         }
         row.autoRowCells(cells);
