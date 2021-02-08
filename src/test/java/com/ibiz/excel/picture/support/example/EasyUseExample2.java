@@ -1,4 +1,4 @@
-package com.ibiz.excel.picture.support;
+package com.ibiz.excel.picture.support.example;
 
 import cn.hutool.core.io.FileUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
@@ -7,20 +7,18 @@ import com.ibiz.excel.picture.support.model.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
- * 简化设置EasyUseExample1
+ * 简化设置EasyUseExample2
  * 1. 需要文本列表信息
  * 2. 需要单元格填充单个图片
+ * 3. 需要表头
  *
  * @author MinWeikai
  * @date 2021-02-07 16:47:17
  */
-public class EasyUseExample1 {
+public class EasyUseExample2 {
     static final String CURRENT_PATH = "E:\\test\\";
 
     private final static String IMG_PATH = CURRENT_PATH + "img\\";
@@ -33,11 +31,17 @@ public class EasyUseExample1 {
         Workbook workBook = Workbook.getInstance(1);
         Sheet sheet = workBook.createSheet("测试");
 
-        // 第一行放标题
+        // 第一行表头
+        Row row = sheet.createRow(0)
+                //字体20
+                .setRowStyle(new RowStyle(StyleEnum.F20));
+        row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
+
+        // 第二行放标题
         String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
         //要进行合并的列
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
-        Row row = sheet.createRow(1)
+        row = sheet.createRow(1)
                 //配置该行颜色，现在默认只有绿色
                 .setRowStyle(new RowStyle(StyleEnum.GREEN_B));
         List<Cell> cells = new ArrayList<>();
@@ -46,7 +50,7 @@ public class EasyUseExample1 {
         }
         row.autoRowCells(cells);
 
-        // 第二行放内容
+        // 第三行放内容
         row = sheet.createRow(2);
         List<Picture> pictures = sheet.getPictures();
         cells = new ArrayList<>();

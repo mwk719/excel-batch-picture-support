@@ -285,14 +285,13 @@ public class Sheet {
      * @param columnIndex 坐标
      * @param width 宽度
      */
-    public void setColumnWidth(int columnIndex, int width){
-        this.columnHelpers = Collections.singletonList(new ColumnHelper(columnIndex, width));
+    public Sheet setColumnWidth(int columnIndex, int width){
+        return this.addColumnHelper(new ColumnHelper(columnIndex, width));
     }
 
 
     public Sheet addColumnHelper(ColumnHelper columnHelper){
-        this.columnHelpers.add(columnHelper);
-        return this;
+        return this.addAllColumnHelper(Collections.singletonList(columnHelper));
     }
 
     public Sheet addAllColumnHelper(List<ColumnHelper> columnHelpers){
