@@ -16,7 +16,10 @@ import java.util.*;
  */
 public class Workbook {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    /**到达row行数就刷新流*/
+    /**
+     * 到达row行数就刷新流
+     * flushSize = -1 时不刷新流
+     */
     private int flushSize;
     /**工作表sheet */
     private List<Sheet> sheets;

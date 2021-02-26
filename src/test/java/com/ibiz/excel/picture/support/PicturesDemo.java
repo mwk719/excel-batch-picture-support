@@ -1,7 +1,9 @@
 package com.ibiz.excel.picture.support;
 
 import cn.hutool.core.io.FileUtil;
+import com.ibiz.excel.picture.support.model.RowStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
+import com.ibiz.excel.picture.support.model.StyleEnum;
 import com.ibiz.excel.picture.support.model.Workbook;
 
 import java.io.File;
@@ -28,12 +30,12 @@ public class PicturesDemo {
 
 	public static void main(String[] args) throws IOException {
 		Date start = new Date();
-		Workbook workBook = Workbook.getInstance(1);
+		Workbook workBook = Workbook.getInstance(-1);
 		Sheet sheet = workBook.createSheet("测试");
 		File[] files = FileUtil.ls(IMG_PATH);
 		SUM = files.length;
 		UserPicture u1;
-		for (int r = 0; r < 10; r++) {
+		for (int r = 0; r < 2; r++) {
 			if (N == 0) {
 				_COUNT = 0;
 			}
@@ -41,19 +43,13 @@ public class PicturesDemo {
 			u1.setAge(15);
 			u1.setName("测试-" + r);
 			u1.setPicture(files[getIndex(N, 0)].getAbsolutePath());
-			u1.setPicture1(files[getIndex(N, 1)].getAbsolutePath());
-			u1.setPicture2(files[getIndex(N, 2)].getAbsolutePath());
-			u1.setPicture3(files[getIndex(N, 3)].getAbsolutePath());
-			u1.setPicture4(files[getIndex(N, 4)].getAbsolutePath());
-			u1.setPicture5(files[getIndex(N, 5)].getAbsolutePath());
-			u1.setPicture6(files[getIndex(N, 6)].getAbsolutePath());
-			u1.setPicture7(files[getIndex(N, 7)].getAbsolutePath());
-			u1.setPicture8(files[getIndex(N, 8)].getAbsolutePath());
 			sheet.createRow(u1);
 
 			_COUNT++;
 			N = _COUNT * 9;
 		}
+
+		sheet.getRows().get(0).setRowStyle(new RowStyle(StyleEnum.GREEN_B));
 
 		File file = createFile();
 		OutputStream os = new FileOutputStream(file);
