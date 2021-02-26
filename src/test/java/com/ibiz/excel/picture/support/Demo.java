@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * @date 2020/7/817:29
  */
 public class Demo {
-    static final String CURRENT_PATH = Demo.class.getClassLoader().getResource(".").getPath();
+    static final String CURRENT_PATH = "E:\\test\\";
     static final String picture1 = CURRENT_PATH + "image/image1.png";
     static final String picture2 = CURRENT_PATH + "image/image2.png";
     static final String picture3 = CURRENT_PATH + "image/image3.png";
@@ -23,7 +23,7 @@ public class Demo {
         Date start = new Date();
         Workbook workBook = Workbook.getInstance(200);
         Sheet sheet = workBook.createSheet("导出个表");
-        IntStream.range(1, 5000).forEach(r -> {
+        IntStream.range(1, 10).forEach(r -> {
             String pre = "a";
             if (r % 3 == 0) {
                 pre = "b";

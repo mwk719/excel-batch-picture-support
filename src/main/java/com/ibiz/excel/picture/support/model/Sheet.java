@@ -260,7 +260,7 @@ public class Sheet {
         }
         Row createRow(int rowNumber) {
             writeRow = rowNumber;
-            if(rows.size() > flushSize){
+            if(rows.size() > flushSize && flushSize != -1){
                 flush();
             }
             Row row = new Row(rowNumber);
