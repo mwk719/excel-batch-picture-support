@@ -31,7 +31,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 <dependency>
     <groupId>top.minwk</groupId>
     <artifactId>excel-x</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
@@ -41,6 +41,12 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
 
 3. ### 版本更迭
+
+   #### 1.0.3(2021.02.26)
+
+   - 简化使用示例
+   - 修复flushSize = -1 时不刷新流
+   - 修复其他未知问题
 
    #### 1.0.2(2021.01.26)
 
