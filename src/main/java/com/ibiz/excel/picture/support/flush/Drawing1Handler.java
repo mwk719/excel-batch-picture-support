@@ -18,6 +18,11 @@ import java.util.stream.Collectors;
 public class Drawing1Handler implements InvocationHandler {
 	private IRepository target;
 
+	/**
+	 * 容器间距 默认10000，可能约等于1px吧
+	 */
+	private static final int PADDING = 10000;
+
 	public Drawing1Handler(IRepository proxy) {
 		this.target = proxy;
 	}
@@ -49,19 +54,43 @@ public class Drawing1Handler implements InvocationHandler {
 	/**
 	 * 写 drawing1.xml
 	 *
-	 * @param picture
-	 * @param i
+	 * @param picture 图片
+	 * @param i 第几张图片，从0开始
 	 */
 	private void writerDrawingXML(
 			Picture picture, int i) {
+		/*
+		<xdr:from> 表示从xx开始
+			<xdr:col>2</xdr:col> 第几个单元格
+			<xdr:colOff>9525</xdr:colOff> 离左边框距离
+			<xdr:row>2</xdr:row> 第几行
+			<xdr:rowOff>9525</xdr:rowOff> 离上边框距离
+		</xdr:from>
+		<xdr:to> 表示到xx位置
+			<xdr:col>2</xdr:col> 第几个单元格
+			<xdr:colOff>1009525</xdr:colOff>
+			<xdr:row>3</xdr:row> 第几行
+			<xdr:rowOff>12225</xdr:rowOff> 离上边框距离
+		</xdr:to>
+		<xdr:pic> 图片标签
+		</xdr:pic>
+		 */
 		String content = "<xdr:twoCellAnchor>" +
 				"<xdr:from><xdr:col>" + picture.getFromCol() + "</xdr:col><xdr:colOff>";
+		// 图片间距
 		int colOff = i * picture.getWidth();
+		// 默认从离左边框1个像素，防止图片遮挡边框线
+		if(colOff == 0){
+			colOff = PADDING;
+		}
 		content = content + colOff + "</xdr:colOff>" +
-				"<xdr:row>" + picture.getFromRow() + "</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>" +
+				"<xdr:row>" + picture.getFromRow() + "</xdr:row>" +
+                "<xdr:rowOff>" + PADDING +
+                "</xdr:rowOff>" +
+                "</xdr:from>" +
 				"<xdr:to>\n" +
-				"<xdr:col>" + picture.getToCol() + "</xdr:col><xdr:colOff>" + (colOff + picture.getWidth()) + "</xdr:colOff>" +
-				"<xdr:row>" + picture.getToRow() + "</xdr:row><xdr:rowOff>1260000</xdr:rowOff>" +
+				"<xdr:col>" + picture.getToCol() + "</xdr:col><xdr:colOff>" + (colOff + picture.getWidth() - PADDING) + "</xdr:colOff>" +
+				"<xdr:row>" + (picture.getToRow()) + "</xdr:row><xdr:rowOff>1260000</xdr:rowOff>" +
 				"</xdr:to>" +
 				"<xdr:pic><xdr:nvPicPr>" +
 				"<xdr:cNvPr id=\"" + (1 + i) + "\" name=\"Picture " + picture.getRembed() + "\" descr=\"Picture\"/><xdr:cNvPicPr><a:picLocks noChangeAspect=\"1\"/></xdr:cNvPicPr></xdr:nvPicPr><xdr:blipFill>" +
