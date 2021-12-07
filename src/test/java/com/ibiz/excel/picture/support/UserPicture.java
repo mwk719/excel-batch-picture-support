@@ -15,9 +15,9 @@ public class UserPicture {
     private String name;
     @ExportModel(sort = 1, title = "年龄")
     private Integer age;
-    @ExportModel(sort = 2, title = "部门")
+    @ExportModel(sort = 3, title = "部门")
     private String department;
-    @ExportModel(sort = 3, isPicture = true, title = "图片1")
+    @ExportModel(sort = 2, isPicture = true, title = "图片1")
     private String picture;
 
     public UserPicture(String name, Integer age, String department, String picture) {

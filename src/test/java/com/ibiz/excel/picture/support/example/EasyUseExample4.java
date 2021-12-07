@@ -1,10 +1,8 @@
 package com.ibiz.excel.picture.support.example;
 
-import cn.hutool.core.io.FileUtil;
 import com.ibiz.excel.picture.support.model.*;
+import com.ibiz.excel.picture.support.util.WebUtil;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -19,7 +17,9 @@ import java.util.*;
  * @date 2021-02-07 16:47:17
  */
 public class EasyUseExample4 {
-    static final String CURRENT_PATH = "E:\\test\\";
+    private static final String CURRENT_PATH = "E:\\test\\";
+
+    private static final String TEMP_PATH = CURRENT_PATH + "excel\\";
 
     private final static String IMG_PATH = CURRENT_PATH + "img\\";
 
@@ -28,8 +28,7 @@ public class EasyUseExample4 {
 
 
     public static void main(String[] args) throws IOException {
-        Date start = new Date();
-        Workbook workBook = Workbook.getInstance(Integer.MAX_VALUE);
+        Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
 
         // 需要在创建行前预设宽度
@@ -58,7 +57,7 @@ public class EasyUseExample4 {
         // 第三行放内容
         int num;
         List<Picture> pictures = sheet.getPictures();
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j < 1; j++) {
             // 第三行放内容
             num = j + 2;
             row = sheet.createRow(num);
@@ -77,6 +76,7 @@ public class EasyUseExample4 {
                     case 2:
                         //在第二列添加多张图片
                         pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_1));
+                        pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_2));
                         row.setHeight(80);
                         break;
                     case 3:
@@ -92,26 +92,8 @@ public class EasyUseExample4 {
             }
         }
 
-
-        File file = createFile();
-        BufferedOutputStream os = FileUtil.getOutputStream(file);
-        workBook.write(os);
-        workBook.close();
-        Date end = new Date();
-        System.out.println("file capital :" + (file.length() / 1024 / 1024) + "M  name :" + file.getName());
-        System.out.println("file cost time :" + (end.getTime() - start.getTime()));
-        os.close();
+        WebUtil.writeExcelTest(workBook, "多数据图测试导出".concat(String.valueOf(UUID.randomUUID())).concat(".xlsx"), TEMP_PATH);
     }
 
-
-    private static File createFile() {
-        String dir = CURRENT_PATH + "excel/";
-        File file = new File(dir);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        String name = CURRENT_PATH + "excel/" + UUID.randomUUID() + ".xlsx";
-        return new File(name);
-    }
 
 }
