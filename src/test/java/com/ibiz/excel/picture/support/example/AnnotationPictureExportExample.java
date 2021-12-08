@@ -6,16 +6,15 @@ import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
 
 import java.io.IOException;
-import java.util.UUID;
 
 /**
- * 注解使用导出
- * todo 使用注解目前一个单元格只能放一张图片，存在bug图片所在下边框不是加粗实线，待解决
+ * 注解图片导出示例
  * todo 建议使用{@link EasyUseExample4} 示例，不过写法有点麻烦，待优化
+ *
  * @author MinWeikai
  * @date 2021-12-07 10:59:49
  */
-public class EasyUseExample_Annotation {
+public class AnnotationPictureExportExample {
     static final String CURRENT_PATH = "E:\\test\\";
     private static final String TEMP_PATH = CURRENT_PATH + "excel\\";
     private final static String IMG_PATH = "E:\\test\\img\\";
@@ -28,14 +27,15 @@ public class EasyUseExample_Annotation {
         Workbook workBook = Workbook.getInstance();
         Sheet sheet = workBook.createSheet("测试");
         UserPicture u1;
-        for (int r = 0; r < 2; r++) {
+        for (int r = 0; r < 5; r++) {
             u1 = new UserPicture();
             u1.setAge(15);
             u1.setName("测试-" + r);
             u1.setPicture(IMG_PATH_1);
+            u1.setHeaderPicture(IMG_PATH_2);
             sheet.createRow(u1);
         }
-        WebUtil.writeExcelTest(workBook, "使用注解导出".concat(String.valueOf(UUID.randomUUID())).concat(".xlsx"), TEMP_PATH);
+        WebUtil.writeExcelTest(workBook, "注解导出图片示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
 }

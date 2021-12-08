@@ -19,6 +19,8 @@ public class UserPicture {
     private String department;
     @ExportModel(sort = 2, isPicture = true, title = "图片1")
     private String picture;
+    @ExportModel(sort = 4, isPicture = true, title = "图片2")
+    private String headerPicture;
 
     public UserPicture(String name, Integer age, String department, String picture) {
         this.name = name;
@@ -59,4 +61,11 @@ public class UserPicture {
         this.picture = picture;
     }
 
+    public String getHeaderPicture() {
+        return headerPicture;
+    }
+
+    public void setHeaderPicture(String headerPicture) {
+        this.headerPicture = headerPicture;
+    }
 }
