@@ -31,7 +31,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 <dependency>
     <groupId>top.minwk</groupId>
     <artifactId>excel-x</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
@@ -41,6 +41,12 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
 
 3. ### 版本更迭
+
+   #### 1.0.4(2021.12.08)
+
+   - 添加使用注解导出含图片或文本的使用示例
+   - 修复图片遮挡所在单元格边框线
+   - 修复f使用注解导出图片所在下边框不是加粗实线
 
    #### 1.0.3(2021.02.26)
 
