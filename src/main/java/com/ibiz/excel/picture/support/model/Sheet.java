@@ -220,34 +220,38 @@ public class Sheet {
                 boolean merge = model.merge();
                 String title = model.title();
                 Cell cell = new Cell(row.getRowNumber(), sort);
+                // 合并 是标题 并且 是要合并的基准列，将元素放在基准列中
                 if (isHead && mergeMaster) {
                     mergeCellNumber = sort;
                     autoMergeCell = true;
                     colCells.add(cell.getCol());
                 }
+                // 合并 是标题 并且 是要合并的列
                 if (isHead && merge) {
                     colCells.add(cell.getCol());
                 }
+
                 String value = null;
                 try {
                     value = null == f.get(t) ? "" : "" + f.get(t);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
+                // 是标题，则将title设置为单元格的值
                 if (isHead) {
                     cell.setValue(title);
                 } else {
                     cell.setValue(value);
                 }
+                // 不是标题 并且 是图片 并且 值不为空
                 if (!isHead && isPicture && StringUtils.isNotBlank(value)) {
                     //有图片的行,行高设置为100
                     row.setHeight(WorkbookConstant.PICTURE_ROW_HEIGHT);
                     //增加图片
                     pictures.add(new Picture(row.getRowNumber(), cell.getCellNumber(), value));
                 }
-                if (isHead || !isPicture) {
-                    row.getCells().add(cell);
-                }
+                // 将组装好的元素项，放到该行的元素项集合中
+                row.getCells().add(cell);
             });
             hasWriteHead = writeRow > -1;
             return row;
