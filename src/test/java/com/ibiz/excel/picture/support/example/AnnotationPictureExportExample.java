@@ -6,6 +6,8 @@ import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 注解图片导出示例
@@ -26,15 +28,19 @@ public class AnnotationPictureExportExample {
     public static void main(String[] args) throws IOException {
         Workbook workBook = Workbook.getInstance();
         Sheet sheet = workBook.createSheet("测试");
-        UserPicture u1;
+        List<UserPicture> userPictures = new ArrayList<>();
+        UserPicture userPicture;
         for (int r = 0; r < 5; r++) {
-            u1 = new UserPicture();
-            u1.setAge(15);
-            u1.setName("测试-" + r);
-            u1.setPicture(IMG_PATH_1);
-            u1.setHeaderPicture(IMG_PATH_2);
-            sheet.createRow(u1);
+            userPicture = new UserPicture();
+            userPicture.setAge(15);
+            userPicture.setName("测试-" + r);
+            userPicture.setPicture(IMG_PATH_1);
+            userPicture.setHeaderPicture(IMG_PATH_2);
+            userPictures.add(userPicture);
         }
+
+        // 创建集合的行数据在excel中
+        sheet.createRow(userPictures);
         WebUtil.writeExcelTest(workBook, "注解导出图片示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
