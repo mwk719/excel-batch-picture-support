@@ -39,6 +39,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
    - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
+   - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
 
 3. ### 版本更迭
 
