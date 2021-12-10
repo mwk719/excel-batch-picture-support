@@ -32,8 +32,8 @@ public class EasyUseExample4 {
         Sheet sheet = workBook.createSheet("测试");
 
         // 需要在创建行前预设宽度
-        //序号宽度
-        sheet.addColumnHelper(new ColumnHelper(1, 10));
+        // 序号宽度 有时需要单独设置序号宽度窄一点
+        sheet.addColumnHelper(new ColumnHelper(1));
 
         // 第一行表头
         Row row = sheet.createRow(0)
@@ -77,7 +77,7 @@ public class EasyUseExample4 {
                         //在第二列添加多张图片
                         pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_1));
                         pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_2));
-                        row.setHeight(80);
+                        row.setHeight(90);
                         break;
                     case 3:
                         propertyValue = "333";

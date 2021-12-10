@@ -36,6 +36,7 @@ public class WebUtil {
         File file = FileUtil.touch(tempPath.concat(fileName));
         try (BufferedOutputStream os = FileUtil.getOutputStream(file)) {
             wb.write(os);
+            wb.close();
         } catch (Exception e) {
             log.error("测试导出excel异常", e);
         }

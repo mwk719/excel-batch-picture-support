@@ -36,6 +36,8 @@ public class RepositoryFactory {
             repository = (IRepository)Proxy.newProxyInstance(RepositoryFactory.class.getClassLoader(), new Class[]{IRepository.class}, new SharedStringXmlHandler(instance));
         } else if (StringUtils.equals(alisa, Alias.SHEET1)) {
             repository = (IRepository)Proxy.newProxyInstance(RepositoryFactory.class.getClassLoader(), new Class[]{IRepository.class}, new Sheet1Handler(instance));
+        }  else if (StringUtils.equals(alisa, Alias.STYLES)) {
+            repository = (IRepository)Proxy.newProxyInstance(RepositoryFactory.class.getClassLoader(), new Class[]{IRepository.class}, new StylesHandler(instance));
         }
         return repository;
     }

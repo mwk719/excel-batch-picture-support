@@ -11,13 +11,18 @@ public class RowStyle {
 	private int fillId;
 
 	/**
+	 * fgColor rgb颜色
+	 */
+	private String fgColorRgb;
+
+	/**
 	 * 样式
 	 */
 	private StyleEnum styleEnum;
 
-
-	public RowStyle() {
-	}
+    public RowStyle(String fgColorRgb) {
+        this.fgColorRgb = fgColorRgb;
+    }
 
 	public RowStyle(StyleEnum styleEnum) {
 		this.styleEnum = styleEnum;
@@ -28,4 +33,11 @@ public class RowStyle {
 		return fillId;
 	}
 
+    public String getFgColorRgb() {
+        return fgColorRgb;
+    }
+
+    public void setFgColorRgb(String fgColorRgb) {
+        this.fgColorRgb = fgColorRgb;
+    }
 }

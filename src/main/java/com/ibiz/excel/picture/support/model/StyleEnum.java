@@ -1,5 +1,7 @@
 package com.ibiz.excel.picture.support.model;
 
+import com.ibiz.excel.picture.support.module.Styles;
+
 /**
  * 样式枚举类
  *
@@ -21,7 +23,7 @@ public enum StyleEnum {
 
 	/**
 	 * 填充色id
-	 * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
+	 * 与对应{@link Styles}
 	 */
 	private Integer fillId;
 

@@ -1,5 +1,7 @@
 package com.ibiz.excel.picture.support.model;
 
+import com.ibiz.excel.picture.support.module.Styles;
+
 /**
  * 读取内置字体
  *
@@ -16,7 +18,7 @@ public enum  FontEnum {
 	F10(3)
 	;
 	/**
-	 * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
+	 * 与对应{@link Styles}
 	 */
 	private Integer fillId;
 
