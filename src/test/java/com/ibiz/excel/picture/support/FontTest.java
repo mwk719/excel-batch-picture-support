@@ -36,7 +36,7 @@ public class FontTest {
 		// 第一行表头
 		Row row = sheet.createRow(0)
 				//字体20
-				.setRowStyle(new RowStyle(StyleEnum.F20))
+				.setCellStyle(new CellStyle(StyleEnum.F20))
 				;
 		String[] excelName = {"序号", "文本2", "图片1", "图片2", "图片3"};
 		sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
@@ -45,7 +45,7 @@ public class FontTest {
 		// 第二行放标题
 		row = sheet.createRow(1)
 				//配置该行颜色，现在默认只有绿色
-				.setRowStyle(new RowStyle(StyleEnum.GREEN_B));
+				.setCellStyle(new CellStyle(StyleEnum.GREEN_B));
 		List<Cell> cells = new ArrayList<>();
 		for (int i = 0; i < excelName.length; i++) {
 			Cell cell = new Cell(1, i).setValue(excelName[i]);

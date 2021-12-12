@@ -20,7 +20,7 @@ public class Row {
     /**
      * 该行样式
      */
-    private RowStyle rowStyle;
+    private CellStyle cellStyle;
 
     public Row(){
         this(1);
@@ -69,12 +69,17 @@ public class Row {
         this.cells.clear();
     }
 
-    public RowStyle getRowStyle() {
-        return rowStyle;
+    public CellStyle getCellStyle() {
+        return cellStyle;
     }
 
-    public Row setRowStyle(RowStyle rowStyle) {
-        this.rowStyle = rowStyle;
+    /**
+     * 设置行样式
+     * @param cellStyle
+     * @return
+     */
+    public Row setCellStyle(CellStyle cellStyle) {
+        this.cellStyle = new CellStyle(cellStyle);
         return this;
     }
 }

@@ -43,6 +43,8 @@ public class Workbook {
      */
     private Map<String, Integer> imageCache = new HashMap<>();
 
+    private CellStyle cellStyle;
+
     public Map<String, Integer> getImageCache() {
         return imageCache;
     }
@@ -116,4 +118,17 @@ public class Workbook {
         }
     }
 
+    public CellStyle getCellStyle() {
+        return cellStyle;
+    }
+
+    public void setCellStyle(CellStyle cellStyle) {
+        this.cellStyle = cellStyle;
+    }
+
+    public CellStyle createCellStyle() {
+        CellStyle cellStyle = new CellStyle();
+        this.setCellStyle(cellStyle);
+        return cellStyle;
+    }
 }

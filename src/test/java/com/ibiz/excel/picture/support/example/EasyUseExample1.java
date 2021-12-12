@@ -39,7 +39,7 @@ public class EasyUseExample1 {
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
         Row row = sheet.createRow(1)
                 //配置该行颜色，现在默认只有绿色
-                .setRowStyle(new RowStyle(StyleEnum.GREEN_B));
+                .setCellStyle(new CellStyle(StyleEnum.GREEN_B));
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < excelName.length; i++) {
             cells.add(new Cell(i).setValue(excelName[i]));

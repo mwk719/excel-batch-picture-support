@@ -31,23 +31,25 @@ public class EasyUseExample4 {
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
 
+        CellStyle cellStyle = workBook.createCellStyle();
+
+        cellStyle.setFgColorRgb("cc3300");
+
         // 需要在创建行前预设宽度
         // 序号宽度 有时需要单独设置序号宽度窄一点
         sheet.addColumnHelper(new ColumnHelper(1));
 
         // 第一行表头
-        Row row = sheet.createRow(0)
-                //字体20
-                .setRowStyle(new RowStyle(StyleEnum.F20));
+        Row row = sheet.createRow(0).setCellStyle(cellStyle);
         row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
 
         // 第二行放标题
         String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
         //要进行合并的列
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
-        row = sheet.createRow(1)
-                //配置该行颜色，现在默认只有绿色
-                .setRowStyle(new RowStyle(StyleEnum.GREEN_B));
+
+        cellStyle.setFgColorRgb("996699");
+        row = sheet.createRow(1).setCellStyle(cellStyle);
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < excelName.length; i++) {
             cells.add(new Cell(i).setValue(excelName[i]));

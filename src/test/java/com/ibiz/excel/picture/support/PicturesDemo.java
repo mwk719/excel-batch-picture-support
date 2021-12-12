@@ -1,7 +1,7 @@
 package com.ibiz.excel.picture.support;
 
 import cn.hutool.core.io.FileUtil;
-import com.ibiz.excel.picture.support.model.RowStyle;
+import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.StyleEnum;
 import com.ibiz.excel.picture.support.model.Workbook;
@@ -49,7 +49,7 @@ public class PicturesDemo {
 			N = _COUNT * 9;
 		}
 
-		sheet.getRows().get(0).setRowStyle(new RowStyle(StyleEnum.GREEN_B));
+		sheet.getRows().get(0).setCellStyle(new CellStyle(StyleEnum.GREEN_B));
 
 		File file = createFile();
 		OutputStream os = new FileOutputStream(file);

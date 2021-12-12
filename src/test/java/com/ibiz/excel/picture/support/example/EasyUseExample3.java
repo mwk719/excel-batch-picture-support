@@ -40,7 +40,7 @@ public class EasyUseExample3 {
         // 第一行表头
         Row row = sheet.createRow(0)
                 //字体20
-                .setRowStyle(new RowStyle(StyleEnum.F20));
+                .setCellStyle(new CellStyle(StyleEnum.F20));
         row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
 
         // 第二行放标题
@@ -49,7 +49,7 @@ public class EasyUseExample3 {
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
         row = sheet.createRow(1)
                 //配置该行颜色，现在默认只有绿色
-                .setRowStyle(new RowStyle(StyleEnum.GREEN_B));
+                .setCellStyle(new CellStyle(StyleEnum.GREEN_B));
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < excelName.length; i++) {
             cells.add(new Cell(i).setValue(excelName[i]));

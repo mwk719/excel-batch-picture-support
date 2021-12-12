@@ -68,6 +68,33 @@ public class Sheet {
      */
     private List<ColumnHelper> columnHelpers = new ArrayList<>();
 
+    /**
+     * 默认已有fill样式
+     * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
+     */
+    private int fillId = 33;
+
+    /**
+     * 默认已有cellStyles样式
+     */
+    private int s = 4;
+
+    public int getFillId() {
+        return fillId;
+    }
+
+    public void setFillId(int fillId) {
+        this.fillId = fillId;
+    }
+
+    public int getS() {
+        return s;
+    }
+
+    public void setS(int s) {
+        this.s = s;
+    }
+
     public List<Picture> getPictures() {
         return pictures;
     }
