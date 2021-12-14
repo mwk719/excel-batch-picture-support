@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support.example;
 
 import com.ibiz.excel.picture.support.UserPicture;
+import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
@@ -40,9 +41,14 @@ public class AnnotationPicturesExportExample {
             userPicture.setPictures(Arrays.asList(IMG_PATH_1, IMG_PATH_2, IMG_PATH_3));
             userPictures.add(userPicture);
         }
-
         // 创建集合的行数据在excel中
         sheet.createRow(userPictures);
+
+        // 给标题行加上背景色，加颜色时，会对字体加粗
+        CellStyle cellStyle = workBook.createCellStyle();
+        cellStyle.setFgColorRgb("66cc66");
+        sheet.getRows(0).setCellStyle(cellStyle);
+
         WebUtil.writeExcelTest(workBook, "注解导出图片集合示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 }

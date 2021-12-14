@@ -224,6 +224,15 @@ public class Sheet {
         return rows;
     }
 
+    /**
+     * 根据行号，获取行对象，默认从0开始
+     * @param num
+     * @return
+     */
+    public Row getRows(int num) {
+        return this.getRows().get(num);
+    }
+
     public int getDrawingSequence() {
         return drawingSequence;
     }

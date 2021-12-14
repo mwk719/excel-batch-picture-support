@@ -21,6 +21,7 @@ public class CellStyle {
 
 	/**
 	 * fgColor rgb颜色
+	 *  RGB网页颜色在线取色器 https://link.fobshanghai.com/rgbcolor.htm
 	 */
 	private String fgColorRgb;
 
@@ -75,6 +76,10 @@ public class CellStyle {
 		return fgColorRgb;
 	}
 
+	/**
+	 * fgColor rgb颜色
+	 *  RGB网页颜色在线取色器 https://link.fobshanghai.com/rgbcolor.htm
+	 */
 	public void setFgColorRgb(String fgColorRgb) {
 		this.fgColorRgb = fgColorRgb;
 	}
