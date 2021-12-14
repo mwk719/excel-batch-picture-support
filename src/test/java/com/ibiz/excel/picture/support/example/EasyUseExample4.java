@@ -77,8 +77,8 @@ public class EasyUseExample4 {
                         break;
                     case 2:
                         //在第二列添加多张图片
-                        pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_1));
-                        pictures.add(new Picture(2, row.getRowNumber(), 1000000, IMG_PATH_2));
+                        pictures.add(new Picture(row.getRowNumber(), 2, 1000000, IMG_PATH_1));
+                        pictures.add(new Picture(row.getRowNumber(), 2, 1000000, IMG_PATH_2));
                         row.setHeight(90);
                         break;
                     case 3:

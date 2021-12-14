@@ -2,6 +2,8 @@ package com.ibiz.excel.picture.support;
 
 import com.ibiz.excel.picture.support.annotation.ExportModel;
 
+import java.util.List;
+
 /**
  * @auther 喻场
  * @date 2020/7/813:41
@@ -17,10 +19,12 @@ public class UserPicture {
     private Integer age;
     @ExportModel(sort = 3, title = "部门")
     private String department;
-    @ExportModel(sort = 2, isPicture = true, title = "图片1")
+    @ExportModel(sort = 2, isPicture = true, title = "图片1", width = 20)
     private String picture;
     @ExportModel(sort = 4, isPicture = true, title = "图片2")
     private String headerPicture;
+    @ExportModel(sort = 5, isPicture = true, title = "多图片", height = 80)
+    private List<String> pictures;
 
     public UserPicture(String name, Integer age, String department, String picture) {
         this.name = name;
@@ -67,5 +71,13 @@ public class UserPicture {
 
     public void setHeaderPicture(String headerPicture) {
         this.headerPicture = headerPicture;
+    }
+
+    public List<String> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<String> pictures) {
+        this.pictures = pictures;
     }
 }

@@ -65,7 +65,7 @@ public class PictureCellWidthTest {
 				//每个单元格增加一个图片
 				//pictures.add(new Picture(i, row.getRowNumber(),1000000 , IMG_PATH_1));
 				//在第三列添加多张图片
-				pictures.add(new Picture(3, row.getRowNumber(), 1000000, IMG_PATH_1));
+				pictures.add(new Picture( row.getRowNumber(), 3,1000000, IMG_PATH_1));
 			}
 		}
 		row.setCells(cells);

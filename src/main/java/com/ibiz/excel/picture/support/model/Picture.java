@@ -30,14 +30,14 @@ public class Picture {
         this.picturePath = picturePath;
     }
 
-    public Picture(int fromCol, int fromRow, int width, String picturePath) {
+    public Picture(int fromRow,int fromCol,  int width, String picturePath) {
 	    super();
 	    this.fromRow = fromRow;
 	    this.fromCol = fromCol;
 	    this.toRow = fromRow;
 	    this.toCol = fromCol;
 	    this.picturePath = picturePath;
-	    this.width = width;
+	    this.setWidth(width);
     }
 
     public String getPicturePath() {
@@ -93,7 +93,8 @@ public class Picture {
     }
 
     public Picture setWidth(int width) {
-        this.width = width;
+        // 转换在excel中阈值 80000
+        this.width = width * 80000;
         return this;
     }
 }
