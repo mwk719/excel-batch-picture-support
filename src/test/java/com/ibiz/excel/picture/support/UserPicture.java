@@ -19,7 +19,7 @@ public class UserPicture {
     private Integer age;
     @ExportModel(sort = 3, title = "部门")
     private String department;
-    @ExportModel(sort = 2, isPicture = true, title = "图片1", width = 20)
+    @ExportModel(sort = 2, isPicture = true, title = "图片1")
     private String picture;
     @ExportModel(sort = 4, isPicture = true, title = "图片2")
     private String headerPicture;

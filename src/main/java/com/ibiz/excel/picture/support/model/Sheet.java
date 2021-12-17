@@ -229,7 +229,7 @@ public class Sheet {
      * @param num
      * @return
      */
-    public Row getRows(int num) {
+    public Row getRow(int num) {
         return this.getRows().get(num);
     }
 
@@ -338,7 +338,8 @@ public class Sheet {
                 values.add(String.valueOf(value));
             }
             // 设置单元格宽度，单元格宽度 = 图片宽*图片数量
-            setColumnWidth(cellNumber + 1, width * values.size());
+            int columnWidth = (width / 76923) * values.size() +  values.size() / 7;
+            setColumnWidth(cellNumber + 1, columnWidth);
             //增加图片
             values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, v)));
         }

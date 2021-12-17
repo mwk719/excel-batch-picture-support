@@ -29,7 +29,7 @@ public @interface ExportModel {
      * {@link com.ibiz.excel.picture.support.model.Picture}
      * @return
      */
-    int width() default 25;
+    int width() default 1000000;
 
     /**
      * 有图片的行高设置为100

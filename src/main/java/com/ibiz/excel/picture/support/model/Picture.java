@@ -37,7 +37,7 @@ public class Picture {
 	    this.toRow = fromRow;
 	    this.toCol = fromCol;
 	    this.picturePath = picturePath;
-	    this.setWidth(width);
+	    this.width = width;
     }
 
     public String getPicturePath() {
@@ -93,8 +93,6 @@ public class Picture {
     }
 
     public Picture setWidth(int width) {
-        // 转换在excel中阈值 80000
-        this.width = width * 80000;
         return this;
     }
 }
