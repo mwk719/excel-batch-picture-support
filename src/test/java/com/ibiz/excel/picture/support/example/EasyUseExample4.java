@@ -37,7 +37,7 @@ public class EasyUseExample4 {
 
         // 需要在创建行前预设宽度
         // 序号宽度 有时需要单独设置序号宽度窄一点
-        sheet.addColumnHelper(new ColumnHelper(1));
+        sheet.setColumnWidth(1, 10);
 
         // 第一行表头
         Row row = sheet.createRow(0).setCellStyle(cellStyle);

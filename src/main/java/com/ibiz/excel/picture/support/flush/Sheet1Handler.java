@@ -57,13 +57,13 @@ public class Sheet1Handler implements InvocationHandler {
 					// 默认宽度
 					.append("<col min=\"1\" max=\"4\" width=\"23.5\"/>");
 			// 自定义的宽度
-			sheet.getColumnHelpers().stream().forEach(column ->
+			sheet.getColumnHelperMap().entrySet().forEach(column ->
 					content.append("<col min=\"")
-					.append(column.getColumnIndex())
+					.append(column.getKey())
 					.append("\" max=\"")
-					.append(column.getColumnIndex())
+					.append(column.getKey())
 					.append("\" width=\"")
-					.append(column.getWidth())
+					.append(column.getValue().getWidth())
 					.append("\" customWidth=\"1\"/>"));
 			content.append("</cols><sheetData>");
 			target.append(content.toString());

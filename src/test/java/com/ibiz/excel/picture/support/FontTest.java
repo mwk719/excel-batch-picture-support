@@ -29,9 +29,9 @@ public class FontTest {
 		Sheet sheet = workBook.createSheet("测试");
 
 		// 需要在创建行前预设宽度
-		sheet.addColumnHelper(new ColumnHelper(1, 10))
-				.addColumnHelper(new ColumnHelper(3, 50))
-				.addColumnHelper(new ColumnHelper(4, 50));
+		sheet.setColumnWidth(1, 10)
+				.setColumnWidth(3, 50)
+				.setColumnWidth(4, 50);
 
 		// 第一行表头
 		Row row = sheet.createRow(0)

@@ -76,7 +76,7 @@ public class Sheet {
     /**
      * 单元格辅助类
      */
-    private List<ColumnHelper> columnHelpers = new ArrayList<>();
+    private Map<Integer, ColumnHelper> columnHelperMap = new HashMap<>();
 
     /**
      * 默认已有fill样式
@@ -331,8 +331,10 @@ public class Sheet {
             } else {
                 values.add(String.valueOf(value));
             }
+            // 实际宽
+            int actualWidth = width / 76923;
             // 设置单元格宽度，单元格宽度 = 图片宽*图片数量
-            int columnWidth = (width / 76923) * values.size() +  values.size() / 7;
+            double columnWidth = actualWidth * values.size() +  values.size() / 1.5;
             setColumnWidth(cellNumber + 1, columnWidth);
             //增加图片
             values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, v)));
@@ -374,21 +376,15 @@ public class Sheet {
      * @param columnIndex 坐标
      * @param width       宽度
      */
-    public Sheet setColumnWidth(int columnIndex, int width) {
-        return this.addColumnHelper(new ColumnHelper(columnIndex, width));
-    }
-
-
-    public Sheet addColumnHelper(ColumnHelper columnHelper) {
-        return this.addAllColumnHelper(Collections.singletonList(columnHelper));
-    }
-
-    public Sheet addAllColumnHelper(List<ColumnHelper> columnHelpers) {
-        this.columnHelpers.addAll(columnHelpers);
+    public Sheet setColumnWidth(int columnIndex, double width) {
+        // 判断 columnHelperMap 不包含 columnIndex
+        if(!this.columnHelperMap.containsKey(columnIndex)){
+            this.columnHelperMap.put(columnIndex, new ColumnHelper(columnIndex, width));
+        }
         return this;
     }
 
-    public List<ColumnHelper> getColumnHelpers() {
-        return columnHelpers;
+    public Map<Integer, ColumnHelper> getColumnHelperMap() {
+        return columnHelperMap;
     }
 }

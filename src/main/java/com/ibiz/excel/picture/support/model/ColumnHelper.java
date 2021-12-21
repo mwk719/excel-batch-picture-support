@@ -16,7 +16,7 @@ public class ColumnHelper {
     /**
      * 单元格宽度, 默认10
      */
-    private int width = 10;
+    private double width = 10;
 
     /**
      * 设置第几列单元格宽度
@@ -24,7 +24,7 @@ public class ColumnHelper {
      * @param columnIndex 第几列单元格
      * @param width       宽度
      */
-    public ColumnHelper(int columnIndex, int width) {
+    public ColumnHelper(int columnIndex, double width) {
         this.columnIndex = columnIndex;
         this.width = width;
     }
@@ -41,7 +41,7 @@ public class ColumnHelper {
         return columnIndex;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 }

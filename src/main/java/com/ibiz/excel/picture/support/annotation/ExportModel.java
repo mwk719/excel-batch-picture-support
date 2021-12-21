@@ -25,11 +25,11 @@ public @interface ExportModel {
     boolean merge() default false;
 
     /**
-     * 图片所在单元格宽度，图片和单元格宽度一致
+     * 图片所在单元格宽度，图片和单元格宽度一致，建议使用默认 1500000作为宽度
      * {@link com.ibiz.excel.picture.support.model.Picture}
      * @return
      */
-    int width() default 1000000;
+    int width() default 1500000;
 
     /**
      * 有图片的行高设置为100
