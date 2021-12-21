@@ -132,16 +132,6 @@ public class Sheet {
         return SHEET_HANDLER.createRow(t);
     }
 
-    /**
-     * 对集合列表进行创建行,单元格会根据t的属性自动填充
-     *
-     * @param collection 列属性集合 只会读取com.ibiz.excelx.annotation.Model 注解的属性
-     * @param <T>
-     */
-    public <T> void createRow(Collection<T> collection) {
-        collection.forEach(this::createRow);
-    }
-
     public Row createRow(int rowNumber) {
         return SHEET_HANDLER.createRow(rowNumber);
     }
