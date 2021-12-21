@@ -32,30 +32,28 @@ public class AnnotationPicturesExportExample {
     private final static String IMAGES_PATH = CURRENT_PATH + "images\\";
 
     public static void main(String[] args) throws IOException {
-        Workbook workBook = Workbook.getInstance();
+        Workbook workBook = Workbook.getInstance(56);
         Sheet sheet = workBook.createSheet("测试");
-        // 图片数组
-        File[] files = FileUtil.ls(IMAGES_PATH);
-        List<UserPicture> userPictures = new ArrayList<>();
-        UserPicture userPicture;
-        for (int r = 0; r < 1; r++) {
-            userPicture = new UserPicture();
-            userPicture.setAge(15);
-            userPicture.setName("测试-" + r);
-//            userPicture.setPicture(IMG_PATH_1);
-//            userPicture.setHeaderPicture(IMG_PATH_2);
-            // 根据图片数组和要获取图片的数量，随机从图片数组中取出若干
-            userPicture.setPictures(getPictures(files, 5));
-            userPictures.add(userPicture);
-        }
-        // 创建集合的行数据在excel中
-        sheet.createRow(userPictures);
-
         // 给标题行加上背景色，加颜色时，会对字体加粗
         CellStyle cellStyle = workBook.createCellStyle();
         cellStyle.setFgColorRgb("66cc66");
-        sheet.getRow(0).setCellStyle(cellStyle);
-
+        // 图片数组
+        File[] files = FileUtil.ls(IMAGES_PATH);
+        UserPicture userPicture;
+        for (int r = 0; r < 15; r++) {
+            userPicture = new UserPicture();
+            userPicture.setAge(15);
+            userPicture.setName("测试-" + r);
+            userPicture.setPicture(IMG_PATH_1);
+            userPicture.setHeaderPicture(IMG_PATH_2);
+            // 根据图片数组和要获取图片的数量，随机从图片数组中取出若干
+            userPicture.setPictures(getPictures(files, 5));
+            sheet.createRow(userPicture);
+            // 对标题行添加上样式
+            if(r == 0){
+                sheet.getRow(0).setCellStyle(cellStyle);
+            }
+        }
         WebUtil.writeExcelTest(workBook, "注解导出图片集合示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 

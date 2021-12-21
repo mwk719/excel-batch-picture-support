@@ -38,6 +38,8 @@ public class WebUtil {
             wb.write(os);
             wb.close();
         } catch (Exception e) {
+            // 报错时删除文件
+            FileUtil.del(file);
             log.error("测试导出excel异常", e);
         }
         log.debug("测试导出excel路径：{}", file.getAbsolutePath());

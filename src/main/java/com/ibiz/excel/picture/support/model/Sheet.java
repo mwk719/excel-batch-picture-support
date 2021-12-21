@@ -248,6 +248,10 @@ public class Sheet {
         return writeRow + 1;
     }
 
+    public int getFlushSize() {
+        return flushSize;
+    }
+
     class SheetHandler {
         void init() {
             sheetContext = SheetContext.getInstance(Sheet.this);
