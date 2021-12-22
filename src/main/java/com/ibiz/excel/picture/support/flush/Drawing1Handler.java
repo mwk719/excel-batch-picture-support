@@ -90,7 +90,9 @@ public class Drawing1Handler implements InvocationHandler {
                 "</xdr:from>" +
 				"<xdr:to>\n" +
 				"<xdr:col>" + picture.getToCol() + "</xdr:col><xdr:colOff>" + (colOff + picture.getWidth() - PADDING) + "</xdr:colOff>" +
-				"<xdr:row>" + (picture.getToRow()) + "</xdr:row><xdr:rowOff>1260000</xdr:rowOff>" +
+				"<xdr:row>" + (picture.getToRow()) +
+				// 设置图片高度
+				"</xdr:row><xdr:rowOff>"+ picture.getHeight() +"</xdr:rowOff>" +
 				"</xdr:to>" +
 				"<xdr:pic><xdr:nvPicPr>" +
 				"<xdr:cNvPr id=\"" + (1 + i) + "\" name=\"Picture " + picture.getRembed() + "\" descr=\"Picture\"/><xdr:cNvPicPr><a:picLocks noChangeAspect=\"1\"/></xdr:cNvPicPr></xdr:nvPicPr><xdr:blipFill>" +

@@ -23,7 +23,7 @@ public class UserPicture {
     private String picture;
     @ExportModel(sort = 4, isPicture = true, title = "图片2")
     private String headerPicture;
-    @ExportModel(sort = 5, isPicture = true, title = "多图片", height = 80)
+    @ExportModel(sort = 5, isPicture = true, title = "多图片")
     private List<String> pictures;
 
     public UserPicture(String name, Integer age, String department, String picture) {

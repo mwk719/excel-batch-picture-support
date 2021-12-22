@@ -276,6 +276,7 @@ public class Sheet {
                 boolean merge = model.merge();
                 // 图片所在单元格宽度，图片和单元格宽度一致
                 int width = model.width();
+                // 图片所在单元格行高度
                 int height = model.height();
                 String title = model.title();
                 Cell cell = new Cell(row.getRowNumber(), sort);
@@ -325,7 +326,8 @@ public class Sheet {
          */
         private void addPictures(Row row, int cellNumber, int width,int height, Object value) {
             List<String> values = new ArrayList<>();
-            row.setHeight(height);
+            // 设置行高自适应于图片的高度
+            row.setHeight((height / 12600) - 1);
             if (value instanceof List) {
                 values = (List<String>) value;
             } else {
@@ -337,7 +339,7 @@ public class Sheet {
             double columnWidth = actualWidth * values.size() +  values.size() / 1.5;
             setColumnWidth(cellNumber + 1, columnWidth);
             //增加图片
-            values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, v)));
+            values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, height, v)));
         }
 
         <T> Row createRow(T t) {

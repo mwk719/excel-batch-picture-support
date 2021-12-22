@@ -11,4 +11,13 @@ public class WorkbookConstant {
     public static final String MEDIA_IMAGE_TYPE = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image";
     /**有图片的行高设置为100*/
     public static final int PICTURE_ROW_HEIGHT = 100;
+
+    /**
+     * 图片默认高度
+     */
+    public static final int PICTURE_HEIGHT = 1260000;
+    /**
+     * 图片默认宽度
+     */
+    public static final int PICTURE_WEIGHT = 1500000;
 }

@@ -1,5 +1,7 @@
 package com.ibiz.excel.picture.support.model;
 
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
+
 /**
  * @auther 喻场
  * @date 2020/7/217:35
@@ -16,7 +18,12 @@ public class Picture {
     /**
      * 图片宽度
      */
-    private int width;
+    private int width = WorkbookConstant.PICTURE_WEIGHT;
+
+    /**
+     * 图片高度
+     */
+    private int height = WorkbookConstant.PICTURE_HEIGHT;
 
     public Picture(){
     }
@@ -38,6 +45,17 @@ public class Picture {
 	    this.toCol = fromCol;
 	    this.picturePath = picturePath;
 	    this.width = width;
+    }
+
+    public Picture(int fromRow,int fromCol,  int width, int height,String picturePath) {
+        super();
+        this.fromRow = fromRow;
+        this.fromCol = fromCol;
+        this.toRow = fromRow;
+        this.toCol = fromCol;
+        this.picturePath = picturePath;
+        this.width = width;
+        this.height = height;
     }
 
     public String getPicturePath() {
@@ -94,5 +112,13 @@ public class Picture {
 
     public Picture setWidth(int width) {
         return this;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

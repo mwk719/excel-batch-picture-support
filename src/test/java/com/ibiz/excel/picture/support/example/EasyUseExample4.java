@@ -1,5 +1,6 @@
 package com.ibiz.excel.picture.support.example;
 
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.WebUtil;
 
@@ -37,7 +38,9 @@ public class EasyUseExample4 {
 
         // 需要在创建行前预设宽度
         // 序号宽度 有时需要单独设置序号宽度窄一点
-        sheet.setColumnWidth(1, 10);
+        sheet.setColumnWidth(1, 5)
+                // 设置第三列宽度
+                .setColumnWidth(3, 50);
 
         // 第一行表头
         Row row = sheet.createRow(0).setCellStyle(cellStyle);
@@ -77,8 +80,8 @@ public class EasyUseExample4 {
                         break;
                     case 2:
                         //在第二列添加多张图片
-                        pictures.add(new Picture(row.getRowNumber(), 2, 1000000, IMG_PATH_1));
-                        pictures.add(new Picture(row.getRowNumber(), 2, 1000000, IMG_PATH_2));
+                        pictures.add(new Picture(row.getRowNumber(), 2, WorkbookConstant.PICTURE_WEIGHT, IMG_PATH_1));
+                        pictures.add(new Picture(row.getRowNumber(), 2, WorkbookConstant.PICTURE_WEIGHT, IMG_PATH_2));
                         row.setHeight(90);
                         break;
                     case 3:

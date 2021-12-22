@@ -51,11 +51,11 @@ public class AnnotationPicturesExportExample {
             userPicture.setPicture(IMG_PATH_1);
             userPicture.setHeaderPicture(IMG_PATH_2);
             // 根据图片数组和要获取图片的数量，随机从图片数组中取出若干
-            userPicture.setPictures(getPictures(files, 1));
+            userPicture.setPictures(getPictures(files, 9));
             sheet.createRow(userPicture);
             // 对标题行添加上样式
             if(r == 0){
-                sheet.getRow(0).setCellStyle(cellStyle);
+                sheet.getRow(r).setCellStyle(cellStyle);
             }
         }
         WebUtil.writeExcelTest(workBook, "注解导出图片集合示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
