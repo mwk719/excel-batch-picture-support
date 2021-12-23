@@ -31,6 +31,11 @@ public class Row {
     public int getHeight() {
         return height <= 0 ? autoHeight : height;
     }
+
+    /**
+     * 设置行高
+     * @param height
+     */
     public void setHeight(int height) {
         this.height = height;
     }

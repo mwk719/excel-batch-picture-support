@@ -335,8 +335,12 @@ public class Sheet {
             }
             // 实际宽
             int actualWidth = width / 76923;
+            // 图片数
+            int valuesSize = values.size();
+            // 数组为空时，给默认值1，否则单元格宽度会被计算成0
+            valuesSize = valuesSize == 0 ? 1 : valuesSize;
             // 设置单元格宽度，单元格宽度 = 图片宽*图片数量
-            double columnWidth = actualWidth * values.size() +  values.size() / 1.5;
+            double columnWidth = actualWidth * valuesSize +  valuesSize / 1.5;
             setColumnWidth(cellNumber + 1, columnWidth);
             //增加图片
             values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, height, v)));
@@ -382,6 +386,13 @@ public class Sheet {
         // 判断 columnHelperMap 不包含 columnIndex
         if(!this.columnHelperMap.containsKey(columnIndex)){
             this.columnHelperMap.put(columnIndex, new ColumnHelper(columnIndex, width));
+        }else {
+            // 存在时，则取出来
+            ColumnHelper columnHelper = this.columnHelperMap.get(columnIndex);
+            // 比较新的宽度和存在的宽度，将最大的宽度设置进去
+            if(width > columnHelper.getWidth()){
+                columnHelper.setWidth(width);
+            }
         }
         return this;
     }
