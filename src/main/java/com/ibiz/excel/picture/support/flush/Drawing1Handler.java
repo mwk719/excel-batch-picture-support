@@ -31,10 +31,10 @@ public class Drawing1Handler implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		if (method.getName().equals("write")) {
 			Sheet sheet = (Sheet) args[0];
-			Map<Integer, List<Picture>> listMap = sheet.getPictures().stream()
-					.collect(Collectors.groupingBy(e -> e.getFromCol() + e.getFromRow()));
-
-			for (Map.Entry<Integer, List<Picture>> map : listMap.entrySet()) {
+			// 将同一单元格的图片分组在一个集合中
+			Map<String, List<Picture>> listMap = sheet.getPictures().stream()
+					.collect(Collectors.groupingBy(e -> e.getFromCol() + "_" + e.getFromRow()));
+			for (Map.Entry<String, List<Picture>> map : listMap.entrySet()) {
 				this.writerDrawing(map.getValue());
 			}
 		}

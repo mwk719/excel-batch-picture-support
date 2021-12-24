@@ -44,15 +44,14 @@ public class AnnotationPicturesExportExample {
         // 图片数组
         File[] files = FileUtil.ls(IMAGES_PATH);
         UserPicture userPicture;
-        for (int r = 0; r < 3; r++) {
+        for (int r = 0; r < 101; r++) {
             userPicture = new UserPicture();
             userPicture.setAge(15);
             userPicture.setName("测试-" + r);
             userPicture.setPicture(IMG_PATH_1);
-            userPicture.setHeaderPicture(IMG_PATH_2);
+//            userPicture.setHeaderPicture(IMG_PATH_2);
             // 根据图片数组和要获取图片的数量，随机从图片数组中取出若干
-//            userPicture.setPictures(getPictures(files, 5));
-//            userPicture.setPictures(getPictures(files, 1));
+            userPicture.setPictures(getPictures(files, new Random().nextInt(5)));
             sheet.createRow(userPicture);
                     // 不设置时，自适应图片的高度
 //                    .setHeight(200);

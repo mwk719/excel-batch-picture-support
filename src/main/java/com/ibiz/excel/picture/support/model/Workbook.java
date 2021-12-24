@@ -21,7 +21,9 @@ public class Workbook {
      * flushSize = -1 时不刷新流
      */
     private int flushSize;
-    /**工作表sheet */
+    /**
+     * 工作表sheet
+     */
     private List<Sheet> sheets;
 
     public File getWorkbookFile() {
@@ -29,12 +31,18 @@ public class Workbook {
     }
 
     private final File workbookFile;
-    /**excel临时目录名*/
+    /**
+     * excel临时目录名
+     */
     private final String filePath;
-    /**生成的excel文件绝对路径*/
+    /**
+     * 生成的excel文件绝对路径
+     */
     private final String destPath;
     /**执行了close方法后,才会有dest*/
-    /**目的文件*/
+    /**
+     * 目的文件
+     */
     private File destFile;
     private boolean close;
     /***
@@ -48,9 +56,11 @@ public class Workbook {
     public Map<String, Integer> getImageCache() {
         return imageCache;
     }
+
     private Workbook() {
         this(100);
     }
+
     private Workbook(int flushSize) {
         this.flushSize = flushSize;
         filePath = WorkbookConstant.AUTO_DIR + WorkbookConstant.FILE_SEPARATOR + UUID.randomUUID().toString().replace("-", "");
@@ -61,14 +71,17 @@ public class Workbook {
 
     /**
      * 获取WorkBook实例，默认100行刷新
+     *
      * @return
      */
     public static Workbook getInstance() {
         return getInstance(100);
     }
+
     public static Workbook getInstance(int flushSize) {
         return new Workbook(flushSize);
     }
+
     public Sheet createSheet() {
         Sheet sheet = Sheet.getInstance(flushSize, this);
         sheets.add(sheet);
@@ -118,17 +131,14 @@ public class Workbook {
         }
     }
 
-    public CellStyle getCellStyle() {
-        return cellStyle;
-    }
-
-    public void setCellStyle(CellStyle cellStyle) {
-        this.cellStyle = cellStyle;
-    }
-
+    /**
+     * 创建工作簿样式
+     *
+     * @return
+     */
     public CellStyle createCellStyle() {
         CellStyle cellStyle = new CellStyle();
-        this.setCellStyle(cellStyle);
+        this.cellStyle = cellStyle;
         return cellStyle;
     }
 }

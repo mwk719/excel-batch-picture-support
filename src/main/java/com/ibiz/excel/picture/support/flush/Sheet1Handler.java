@@ -1,5 +1,6 @@
 package com.ibiz.excel.picture.support.flush;
 
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -55,7 +56,7 @@ public class Sheet1Handler implements InvocationHandler {
 			StringBuilder content = new StringBuilder();
 			content.append("<cols>")
 					// 默认宽度
-					.append("<col min=\"1\" max=\"4\" width=\"23.5\"/>");
+					.append("<col min=\"1\" max=\"4\" width=\"" + WorkbookConstant.CELL_WEIGHT+ "\"/>");
 			// 自定义的宽度
 			sheet.getColumnHelperMap().entrySet().forEach(column ->
 					content.append("<col min=\"")

@@ -20,4 +20,9 @@ public class WorkbookConstant {
      * 图片默认宽度
      */
     public static final int PICTURE_WEIGHT = 1500000;
+
+    /**
+     * 单元格宽度
+     */
+    public static final double CELL_WEIGHT = 23.5;
 }
