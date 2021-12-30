@@ -31,7 +31,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 <dependency>
     <groupId>top.minwk</groupId>
     <artifactId>excel-x</artifactId>
-    <version>1.0.4</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
@@ -42,6 +42,15 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
    - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
 
 3. ### 版本更迭
+
+   #### 2.0.0(2021.12.30)
+
+   - [添加用户可自定义背景色样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
+   - [添加使用注解可对图片集合进行导出](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
+   - 添加自定义图片的高度；图片高度和单元格高度自适应
+   - 修复导出图片集合变多时单元格宽度不够
+   - 修复导出数据行数大于100 excel打开异常
+   - 修复导出多组图片excel中缺失部分图片问题
 
    #### 1.0.4(2021.12.08)
 
