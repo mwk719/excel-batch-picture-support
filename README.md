@@ -1,4 +1,6 @@
 # Excel支持大量图片导出
+[![Build Status](https://travis-ci.com/mwk719/excel-batch-picture-support.svg?branch=dev)](https://app.travis-ci.com/github/mwk719/excel-batch-picture-support)
+[![codecov](https://codecov.io/gh/mwk719/excel-batch-picture-support/branch/dev/graph/badge.svg?token=pNgL09o7hN)](https://codecov.io/gh/mwk719/excel-batch-picture-support)
 
 ## 背景
 
