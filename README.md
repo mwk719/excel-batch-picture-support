@@ -1,6 +1,10 @@
 # Excel支持大量图片导出
 [![Build Status](https://travis-ci.com/mwk719/excel-batch-picture-support.svg?branch=master)](https://app.travis-ci.com/github/mwk719/excel-batch-picture-support)
 [![codecov](https://codecov.io/gh/mwk719/excel-batch-picture-support/branch/master/graph/badge.svg?token=40375Bb4s5)](https://codecov.io/gh/mwk719/excel-batch-picture-support)
+<a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">
+<img src="https://img.shields.io/badge/JDK-8+-green.svg" /></a>
+<a target="_blank" href="https://search.maven.org/artifact/top.minwk/excel-x">
+<img src="https://img.shields.io/maven-central/v/top.minwk/excel-x.svg?label=Maven%20Central" /></a>
 
 ## 背景
 
