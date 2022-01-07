@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support.util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -58,6 +59,14 @@ public class MD5Digester {
             result[(i * 2 + 1)] = DIGITAL[(bytes[i] & 0xF)];
         }
         return new String(result);
+    }
+
+    public static String encodeHexStr(String str) {
+        if (str == null) {
+            return null;
+        }
+        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+        return encodeHexStr(bytes);
     }
 
 }
