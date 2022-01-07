@@ -16,6 +16,12 @@ public class Picture {
     private String picturePath;	//图片路径
 
     /**
+     * 图片来源
+     * {@link com.ibiz.excel.picture.support.constants.PictureSourceContent}
+     */
+    private int pictureSource;
+
+    /**
      * 图片宽度
      */
     private int width = WorkbookConstant.PICTURE_WEIGHT;
@@ -56,6 +62,18 @@ public class Picture {
         this.picturePath = picturePath;
         this.width = width;
         this.height = height;
+    }
+
+    public Picture(int fromRow,int fromCol,  int width, int height,String picturePath, int pictureSource) {
+        super();
+        this.fromRow = fromRow;
+        this.fromCol = fromCol;
+        this.toRow = fromRow;
+        this.toCol = fromCol;
+        this.picturePath = picturePath;
+        this.width = width;
+        this.height = height;
+        this.pictureSource = pictureSource;
     }
 
     public String getPicturePath() {
@@ -120,5 +138,13 @@ public class Picture {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public int getPictureSource() {
+        return pictureSource;
+    }
+
+    public void setPictureSource(int pictureSource) {
+        this.pictureSource = pictureSource;
     }
 }

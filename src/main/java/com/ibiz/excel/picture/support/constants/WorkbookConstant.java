@@ -25,4 +25,9 @@ public class WorkbookConstant {
      * 单元格宽度
      */
     public static final double CELL_WEIGHT = 23.5;
+
+    /**
+     * 下载网络图片超时时间
+     */
+    public static final int DOWNLOAD_PICTURE_TIME_OUT = 10 * 1000;
 }

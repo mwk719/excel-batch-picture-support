@@ -1,6 +1,8 @@
 package com.ibiz.excel.picture.support.flush;
 
+import cn.hutool.http.HttpUtil;
 import com.ibiz.excel.picture.support.constants.Alias;
+import com.ibiz.excel.picture.support.constants.PictureSourceContent;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.Picture;
 import com.ibiz.excel.picture.support.model.Sheet;
@@ -13,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -37,11 +38,8 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
             List<Picture> pictures = sheet.getPictures();
             pictures.stream().filter(Objects::nonNull).forEach(p -> {
                 if (StringUtils.isNotBlank(p.getPicturePath())) {
-                    File file = new File(p.getPicturePath());
-                    if(file.exists()) {
-                        //写图片
-                        copyPictureAppendDrawingRelsXML(sheet, p);
-                    }
+                    //写图片
+                    copyPictureAppendDrawingRelsXML(sheet, p);
                 }
             });
         }
@@ -55,8 +53,21 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
      */
     private void copyPictureAppendDrawingRelsXML(Sheet sheet, Picture picture) {
         try {
-            File srcPicture = new File(picture.getPicturePath());
-            String md5 = MD5Digester.digestMD5(srcPicture);
+            String md5;
+            File srcPicture = null;
+            String picturePath = picture.getPicturePath();
+            // 判断图片来源
+            if(PictureSourceContent.WEB_URL == picture.getPictureSource() ){
+                md5 = MD5Digester.encodeHexStr(picturePath);
+            }else {
+                // 绝对路径图片
+                srcPicture = new File(picturePath);
+                // 绝对路径下图片不存在则不执行
+                if(!srcPicture.exists()){
+                    return;
+                }
+                md5 = MD5Digester.digestMD5(srcPicture);
+            }
             Integer drawingSequence = sheet.getWorkbook().getImageCache().get(md5);
             // 已存在的图片
             if (Objects.nonNull(drawingSequence)) {
@@ -67,7 +78,17 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
             File media = sheet.getSheetContext().getRepositoryHolder().get(Alias.MEDIA).getFile();
             drawingSequence = sheet.getDrawingSequence();
             File destPicture = new File(media, "image"+ drawingSequence + ".png");
-            FileUtil.copyFile(srcPicture, destPicture);
+            if(PictureSourceContent.WEB_URL == picture.getPictureSource() ){
+                // 下载网络图片到excel资源路径
+                HttpUtil.downloadFile(picturePath, destPicture, WorkbookConstant.DOWNLOAD_PICTURE_TIME_OUT);
+            }else {
+                // 复制绝对图片到excel资源路径
+                FileUtil.copyFile(srcPicture, destPicture);
+            }
+            // 输出的图片不存在则跳出
+            if(!destPicture.exists()){
+                return;
+            }
             picture.setRembed(drawingSequence);
             RelationShip relationShip = new RelationShip("rId" + drawingSequence, WorkbookConstant.MEDIA_IMAGE_TYPE, "../media/image" + drawingSequence +".png");
             //先把drawingSequence放入缓存,因为从缓存中获取时设置drawingSequence再+1对应图片。实际图片的drawingSequence不变
@@ -75,9 +96,7 @@ public class DrawingXmlRelsHandler implements InvocationHandler {
             drawingSequence++;
             sheet.setDrawingSequence(drawingSequence);
             target.append(CovertUtil.covert(relationShip));
-        } catch (IOException e) {
-            logger.error("图片copy到media目录下异常",e);
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.error("图片copy到media目录下异常",e);
         }
     }

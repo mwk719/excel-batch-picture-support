@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support;
 
 import com.ibiz.excel.picture.support.annotation.ExportModel;
+import com.ibiz.excel.picture.support.constants.PictureSourceContent;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class UserPicture {
     private String department;
     @ExportModel(sort = 2, isPicture = true, title = "图片1")
     private String picture;
-    @ExportModel(sort = 4, isPicture = true, title = "图片2")
+    @ExportModel(sort = 4, isPicture = true, title = "图片2", pictureSource = PictureSourceContent.WEB_URL)
     private String headerPicture;
     @ExportModel(sort = 5, isPicture = true, title = "多图片")
     private List<String> pictures;

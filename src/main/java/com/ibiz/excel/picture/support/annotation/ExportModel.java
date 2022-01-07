@@ -1,5 +1,6 @@
 package com.ibiz.excel.picture.support.annotation;
 
+import com.ibiz.excel.picture.support.constants.PictureSourceContent;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 
 import java.lang.annotation.*;
@@ -52,7 +53,16 @@ public @interface ExportModel {
     /**
      * 图片所在单元格行高度，单元格会自适应图片的高度
      * 如需要自定义图片高度，注意：在导出类中有多个图片字段，需要在每个图片字段上注解配置自定义的高度
+     *
      * @return
      */
     int height() default WorkbookConstant.PICTURE_HEIGHT;
+
+    /**
+     * 图片来源 默认为图片的绝对路径
+     * {@link PictureSourceContent}
+     *
+     * @return
+     */
+    int pictureSource() default PictureSourceContent.ABSOLUTE_PATH;
 }
