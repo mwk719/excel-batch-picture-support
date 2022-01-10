@@ -34,7 +34,7 @@ public class ExportExample_20220110 extends BaseJunitTest {
             // 导出url单张图片
             userPicture.setHeaderPicture(getUrl());
             // 导出本地图片集合
-            userPicture.setPictures(getPictures(localTestFiles, new Random().nextInt(5)));
+            userPicture.setPictures(getPictures(new Random().nextInt(5)));
             // 导出url图片集合
             userPicture.setUrlPictures(getUrls(5));
             sheet.createRow(userPicture);

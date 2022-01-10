@@ -33,7 +33,7 @@ public class AnnotationPicturesExportExample extends BaseJunitTest {
             userPicture.setPicture(IMG_PATH_1);
             userPicture.setHeaderPicture(getUrl());
             // 根据图片数组和要获取图片的数量，随机从本地测试图片数组中取出若干
-            userPicture.setPictures(getPictures(localTestFiles, new Random().nextInt(5)));
+            userPicture.setPictures(getPictures(new Random().nextInt(5)));
             sheet.createRow(userPicture);
                     // 不设置时，自适应图片的高度
 //                    .setHeight(200);

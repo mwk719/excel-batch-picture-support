@@ -23,19 +23,23 @@ public class BaseJunitTest {
 
     protected final static String IMAGES_PATH = CURRENT_PATH + "images\\";
 
-    // url图片测试集合
-    protected final static List<String> urls = new ArrayList<>();
+    /**
+     * url图片测试集合
+     */
+    protected final static List<String> URLS = new ArrayList<>();
 
-    // 本地测试图片数组
-    protected final static File[] localTestFiles;
+    /**
+     * 本地测试图片数组
+     */
+    protected final static File[] LOCAL_TEST_FILES;
 
     static {
-        urls.add("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
-        urls.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F060421091316%2F210604091316-6-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644142768&t=82062e20360f72b0fd8d5fd7e2fc9885");
-        urls.add("https://img2.baidu.com/it/u=121102239,1207969661&fm=253&fmt=auto&app=120&f=JPEG?w=1195&h=500");
-        urls.add("https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto");
+        URLS.add("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
+        URLS.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F060421091316%2F210604091316-6-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644142768&t=82062e20360f72b0fd8d5fd7e2fc9885");
+        URLS.add("https://img2.baidu.com/it/u=121102239,1207969661&fm=253&fmt=auto&app=120&f=JPEG?w=1195&h=500");
+        URLS.add("https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto");
 
-        localTestFiles = FileUtil.ls(IMAGES_PATH);
+        LOCAL_TEST_FILES = FileUtil.ls(IMAGES_PATH);
     }
 
 
@@ -45,18 +49,18 @@ public class BaseJunitTest {
      * @param getCount 获取图片的数量
      * @return
      */
-    protected static List<String> getPictures(File[] files, int getCount) {
+    protected static List<String> getPictures(int getCount) {
         List<String> list = new ArrayList<>(getCount);
         for (int i = 0; i < getCount; i++) {
-            int index = new Random().nextInt(files.length);
-            list.add(files[index].getAbsolutePath());
+            int index = new Random().nextInt(LOCAL_TEST_FILES.length);
+            list.add(LOCAL_TEST_FILES[index].getAbsolutePath());
         }
         return list;
     }
 
     protected static String getUrl() {
-        int index = new Random().nextInt(urls.size());
-        return urls.get(index);
+        int index = new Random().nextInt(URLS.size());
+        return URLS.get(index);
     }
 
     protected static List<String> getUrls(int getCount) {

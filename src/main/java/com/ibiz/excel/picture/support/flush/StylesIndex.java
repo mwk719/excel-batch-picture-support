@@ -38,5 +38,19 @@ public class StylesIndex {
         s = s + 1;
     }
 
+    public int getFillId() {
+        return fillId;
+    }
 
+    public void setFillId(int fillId) {
+        this.fillId = fillId;
+    }
+
+    public int getS() {
+        return s;
+    }
+
+    public void setS(int s) {
+        this.s = s;
+    }
 }
