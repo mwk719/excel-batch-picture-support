@@ -9,7 +9,6 @@ import java.io.IOException;
 
 /**
  * 注解图片导出示例
- * todo 建议使用{@link EasyUseExample4} 示例，不过写法有点麻烦，待优化
  *
  * @author MinWeikai
  * @date 2021-12-07 10:59:49
