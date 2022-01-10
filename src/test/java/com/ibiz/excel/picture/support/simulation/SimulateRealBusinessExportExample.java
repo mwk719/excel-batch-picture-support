@@ -44,7 +44,7 @@ public class SimulateRealBusinessExportExample extends BaseJunitTest {
             userPicture.setHeaderPicture(IMG_PATH_2);
             if(new Random().nextInt(10) > 5){
                 // 模拟场景2. 在业务数据集合中，有些数据没有图片对应的图片集合，没有则不设置值
-                userPicture.setPictures(getPictures(localTestFiles, new Random().nextInt(10)));
+                userPicture.setPictures(getPictures(new Random().nextInt(10)));
             }
             sheet.createRow(userPicture);
             // 给标题行加上背景色，加颜色时，会对字体加粗
