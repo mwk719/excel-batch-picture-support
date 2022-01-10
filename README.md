@@ -31,23 +31,28 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 1. ### Maven导入
 
-   在项目的pom.xml的dependencies中加入以下内容:
+   在项目的pom.xml的dependencies中加入以下内容: 点击查看[最新版本 ${excel-x.version}](https://search.maven.org/artifact/top.minwk/excel-x)
 
 ```xml
 <dependency>
     <groupId>top.minwk</groupId>
     <artifactId>excel-x</artifactId>
-    <version>2.0.0</version>
+    <version>${excel-x.version}</version>
 </dependency>
 ```
 
 2. ### 示例
 
-   - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)
+   - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
    - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
 
 3. ### 版本更迭
+
+   #### 2.1.0(2022.01.14)
+
+   - 添加导出网络链接图片到excel中
+   - 修改CellStyle样式的使用
 
    #### 2.0.0(2021.12.30)
 

@@ -24,9 +24,9 @@ public class UserPicture {
     private String picture;
     @ExportModel(sort = 4, isPicture = true, title = "图片2", pictureSource = PictureSourceContent.WEB_URL)
     private String headerPicture;
-    @ExportModel(sort = 5, isPicture = true, title = "多图片")
+    @ExportModel(sort = 5, isPicture = true, title = "本地多图片")
     private List<String> pictures;
-    @ExportModel(sort = 6, isPicture = true, title = "url图片")
+    @ExportModel(sort = 6, isPicture = true, title = "url多图片")
     private List<String> urlPictures;
 
     public UserPicture(String name, Integer age, String department, String picture) {
