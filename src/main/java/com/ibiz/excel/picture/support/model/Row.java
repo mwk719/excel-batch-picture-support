@@ -84,7 +84,7 @@ public class Row {
      * @return
      */
     public Row setCellStyle(CellStyle cellStyle) {
-        this.cellStyle = new CellStyle(cellStyle);
+        this.cellStyle = cellStyle;
         return this;
     }
 }

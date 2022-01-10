@@ -20,10 +20,8 @@ public class UrlPicturesExportExample extends BaseJunitTest {
     public void export() {
         Workbook workBook = Workbook.getInstance();
         Sheet sheet = workBook.createSheet("测试");
-
         // 给标题行加上背景色，加颜色时，会对字体加粗
-        CellStyle cellStyle = workBook.createCellStyle();
-        cellStyle.setFgColorRgb("66cc66");
+        sheet.addCellStyle(new CellStyle(0, "66cc66"));
         UserPicture userPicture;
         for (int r = 0; r < 10; r++) {
             userPicture = new UserPicture();
@@ -34,10 +32,6 @@ public class UrlPicturesExportExample extends BaseJunitTest {
             // 根据图片数组和要获取图片的数量，随机从url图片测试集合中取出若干
             userPicture.setUrlPictures(getUrls(5));
             sheet.createRow(userPicture);
-            // 对标题行添加上样式
-            if (r == 0) {
-                sheet.getRow(0).setCellStyle(cellStyle);
-            }
         }
         WebUtil.writeExcelTest(workBook, "url图片导出excel示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }

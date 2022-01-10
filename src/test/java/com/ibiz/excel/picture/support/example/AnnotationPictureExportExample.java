@@ -32,7 +32,6 @@ public class AnnotationPictureExportExample {
             userPicture.setAge(15);
             userPicture.setName("测试-" + r);
             userPicture.setPicture(IMG_PATH_1);
-            userPicture.setHeaderPicture(IMG_PATH_2);
             // 创建行数据在excel中
             sheet.createRow(userPicture);
         }

@@ -78,6 +78,11 @@ public class Sheet {
      */
     private Map<Integer, ColumnHelper> columnHelperMap = new HashMap<>();
 
+    /**
+     * 预设样式
+     */
+    private final Map<Integer, CellStyle> cellStyleMap = new HashMap<>();
+
     public List<Picture> getPictures() {
         return pictures;
     }
@@ -353,9 +358,20 @@ public class Sheet {
 
         <T> Row createRow(T t) {
             if (!hasWriteHead) {
-                create(t, true);
+                createRowAndCellStyle(t, true);
             }
-            return create(t, false);
+            return createRowAndCellStyle(t, false);
+        }
+
+        private <T> Row createRowAndCellStyle(T t, final boolean isHead) {
+            // 创建行数据
+            Row row = create(t, isHead);
+            // 获取样式
+            CellStyle cellStyle = cellStyleMap.get(row.getRowNumber());
+            if(cellStyle != null){
+                row.setCellStyle(cellStyle);
+            }
+            return row;
         }
 
         Row createRow(int rowNumber) {
@@ -404,5 +420,24 @@ public class Sheet {
 
     public Map<Integer, ColumnHelper> getColumnHelperMap() {
         return columnHelperMap;
+    }
+
+    /**
+     * 批量添加样式
+     *
+     * @param cellStyles
+     */
+    public void addCellStyle(List<CellStyle> cellStyles) {
+        cellStyles.forEach(cellStyle-> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
+    }
+
+    /**
+     * 添加样式
+     * @param cellStyle
+     * @return
+     */
+    public Sheet addCellStyle(CellStyle cellStyle) {
+        this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle);
+        return this;
     }
 }

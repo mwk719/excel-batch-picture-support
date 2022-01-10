@@ -32,10 +32,6 @@ public class EasyUseExample4 {
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
 
-        CellStyle cellStyle = workBook.createCellStyle();
-
-        cellStyle.setFgColorRgb("cc3300");
-
         // 需要在创建行前预设宽度
         // 序号宽度 有时需要单独设置序号宽度窄一点
         sheet.setColumnWidth(1, 5)
@@ -43,7 +39,7 @@ public class EasyUseExample4 {
                 .setColumnWidth(3, 50);
 
         // 第一行表头
-        Row row = sheet.createRow(0).setCellStyle(cellStyle);
+        Row row = sheet.createRow(0).setCellStyle(new CellStyle("cc3300"));
         row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
 
         // 第二行放标题
@@ -51,8 +47,7 @@ public class EasyUseExample4 {
         //要进行合并的列
         sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
 
-        cellStyle.setFgColorRgb("996699");
-        row = sheet.createRow(1).setCellStyle(cellStyle);
+        row = sheet.createRow(1).setCellStyle(new CellStyle("996699"));
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < excelName.length; i++) {
             cells.add(new Cell(i).setValue(excelName[i]));
