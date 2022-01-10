@@ -1,6 +1,10 @@
 package com.ibiz.excel.picture.support.model;
 
+import com.ibiz.excel.picture.support.constants.PictureSourceContent;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
+import com.ibiz.excel.picture.support.util.StringUtils;
+
+import java.util.Objects;
 
 /**
  * @auther 喻场
@@ -12,7 +16,7 @@ public class Picture {
     private int fromRow;	//图片起始行	Row.rowNumber
     private int toCol;	//图片结束列	Cell.cellNumber + 1
     private int toRow;	//图片结束行	Row.rowNumber
-    /**当前系统中图片的绝对路径*/
+    /**当前系统中图片的绝对路径 或 url地址*/
     private String picturePath;	//图片路径
 
     /**
@@ -74,6 +78,26 @@ public class Picture {
         this.width = width;
         this.height = height;
         this.pictureSource = pictureSource;
+    }
+
+    /**
+     * 自动设置图片来源
+     * @return
+     */
+    public Picture autoPictureSourceByPath(){
+        // 来源为0,自动匹配
+        try {
+            if(this.pictureSource == 0
+                    // 图片路径不为空
+                    && StringUtils.isNotBlank(this.picturePath)
+                    // 是url
+                    && Objects.equals(this.picturePath.substring(0, 4),"http")){
+                this.pictureSource = PictureSourceContent.WEB_URL;
+            }
+        }catch (Exception e){
+            throw new RuntimeException("错误的图片地址: " + this.picturePath, e);
+        }
+        return this;
     }
 
     public String getPicturePath() {

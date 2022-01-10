@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  */
 public class User {
 
-    @ExportModel(title = "姓名", mergeMaster = true)
+    @ExportModel(sort = 0,title = "姓名", mergeMaster = true)
     private String name;
     @ExportModel(sort = 1, title = "年龄")
     private Integer age;

@@ -14,7 +14,7 @@ public class UserPicture {
     public UserPicture() {
     }
 
-    @ExportModel(title = "姓名")
+    @ExportModel(sort = 0, title = "姓名")
     private String name;
     @ExportModel(sort = 1, title = "年龄")
     private Integer age;
@@ -26,6 +26,8 @@ public class UserPicture {
     private String headerPicture;
     @ExportModel(sort = 5, isPicture = true, title = "多图片")
     private List<String> pictures;
+    @ExportModel(sort = 6, isPicture = true, title = "url图片")
+    private List<String> urlPictures;
 
     public UserPicture(String name, Integer age, String department, String picture) {
         this.name = name;
@@ -80,5 +82,13 @@ public class UserPicture {
 
     public void setPictures(List<String> pictures) {
         this.pictures = pictures;
+    }
+
+    public List<String> getUrlPictures() {
+        return urlPictures;
+    }
+
+    public void setUrlPictures(List<String> urlPictures) {
+        this.urlPictures = urlPictures;
     }
 }

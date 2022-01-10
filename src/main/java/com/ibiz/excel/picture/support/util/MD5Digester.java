@@ -1,12 +1,12 @@
 package com.ibiz.excel.picture.support.util;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * 文件流md5
+ *
  * @author yc 创建时间：2018年1月24日 下午4:50:35
  */
 public class MD5Digester {
@@ -14,22 +14,26 @@ public class MD5Digester {
      * digital
      */
     public static final char[] DIGITAL = "0123456789ABCDEF".toCharArray();
+
     /**
      * MD5Digester
      */
-    private MD5Digester() {}
+    private MD5Digester() {
+    }
 
     public static String digestMD5(File file) throws FileNotFoundException {
         FileInputStream fis = new FileInputStream(file);
         return digestMD5(fis);
     }
+
     /**
      * 文件流md5
+     *
      * @param inputStream InputStream
-     * @return  md5
+     * @return md5
      */
     public static String digestMD5(InputStream inputStream) {
-        try(InputStream is = inputStream) {
+        try (InputStream is = inputStream) {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             byte[] buffer = new byte[8192];
             int len;
@@ -46,6 +50,7 @@ public class MD5Digester {
 
     /**
      * encodeHexStr
+     *
      * @param bytes bytes
      * @return String
      */
@@ -61,12 +66,27 @@ public class MD5Digester {
         return new String(result);
     }
 
-    public static String encodeHexStr(String str) {
-        if (str == null) {
-            return null;
+    /**
+     * 获取字符串的摘要 md5值
+     *
+     * @param data
+     * @return
+     */
+    public static String digestMD5(String data) {
+        MessageDigest message;
+        try {
+            message = MessageDigest.getInstance("MD5");
+            message.update(data.getBytes());
+            byte[] b = message.digest();
+            return encodeHexStr(b);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-        return encodeHexStr(bytes);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(digestMD5("12312erdhhjfdkti5745468587ry87r4tuy87rt4u8rt44u36346"));
     }
 
 }
