@@ -17,7 +17,7 @@ import java.util.Set;
  * @auther 喻场
  * @date 2020/7/618:33
  */
-public class Sheet1Handler implements InvocationHandler {
+public class Sheet1Handler extends StylesIndex implements InvocationHandler {
 	private IRepository target;
 
 	public Sheet1Handler(IRepository proxy) {
@@ -154,10 +154,15 @@ public class Sheet1Handler implements InvocationHandler {
 		//customHeight=1 使用自定义高度
 		content.append("<row r=\"").append(row.getRowNumber() + 1).append("\" ht=\"").append(row.getHeight())
 				.append("\" customHeight=\"1\"").append(" spans=\"1:").append(row.getCells().size()).append("\">");
+		CellStyle cellStyle = row.getCellStyle();
+		if(cellStyle != null){
+			// 设置cellStyle样式下标
+			this.addCellStyle(cellStyle);
+		}
 		row.getCells().forEach(c -> content.append("<c r=\"")
 				.append(c.getColNumber())
 				.append("\" s=\"")
-				.append(Optional.ofNullable(row.getCellStyle())
+				.append(Optional.ofNullable(cellStyle)
 						.map(CellStyle::getS).orElse(1))
 				.append("\" t=\"s\">")
 				.append("<v>")

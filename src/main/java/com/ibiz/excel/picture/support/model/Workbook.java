@@ -51,8 +51,6 @@ public class Workbook {
      */
     private Map<String, Integer> imageCache = new HashMap<>();
 
-    private CellStyle cellStyle;
-
     public Map<String, Integer> getImageCache() {
         return imageCache;
     }
@@ -129,16 +127,5 @@ public class Workbook {
         if (close) {
             throw new RuntimeException("workbook is closed");
         }
-    }
-
-    /**
-     * 创建工作簿样式
-     *
-     * @return
-     */
-    public CellStyle createCellStyle() {
-        CellStyle cellStyle = new CellStyle();
-        this.cellStyle = cellStyle;
-        return cellStyle;
     }
 }

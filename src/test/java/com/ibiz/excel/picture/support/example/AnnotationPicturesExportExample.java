@@ -25,10 +25,6 @@ public class AnnotationPicturesExportExample extends BaseJunitTest {
 
 //         需要在创建行前预设宽度
 //        sheet.setColumnWidth(6, 100);
-
-        // 给标题行加上背景色，加颜色时，会对字体加粗
-        CellStyle cellStyle = workBook.createCellStyle();
-        cellStyle.setFgColorRgb("66cc66");
         UserPicture userPicture;
         for (int r = 0; r < 10; r++) {
             userPicture = new UserPicture();
@@ -41,9 +37,9 @@ public class AnnotationPicturesExportExample extends BaseJunitTest {
             sheet.createRow(userPicture);
                     // 不设置时，自适应图片的高度
 //                    .setHeight(200);
-            // 对标题行添加上样式
+            // 给标题行加上背景色，加颜色时，会对字体加粗
             if(r == 0){
-                sheet.getRow(0).setCellStyle(cellStyle);
+                sheet.getRow(0).setCellStyle(new CellStyle("66cc66"));
             }
         }
         WebUtil.writeExcelTest(workBook, "注解导出图片集合示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
