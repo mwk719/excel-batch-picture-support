@@ -78,33 +78,6 @@ public class Sheet {
      */
     private Map<Integer, ColumnHelper> columnHelperMap = new HashMap<>();
 
-    /**
-     * 默认已有fill样式
-     * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
-     */
-    private int fillId = 33;
-
-    /**
-     * 默认已有cellStyles样式
-     */
-    private int s = 4;
-
-    public int getFillId() {
-        return fillId;
-    }
-
-    public void setFillId(int fillId) {
-        this.fillId = fillId;
-    }
-
-    public int getS() {
-        return s;
-    }
-
-    public void setS(int s) {
-        this.s = s;
-    }
-
     public List<Picture> getPictures() {
         return pictures;
     }
@@ -331,7 +304,12 @@ public class Sheet {
             // 计算单元格宽度根据单元格中值的数量
             calculateColumnWidth(cellNumber, width, values.size());
             //增加图片
-            values.forEach(v -> pictures.add(new Picture(row.getRowNumber(), cellNumber, width, height, v, model.pictureSource())));
+            values.forEach(val ->
+                    pictures.add(
+                            new Picture(row.getRowNumber(), cellNumber, width, height, val, model.pictureSource())
+                                    // 自动设置图片来源
+                            .autoPictureSourceByPath()
+                    ));
         }
 
         private List<String> getValues(Object value) {

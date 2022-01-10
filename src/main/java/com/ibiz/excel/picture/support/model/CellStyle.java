@@ -9,6 +9,11 @@ package com.ibiz.excel.picture.support.model;
 public class CellStyle {
 
 	/**
+	 * 行号
+	 */
+	private int rowNumber;
+
+	/**
 	 * 默认已有fill样式
 	 * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
 	 */
@@ -82,5 +87,13 @@ public class CellStyle {
 	 */
 	public void setFgColorRgb(String fgColorRgb) {
 		this.fgColorRgb = fgColorRgb;
+	}
+
+	public int getRowNumber() {
+		return rowNumber;
+	}
+
+	public void setRowNumber(int rowNumber) {
+		this.rowNumber = rowNumber;
 	}
 }

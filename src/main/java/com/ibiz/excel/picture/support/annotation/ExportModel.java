@@ -2,6 +2,7 @@ package com.ibiz.excel.picture.support.annotation;
 
 import com.ibiz.excel.picture.support.constants.PictureSourceContent;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
+import com.ibiz.excel.picture.support.model.Picture;
 
 import java.lang.annotation.*;
 
@@ -18,9 +19,10 @@ import java.lang.annotation.*;
 @Documented
 public @interface ExportModel {
     /**
-     * 排序
+     * 排序，必填，且不能重复
+     *
      */
-    int sort() default 0;
+    int sort() ;
 
     /**
      * 是否是图片
@@ -59,10 +61,12 @@ public @interface ExportModel {
     int height() default WorkbookConstant.PICTURE_HEIGHT;
 
     /**
-     * 图片来源 默认为图片的绝对路径
+     * 图片来源 默认为0,自动判断图片来源
+     * {@link Picture#autoPictureSourceByPath()}
+     * 不设置的话自动匹配,也可自己指定
      * {@link PictureSourceContent}
      *
      * @return
      */
-    int pictureSource() default PictureSourceContent.ABSOLUTE_PATH;
+    int pictureSource() default 0;
 }
