@@ -17,7 +17,12 @@ import java.util.*;
 public class Workbook {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * 到达row行数就刷新流
+     * 操作窗口
+     * 当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
+     * 会刷新数据到流,调用该方法
+     * {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
+     * 将图片刷新在磁盘中
+     * 不会占用内存空间
      * flushSize = -1 时不刷新流
      */
     private int flushSize;
@@ -76,6 +81,17 @@ public class Workbook {
         return getInstance(100);
     }
 
+    /**
+     * 操作窗口
+     * 当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
+     * 会刷新数据到流,调用该方法
+     * {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
+     * 将图片刷新在磁盘中
+     * 不会占用内存空间
+     * flushSize = -1 时不刷新流
+     * @param flushSize
+     * @return
+     */
     public static Workbook getInstance(int flushSize) {
         return new Workbook(flushSize);
     }
