@@ -43,6 +43,45 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 2. ### 示例
 
+   - 最新使用示例代码
+
+     ```java
+     @GetMapping("/export/lastversion/{row}")
+         public void exportLastVersion(HttpServletResponse response, @PathVariable int row) throws IOException {
+             /*
+             操作窗口
+             当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
+             会刷新数据到流,调用该方法
+             {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
+             将图片刷新在磁盘中
+             不会占用内存空间
+             flushSize = -1 时不刷新流
+             */
+             Workbook workBook = Workbook.getInstance(1);
+             Sheet sheet = workBook.createSheet("测试");
+             // 给标题行加上背景色，加颜色时，会对字体加粗
+             sheet.addCellStyle(new CellStyle(0, "66cc66"));
+             UserPicture userPicture;
+             for (int r = 0; r < row; r++) {
+                 userPicture = new UserPicture();
+                 userPicture.setAge(15);
+                 userPicture.setName("测试-" + r);
+                 // 导出本地单张图片
+                 userPicture.setPicture("E:\\test\\img\\1.jpg");
+                 // 导出url单张图片
+                 userPicture.setHeaderPicture("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
+                 // 导出本地图片集合
+                 userPicture.setPictures(Arrays.asList("E:\\test\\img\\1.jpg","E:\\test\\img\\2.jpg"));
+                 // 导出url图片集合
+                 userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
+                         "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
+                 sheet.createRow(userPicture);
+             }
+             WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+         }
+     ```
+
+
    - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
    - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
