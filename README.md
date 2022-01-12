@@ -61,6 +61,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
           Sheet sheet = workBook.createSheet("测试");
           // 给标题行加上背景色，加颜色时，会对字体加粗
           sheet.addCellStyle(new CellStyle(0, "66cc66"));
+          List<UserPicture> list = new ArrayList<>();
           UserPicture userPicture;
           for (int r = 0; r < row; r++) {
               userPicture = new UserPicture();
@@ -75,8 +76,9 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
               // 导出url图片集合
               userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
                       "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
-              sheet.createRow(userPicture);
+              list.add(userPicture);
           }
+          sheet.write(UserPicture.class).createRow(list);
           WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
       }
      ```
@@ -197,6 +199,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
    #### 2.1.0(2022.01.14)
 
    - 添加导出网络链接图片到excel中
+   - 添加createRow集合列表生成excel方法
    - 修改CellStyle样式的使用
 
    #### 2.0.0(2021.12.30)

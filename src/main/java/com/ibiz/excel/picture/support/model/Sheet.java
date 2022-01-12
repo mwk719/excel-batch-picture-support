@@ -14,6 +14,7 @@ import com.ibiz.excel.picture.support.listener.FlushListener;
 import com.ibiz.excel.picture.support.listener.InitListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -102,7 +103,7 @@ public class Sheet {
     /**
      * 创建行,单元格会根据t的属性自动填充
      *
-     * @param t   列属性 只会读取com.ibiz.excelx.annotation.Model 注解的属性
+     * @param t   列属性 只会读取{@link ExportModel} 注解的属性
      * @param <T>
      * @return Row
      */
@@ -110,8 +111,35 @@ public class Sheet {
         return SHEET_HANDLER.createRow(t);
     }
 
+    /**
+     * 创建集合行数据,单元格会根据t的属性自动填充
+     * 需要调用{@link Sheet#write(Class)}写入excel信息
+     * 否则 collections为空时,excel中没u有标题
+     * 写法如: sheet.write(UserPicture.class).createRow(list);
+     * @param collections   集合列属性 只会读取{@link ExportModel} 注解的属性
+     * @return
+     */
+    public <T> Sheet createRow(Collection<?> collections) {
+        if(!CollectionUtils.isEmpty(collections)){
+            collections.forEach(this::createRow);
+        }
+        return this;
+    }
+
     public Row createRow(int rowNumber) {
         return SHEET_HANDLER.createRow(rowNumber);
+    }
+
+    /**
+     * 构建并写入excel信息
+     *
+     * @param <T>
+     * @param head 标题
+     * @return
+     */
+    public <T> Sheet write(Class<T> head) {
+        SHEET_HANDLER.write(head);
+        return this;
     }
 
     /**
@@ -395,6 +423,21 @@ public class Sheet {
             rows.addAll(list);
             pictures.clear();
         }
+
+        /**
+         * 构建并写入excel信息
+         *
+         * @param head 标题类
+         * @param <T>
+         */
+        public <T> void write(Class<T> head) {
+            try {
+                createRowAndCellStyle(head.newInstance() , true);
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException("写入标题异常", e);
+            }
+        }
+
     }
 
     /**
