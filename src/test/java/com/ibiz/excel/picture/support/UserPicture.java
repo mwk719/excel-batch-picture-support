@@ -29,6 +29,8 @@ public class UserPicture {
     @ExportModel(sort = 6, isPicture = true, title = "url多图片")
     private List<String> urlPictures;
 
+    private String address;
+
     public UserPicture(String name, Integer age, String department, String picture) {
         this.name = name;
         this.age = age;
@@ -90,5 +92,13 @@ public class UserPicture {
 
     public void setUrlPictures(List<String> urlPictures) {
         this.urlPictures = urlPictures;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
