@@ -43,48 +43,154 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 2. ### 示例
 
-   - 最新使用示例代码
+   - 最新使用示例代码 
 
      ```java
      @GetMapping("/export/lastversion/{row}")
-         public void exportLastVersion(HttpServletResponse response, @PathVariable int row) throws IOException {
-             /*
-             操作窗口
-             当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
-             会刷新数据到流,调用该方法
-             {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
-             将图片刷新在磁盘中
-             不会占用内存空间
-             flushSize = -1 时不刷新流
-             */
-             Workbook workBook = Workbook.getInstance(1);
-             Sheet sheet = workBook.createSheet("测试");
-             // 给标题行加上背景色，加颜色时，会对字体加粗
-             sheet.addCellStyle(new CellStyle(0, "66cc66"));
-             UserPicture userPicture;
-             for (int r = 0; r < row; r++) {
-                 userPicture = new UserPicture();
-                 userPicture.setAge(15);
-                 userPicture.setName("测试-" + r);
-                 // 导出本地单张图片
-                 userPicture.setPicture("E:\\test\\img\\1.jpg");
-                 // 导出url单张图片
-                 userPicture.setHeaderPicture("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
-                 // 导出本地图片集合
-                 userPicture.setPictures(Arrays.asList("E:\\test\\img\\1.jpg","E:\\test\\img\\2.jpg"));
-                 // 导出url图片集合
-                 userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
-                         "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
-                 sheet.createRow(userPicture);
-             }
-             WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
-         }
+     public void exportLastVersion(HttpServletResponse response, @PathVariable int row) throws IOException {
+          /*
+          操作窗口
+          当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
+          会刷新数据到流,调用该方法
+          {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
+          将图片刷新在磁盘中
+          不会占用内存空间
+          flushSize = -1 时不刷新流
+          */
+          Workbook workBook = Workbook.getInstance(1);
+          Sheet sheet = workBook.createSheet("测试");
+          // 给标题行加上背景色，加颜色时，会对字体加粗
+          sheet.addCellStyle(new CellStyle(0, "66cc66"));
+          UserPicture userPicture;
+          for (int r = 0; r < row; r++) {
+              userPicture = new UserPicture();
+              userPicture.setAge(15);
+              userPicture.setName("测试-" + r);
+              // 导出本地单张图片
+              userPicture.setPicture("E:\\test\\img\\1.jpg");
+              // 导出url单张图片
+              userPicture.setHeaderPicture("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
+              // 导出本地图片集合
+              userPicture.setPictures(Arrays.asList("E:\\test\\img\\1.jpg","E:\\test\\img\\2.jpg"));
+              // 导出url图片集合
+              userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
+                      "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
+              sheet.createRow(userPicture);
+          }
+          WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+      }
      ```
 
+     ```java
+     /**
+      * @auther 喻场
+      * @date 2020/7/813:41
+      */
+     public class UserPicture {
+     
+         public UserPicture() {
+         }
+     
+         @ExportModel( sort = 0, title = "姓名")
+         private String name;
+         @ExportModel(sort = 1, title = "年龄")
+         private Integer age;
+         @ExportModel(sort = 3, title = "部门")
+         private String department;
+         @ExportModel(sort = 2, isPicture = true, title = "图片1")
+         private String picture;
+         @ExportModel(sort = 4, isPicture = true, title = "图片2")
+         private String headerPicture;
+         @ExportModel(sort = 5, isPicture = true, title = "多图片")
+         private List<String> pictures;
+         @ExportModel(sort = 6, isPicture = true, title = "url多图片")
+         private List<String> urlPictures;
+     
+         public UserPicture(String name, Integer age, String department, String picture) {
+             this.name = name;
+             this.age = age;
+             this.department = department;
+             this.picture = picture;
+         }
+     
+         public String getName() {
+             return name;
+         }
+     
+         public void setName(String name) {
+             this.name = name;
+         }
+     
+         public Integer getAge() {
+             return age;
+         }
+     
+         public void setAge(Integer age) {
+             this.age = age;
+         }
+     
+         public String getDepartment() {
+             return department;
+         }
+     
+         public void setDepartment(String department) {
+             this.department = department;
+         }
+     
+         public String getPicture() {
+             return picture;
+         }
+     
+         public void setPicture(String picture) {
+             this.picture = picture;
+         }
+     
+         public String getHeaderPicture() {
+             return headerPicture;
+         }
+     
+         public void setHeaderPicture(String headerPicture) {
+             this.headerPicture = headerPicture;
+         }
+     
+         public List<String> getPictures() {
+             return pictures;
+         }
+     
+         public void setPictures(List<String> pictures) {
+             this.pictures = pictures;
+         }
+     
+         public List<String> getUrlPictures() {
+             return urlPictures;
+         }
+     
+         public void setUrlPictures(List<String> urlPictures) {
+             this.urlPictures = urlPictures;
+         }
+     }
+     
+     ```
 
    - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
+
    - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
+
    - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
+
+   #### 项目中测试使用
+
+   1. 设置项目jvm堆栈大小都是20m
+
+      ```bash
+      -Xms20m -Xmx20m -Dfile.encoding=UTF-8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:\log\springlearn.hprof
+      ```
+
+   2. 复制上方 【最新使用示例代码】到项目中
+
+   3. 找一堆图片随机添加到UserPicture中
+
+   4. 导出一个5000条的记录，在最大堆栈占用为20m的情况下，导出excel大小为700m，未发生内存溢出情况
 
 3. ### 版本更迭
 

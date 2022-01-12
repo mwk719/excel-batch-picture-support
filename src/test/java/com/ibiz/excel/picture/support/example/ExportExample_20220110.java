@@ -20,12 +20,12 @@ public class ExportExample_20220110 extends BaseJunitTest {
 
     @Test
     public void export() {
-        Workbook workBook = Workbook.getInstance(3);
+        Workbook workBook = Workbook.getInstance();
         Sheet sheet = workBook.createSheet("测试");
         // 给标题行加上背景色，加颜色时，会对字体加粗
         sheet.addCellStyle(new CellStyle(0, "66cc66"));
         UserPicture userPicture;
-        for (int r = 0; r < 16; r++) {
+        for (int r = 0; r < 101; r++) {
             userPicture = new UserPicture();
             userPicture.setAge(15);
             userPicture.setName("测试-" + r);
@@ -39,7 +39,7 @@ public class ExportExample_20220110 extends BaseJunitTest {
             userPicture.setUrlPictures(getUrls(5));
             sheet.createRow(userPicture);
         }
-        WebUtil.writeExcelTest(workBook, "ExportExample_20220110_导出excel示例".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
+        WebUtil.writeExcelTest(workBook, "ExportExample_20220110_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
 }

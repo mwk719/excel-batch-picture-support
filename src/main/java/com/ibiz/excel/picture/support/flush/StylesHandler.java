@@ -49,8 +49,6 @@ public class StylesHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // 因会写入磁盘，刷新sheet.getRows()，所以需要计算是否最后一块数据
-        boolean last = true;
         if (method.getName().equals("write")) {
             Sheet sheet = (Sheet) args[0];
             List<Row> rows = sheet.getRows();
@@ -65,18 +63,8 @@ public class StylesHandler implements InvocationHandler {
                     }
                 });
             }
-
-            int x = sheet.getRowCount() % sheet.getFlushSize();
-            int y = rows.size() % sheet.getFlushSize();
-            // 判断是否最后
-            last = x - y != 1;
-            // 只写入一条数据需要特殊判断
-            boolean one = y == 0 && sheet.hasFlush();
-            // 不是最后一块数据或者没有行数据，则不写入样式
-            if (!last || rows.isEmpty() || one) {
-                return "";
-            }
-            // 在Styles对象中追加样式
+        }else if (method.getName().equals("close")) {
+            // 关闭时将所有的样式追加在Styles对象中
             target.append(xfBefore.append(xfAfter).toString());
         }
         return method.invoke(target, args);
