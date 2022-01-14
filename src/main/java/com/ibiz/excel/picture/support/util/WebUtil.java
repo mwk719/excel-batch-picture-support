@@ -36,11 +36,12 @@ public class WebUtil {
         File file = FileUtil.touch(tempPath.concat(fileName));
         try (BufferedOutputStream os = FileUtil.getOutputStream(file)) {
             wb.write(os);
-            wb.close();
         } catch (Exception e) {
             // 报错时删除文件
             FileUtil.del(file);
             log.error("测试导出excel异常", e);
+        }finally {
+            wb.close();
         }
         log.debug("测试导出excel路径：{}", file.getAbsolutePath());
     }

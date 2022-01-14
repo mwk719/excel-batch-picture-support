@@ -6,6 +6,7 @@ import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Random;
@@ -16,17 +17,8 @@ import java.util.Random;
  * @author MinWeikai
  * @date 2021-12-22 15:36:46
  */
+@Ignore
 public class SimulateRealBusinessExportExample extends BaseJunitTest {
-
-    static final String CURRENT_PATH = "E:\\test\\";
-    private static final String TEMP_PATH = CURRENT_PATH + "excel\\";
-    private final static String IMG_PATH = "E:\\test\\img\\";
-
-    private final static String IMG_PATH_1 = IMG_PATH + "1.jpg";
-    private final static String IMG_PATH_2 = IMG_PATH + "2.jpg";
-    private final static String IMG_PATH_3 = IMG_PATH + "3.jpg";
-
-    private final static String IMAGES_PATH = CURRENT_PATH + "images\\";
 
     @Test
     public void export() {

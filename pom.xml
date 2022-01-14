@@ -2,23 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
 	<groupId>top.minwk</groupId>
 	<artifactId>excel-x</artifactId>
 	<version>2.1.0</version>
 	<name>excel-x</name>
-	<description>excel-x</description>
+	<description>支持excel中批量导出图片</description>
 	<url>https://gitee.com/mwk719/excel-batch-picture-support</url>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>9</version>
-	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-
+		<!-- 跳过测试 -->
+		<skipTests>true</skipTests>
 		<!-- versions -->
 		<compile.version>8</compile.version>
 		<java.version>1.8</java.version>
@@ -126,6 +121,11 @@
 						</goals>
 					</execution>
 				</executions>
+				<!-- 不检查注释，因为不规范 -->
+				<configuration>
+					<doclint>none</doclint>
+				</configuration>
+
 			</plugin>
 
 		</plugins>
@@ -171,7 +171,7 @@
 								<format>html</format>
 								<format>xml</format>
 							</formats>
-							<check />
+							<check/>
 						</configuration>
 					</plugin>
 					<!-- Gpg Signature -->

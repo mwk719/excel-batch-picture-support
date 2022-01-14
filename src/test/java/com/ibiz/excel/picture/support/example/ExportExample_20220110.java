@@ -6,6 +6,7 @@ import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Random;
  * @author MinWeikai
  * @date 2022-01-10 10:08:03
  */
+@Ignore
 public class ExportExample_20220110 extends BaseJunitTest {
 
     @Test

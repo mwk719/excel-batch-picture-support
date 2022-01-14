@@ -6,6 +6,7 @@ import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Random;
@@ -16,6 +17,7 @@ import java.util.Random;
  * @author MinWeikai
  * @date 2021/12/14 10:36
  */
+@Ignore
 public class AnnotationPicturesExportExample extends BaseJunitTest {
 
     @Test
