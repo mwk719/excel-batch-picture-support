@@ -198,8 +198,8 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
    #### 2.1.0(2022.01.14)
 
-   - [添加导出网络链接图片到excel中](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
-   - 添加createRow集合列表生成excel方法
+   - [添加导出网络链接图片到excel中](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L146)
+   - [添加createRow集合列表生成excel方法](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L191)
    - 修改CellStyle样式的使用
 
    #### 2.0.0(2021.12.30)
