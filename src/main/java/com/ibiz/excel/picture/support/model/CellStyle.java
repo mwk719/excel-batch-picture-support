@@ -1,14 +1,23 @@
 package com.ibiz.excel.picture.support.model;
 
-import com.ibiz.excel.picture.support.flush.StylesIndex;
-
 /**
  * 控制该行样式
  *
  * @author MinWeikai
  * @date 2021/1/19 14:04
  */
-public class CellStyle extends StylesIndex {
+public class CellStyle{
+
+    /**
+     * 默认已有fill样式
+     * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
+     */
+    private int fillId = 0;
+
+    /**
+     * 默认已有cellStyles样式
+     */
+    private int s = 1;
 
     /**
      * 行号
@@ -21,7 +30,20 @@ public class CellStyle extends StylesIndex {
      */
     private String fgColorRgb;
 
+    /**
+     * 字体
+     */
+    private Font font;
+
     public CellStyle() {
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
     }
 
     /**
@@ -36,7 +58,7 @@ public class CellStyle extends StylesIndex {
     /**
      * 根据行号设置颜色
      * @param rowNumber
-     * @param fgColorRgb
+     * @param fgColorRgb RGB网页颜色在线取色器 https://link.fobshanghai.com/rgbcolor.htm
      */
     public CellStyle(int rowNumber, String fgColorRgb) {
         this.rowNumber = rowNumber;
@@ -67,4 +89,19 @@ public class CellStyle extends StylesIndex {
         this.rowNumber = rowNumber;
     }
 
+    public int getFillId() {
+        return fillId;
+    }
+
+    public void setFillId(int fillId) {
+        this.fillId = fillId;
+    }
+
+    public int getS() {
+        return s;
+    }
+
+    public void setS(int s) {
+        this.s = s;
+    }
 }
