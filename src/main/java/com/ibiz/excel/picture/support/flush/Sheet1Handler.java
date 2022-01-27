@@ -17,8 +17,10 @@ import java.util.Set;
  * @auther 喻场
  * @date 2020/7/618:33
  */
-public class Sheet1Handler extends StylesIndex implements InvocationHandler {
+public class Sheet1Handler implements InvocationHandler {
 	private IRepository target;
+
+	private StylesIndex stylesIndex = new StylesIndex();
 
 	public Sheet1Handler(IRepository proxy) {
 		this.target = proxy;
@@ -157,7 +159,7 @@ public class Sheet1Handler extends StylesIndex implements InvocationHandler {
 		CellStyle cellStyle = row.getCellStyle();
 		if(cellStyle != null){
 			// 设置cellStyle样式下标
-			this.addCellStyle(cellStyle);
+			stylesIndex.addCellStyle(cellStyle);
 		}
 		row.getCells().forEach(c -> content.append("<c r=\"")
 				.append(c.getColNumber())

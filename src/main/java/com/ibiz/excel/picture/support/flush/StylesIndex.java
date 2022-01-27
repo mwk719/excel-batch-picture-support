@@ -1,6 +1,8 @@
 package com.ibiz.excel.picture.support.flush;
 
 import com.ibiz.excel.picture.support.model.CellStyle;
+import com.ibiz.excel.picture.support.model.Font;
+import com.ibiz.excel.picture.support.util.StringUtils;
 
 /**
  * 样式下标取值
@@ -14,12 +16,22 @@ public class StylesIndex {
      * 默认已有fill样式
      * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
      */
-    private int fillId = 33;
+    private int fillId = 0;
 
     /**
      * 默认已有cellStyles样式
      */
-    private int s = 4;
+    private int s = 1;
+
+    /**
+     * 字体id
+     */
+    private int fontId = 0;
+
+    /**
+     * 是否设置字体
+     */
+    private boolean isSetFont;
 
     /**
      * 设置下标样式
@@ -27,15 +39,32 @@ public class StylesIndex {
      * @param cellStyle
      */
     protected void addCellStyle(CellStyle cellStyle) {
-        this.addIndex();
-        cellStyle.setFillId(fillId);
+        // 字体
+        Font font = cellStyle.getFont();
+        if(font != null){
+            this.isSetFont = true;
+        }else {
+            this.isSetFont = false;
+        }
+        this.addIndex(cellStyle);
+        if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
+            cellStyle.setFillId(fillId);
+        }
         cellStyle.setS(s);
+        if(font != null){
+            font.setFontId(fontId);
+        }
     }
 
-    protected void addIndex() {
+    protected void addIndex(CellStyle cellStyle) {
         // fillId+1，生成下一个编号
-        fillId = fillId + 1;
+        if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
+            fillId = (fillId == 0 ? 1 : fillId) + 1;
+        }
         s = s + 1;
+        if(isSetFont){
+            fontId = fontId + 1;
+        }
     }
 
     public int getFillId() {
@@ -52,5 +81,17 @@ public class StylesIndex {
 
     public void setS(int s) {
         this.s = s;
+    }
+
+    public int getFontId() {
+        return fontId;
+    }
+
+    public void setFontId(int fontId) {
+        this.fontId = fontId;
+    }
+
+    public void setSetFont(boolean setFont) {
+        isSetFont = setFont;
     }
 }

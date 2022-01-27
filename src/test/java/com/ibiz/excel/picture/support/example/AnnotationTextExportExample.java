@@ -1,11 +1,12 @@
 package com.ibiz.excel.picture.support.example;
 
 import com.ibiz.excel.picture.support.UserPicture;
+import com.ibiz.excel.picture.support.common.BaseJunitTest;
+import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.model.Workbook;
 import com.ibiz.excel.picture.support.util.WebUtil;
-
-import java.io.IOException;
+import org.junit.Test;
 
 /**
  * 注解无图导出示例
@@ -13,19 +14,15 @@ import java.io.IOException;
  * @author MinWeikai
  * @date 2021-12-08 11:18:49
  */
-public class AnnotationTextExportExample {
-    static final String CURRENT_PATH = "E:\\test\\";
-    private static final String TEMP_PATH = CURRENT_PATH + "excel\\";
-    private final static String IMG_PATH = "E:\\test\\img\\";
+public class AnnotationTextExportExample extends BaseJunitTest {
 
-    private final static String IMG_PATH_1 = IMG_PATH + "1.jpg";
-    private final static String IMG_PATH_2 = IMG_PATH + "2.jpg";
-
-
-    public static void main(String[] args) throws IOException {
+    @Test
+    public void export() {
         Workbook workBook = Workbook.getInstance();
         Sheet sheet = workBook.createSheet("测试");
         UserPicture u1;
+        // 给标题行加上背景色，加颜色时，会对字体加粗
+        sheet.addCellStyle(new CellStyle(0, "66cc66"));
         for (int r = 0; r < 5; r++) {
             u1 = new UserPicture();
             u1.setAge(15);
