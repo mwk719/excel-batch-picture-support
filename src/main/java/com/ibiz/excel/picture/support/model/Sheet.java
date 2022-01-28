@@ -131,6 +131,17 @@ public class Sheet {
     }
 
     /**
+     * 开始行号
+     *
+     * @param startRowNumber 表示从第几行开始写入数据
+     * @return
+     */
+    public Sheet startRow(int startRowNumber) {
+        writeRow = --startRowNumber;
+        return this;
+    }
+
+    /**
      * 构建并写入excel信息
      *
      * @param <T>
@@ -394,10 +405,13 @@ public class Sheet {
         private <T> Row createRowAndCellStyle(T t, final boolean isHead) {
             // 创建行数据
             Row row = create(t, isHead);
-            // 获取样式
-            CellStyle cellStyle = cellStyleMap.get(row.getRowNumber());
-            if(cellStyle != null){
-                row.setCellStyle(cellStyle);
+            // 最小单元配置优先，所以优先取Row中设置的样式
+            if(Objects.isNull(row.getCellStyle())){
+                // 获取样式
+                CellStyle cellStyle = cellStyleMap.get(row.getRowNumber());
+                if(cellStyle != null){
+                    row.setCellStyle(cellStyle);
+                }
             }
             return row;
         }
@@ -482,5 +496,14 @@ public class Sheet {
     public Sheet addCellStyle(CellStyle cellStyle) {
         this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle);
         return this;
+    }
+
+    /**
+     * 添加元素的合并
+     *
+     * @param mergeCell
+     */
+    public void addMergeCell(MergeCell mergeCell) {
+        this.getMergeCells().add(mergeCell);
     }
 }

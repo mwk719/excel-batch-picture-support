@@ -196,6 +196,10 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 3. ### 版本更迭
 
+   #### 2.2.1(2022.01.28)
+
+   - 优化对合并单元格的处理
+
    #### 2.2.0(2022.01.27)
 
    - [添加导出excel中字体设置](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L243)
