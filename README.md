@@ -198,7 +198,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
    #### 2.2.1(2022.01.28)
 
-   - 优化对合并单元格的处理
+   - [优化对合并单元格的处理](https://gitee.com/mwk719/excel-batch-picture-support/blob/master/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20220128.java#L30)
 
    #### 2.2.0(2022.01.27)
 
