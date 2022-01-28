@@ -24,6 +24,11 @@ public class Cell {
         this.autoSetCell(rowNumber, cellNumber);
     }
 
+    public Cell(int cellNumber, String value) {
+        this.cellNumber = cellNumber;
+        this.value = value;
+    }
+
     /**
      * 自动设置Cell顺序
      *

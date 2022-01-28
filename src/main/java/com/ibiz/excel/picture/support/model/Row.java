@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,6 +86,17 @@ public class Row {
      */
     public Row setCellStyle(CellStyle cellStyle) {
         this.cellStyle = cellStyle;
+        return this;
+    }
+
+    /**
+     * 添加行中单元格元素
+     *
+     * @param cell
+     * @return
+     */
+    public Row addCell(Cell cell) {
+        autoRowCells(Collections.singletonList(cell));
         return this;
     }
 }

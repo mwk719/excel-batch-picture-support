@@ -4,8 +4,10 @@ import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.WebUtil;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 简化设置EasyUseExample4
@@ -28,7 +30,7 @@ public class EasyUseExample4 {
     private final static String IMG_PATH_2 = IMG_PATH + "2.jpg";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
 
