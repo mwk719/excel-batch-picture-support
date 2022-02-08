@@ -66,7 +66,7 @@ public class ExportExample_20220128 extends BaseJunitTest {
             list.add(userPicture);
         }
         sheet.startRow(1).write(UserPicture.class).createRow(list);
-        WebUtil.writeExcelTest(workBook, "ExportExample_20220127_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
+        WebUtil.writeExcelTest(workBook, "ExportExample_20220128_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
 }

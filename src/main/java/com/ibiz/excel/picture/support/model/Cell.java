@@ -42,6 +42,7 @@ public class Cell {
             colNumber += "A";
         }
         col += colNumber + CELL_NUMBER_LINE[line];
+        colNumber = "";
         colNumber += CELL_NUMBER_LINE[line] + (rowNumber + 1);
     }
 
