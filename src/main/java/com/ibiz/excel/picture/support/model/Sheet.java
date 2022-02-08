@@ -500,6 +500,7 @@ public class Sheet {
 
     /**
      * 添加元素的合并
+     * 必须放在对元素赋值之后
      *
      * @param mergeCell
      */

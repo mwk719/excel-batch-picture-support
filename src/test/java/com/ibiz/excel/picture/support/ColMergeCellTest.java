@@ -26,8 +26,8 @@ public class ColMergeCellTest {
 		// 第一行表头
 		Row row = sheet.createRow(0);
 		String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
-		sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
-		row.setCells(Collections.singletonList(new Cell(0, 0).setValue("表头")));
+		row.addCell(new Cell(0, 0).setValue("表头"));
+		sheet.addMergeCell(new MergeCell(0, 0, 0, excelName.length - 1));
 
 		// 第二行放标题
 		row = sheet.createRow(1);

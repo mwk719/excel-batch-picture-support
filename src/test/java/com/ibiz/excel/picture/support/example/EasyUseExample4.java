@@ -5,7 +5,6 @@ import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.WebUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,12 +41,12 @@ public class EasyUseExample4 {
 
         // 第一行表头
         Row row = sheet.createRow(0).setCellStyle(new CellStyle("cc3300"));
-        row.autoRowCells(Collections.singletonList(new Cell(0).setValue("表头")));
+        row.addCell(new Cell(0).setValue("表头"));
 
         // 第二行放标题
         String[] excelName = {"文本1", "文本2", "图片1", "图片2", "图片3"};
         //要进行合并的列
-        sheet.getMergeCells().add(new MergeCell(0, 0, 0, excelName.length - 1));
+        sheet.addMergeCell(new MergeCell(0, 0, 0, excelName.length - 1));
 
         row = sheet.createRow(1).setCellStyle(new CellStyle("996699"));
         List<Cell> cells = new ArrayList<>();
