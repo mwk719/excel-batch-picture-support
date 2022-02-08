@@ -196,6 +196,10 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 3. ### 版本更迭
 
+   #### 2.2.2(2022.02.08)
+
+   - 修复合并后的单元格没有边框线
+
    #### 2.2.1(2022.01.28)
 
    - [优化对合并单元格的处理](https://gitee.com/mwk719/excel-batch-picture-support/blob/master/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20220128.java#L30)
