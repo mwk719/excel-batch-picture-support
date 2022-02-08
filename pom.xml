@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>top.minwk</groupId>
 	<artifactId>excel-x</artifactId>
-	<version>2.2.1</version>
+	<version>2.2.2</version>
 	<name>excel-x</name>
 	<description>支持excel中批量导出图片</description>
 	<url>https://gitee.com/mwk719/excel-batch-picture-support</url>
