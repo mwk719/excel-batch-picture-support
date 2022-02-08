@@ -504,6 +504,25 @@ public class Sheet {
      * @param mergeCell
      */
     public void addMergeCell(MergeCell mergeCell) {
+        // 对合并的单元格添加空元素
+        addFillSpace(mergeCell);
         this.getMergeCells().add(mergeCell);
+    }
+
+    /**
+     * 对合并的单元个添加填充占位
+     *
+     * @param mergeCell
+     */
+    private void addFillSpace(MergeCell mergeCell) {
+        List<Cell> cells = new ArrayList<>();
+        for (int i = mergeCell.getFirstRow(); i < mergeCell.getLastRow() + 1; i++) {
+            for (int j = mergeCell.getFirstCol() + 1; j < mergeCell.getLastCol() + 1; j++) {
+                cells.add(new Cell(j, ""));
+            }
+            List<Cell> rowCell = this.getRow(i).getCells();
+            rowCell.addAll(cells);
+            this.getRow(i).autoRowCells(rowCell);
+        }
     }
 }

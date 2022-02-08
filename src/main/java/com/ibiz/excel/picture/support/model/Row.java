@@ -1,7 +1,6 @@
 package com.ibiz.excel.picture.support.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -96,7 +95,9 @@ public class Row {
      * @return
      */
     public Row addCell(Cell cell) {
-        autoRowCells(Collections.singletonList(cell));
+        List<Cell> cells = new ArrayList<>();
+        cells.add(cell);
+        autoRowCells(cells);
         return this;
     }
 }
