@@ -17,6 +17,13 @@ public class BizExcelRel {
         this.orderNo = orderNo;
     }
 
+    public BizExcelRel(String excelName, String field, int orderNo, boolean isPicture) {
+        this.excelName = excelName;
+        this.field = field;
+        this.orderNo = orderNo;
+        this.isPicture = isPicture;
+    }
+
     public BizExcelRel(String excelName, String field, boolean isEnum, String lookupCode, int orderNo) {
         this.excelName = excelName;
         this.field = field;
@@ -49,6 +56,19 @@ public class BizExcelRel {
      * 排序
      */
     private int orderNo = 0;
+
+    /**
+     * 是否是图片
+     */
+    private boolean isPicture = false;
+
+    public boolean isPicture() {
+        return isPicture;
+    }
+
+    public void setPicture(boolean picture) {
+        isPicture = picture;
+    }
 
     public String getExcelName() {
         return excelName;
