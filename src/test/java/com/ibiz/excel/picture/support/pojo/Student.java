@@ -13,9 +13,25 @@ public class Student implements BizExcelPojoInterface {
         this.age = age;
     }
 
+    public Student(String name, Integer age, String headPicture) {
+        this.name = name;
+        this.age = age;
+        this.headPicture = headPicture;
+    }
+
     private String name;
 
     private Integer age;
+
+    private String headPicture;
+
+    public String getHeadPicture() {
+        return headPicture;
+    }
+
+    public void setHeadPicture(String headPicture) {
+        this.headPicture = headPicture;
+    }
 
     public String getName() {
         return name;
