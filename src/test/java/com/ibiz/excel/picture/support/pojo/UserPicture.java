@@ -1,4 +1,4 @@
-package com.ibiz.excel.picture.support;
+package com.ibiz.excel.picture.support.pojo;
 
 import com.ibiz.excel.picture.support.annotation.ExportModel;
 import com.ibiz.excel.picture.support.constants.PictureSourceContent;

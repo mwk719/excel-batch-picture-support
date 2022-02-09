@@ -1,6 +1,6 @@
 package com.ibiz.excel.picture.support.simulation;
 
-import com.ibiz.excel.picture.support.UserPicture;
+import com.ibiz.excel.picture.support.pojo.UserPicture;
 import com.ibiz.excel.picture.support.common.BaseJunitTest;
 import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Sheet;
