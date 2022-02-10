@@ -4,9 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,14 +29,14 @@ public class ExcelTableProcessor {
     private final Sheet sheet;
 
     /**
-     * 标题样式
-     */
-    private CellStyle titleCellStyle;
-
-    /**
      * 开始行号
      */
     private int startRow = 0;
+
+    /**
+     * 样式
+     */
+    private final Map<Integer, CellStyle> cellStyleMap = new HashMap<>();
 
     /**
      * 构建excel
@@ -48,10 +46,13 @@ public class ExcelTableProcessor {
      */
     public void buildExcel(List<BizExcelRel> excels, List<? extends BizExcelPojoInterface> list) {
         // 开始行放标题
-        Row row = sheet.createRow(startRow).setCellStyle(titleCellStyle);
+        Row row = sheet.createRow(startRow).setCellStyle(cellStyleMap.get(startRow));
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < excels.size(); i++) {
-            cells.add(new Cell(i).setValue(excels.get(i).getExcelName()));
+            BizExcelRel rel = excels.get(i);
+            cells.add(new Cell(i).setValue(rel.getExcelName()));
+            // 设置单元格宽度
+            sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
         }
         row.autoRowCells(cells);
         int num;
@@ -59,7 +60,7 @@ public class ExcelTableProcessor {
         for (int j = 0; j < list.size(); j++) {
             // 开始行的下一行放内容
             num = startRow + j + 1;
-            row = sheet.createRow(num);
+            row = sheet.createRow(num).setCellStyle(cellStyleMap.get(num));
             cells = new ArrayList<>();
             int index = 0;
             BizExcelPojoInterface excelPojoInterface = list.get(j);
@@ -75,21 +76,47 @@ public class ExcelTableProcessor {
                 row.setHeight(rowHeight);
                 cells.add(new Cell(num, index++).setValue(value));
                 row.setCells(cells);
-
             }
+
         }
     }
 
+    /**
+     * 设置行高
+     *
+     * @param rowHeight
+     * @return
+     */
     public ExcelTableProcessor setRowHeight(int rowHeight) {
         this.rowHeight = rowHeight;
         return this;
     }
 
-    public ExcelTableProcessor setTitleCellStyle(CellStyle titleCellStyle) {
-        this.titleCellStyle = titleCellStyle;
+    /**
+     * 批量添加样式
+     *
+     * @param cellStyles
+     */
+    public void addCellStyle(List<CellStyle> cellStyles) {
+        cellStyles.forEach(cellStyle-> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
+    }
+
+    /**
+     * 添加样式
+     * @param cellStyle
+     * @return
+     */
+    public ExcelTableProcessor addCellStyle(CellStyle cellStyle) {
+        this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle);
         return this;
     }
 
+    /**
+     * 设置写入数据开始行号
+     *
+     * @param startRow
+     * @return
+     */
     public ExcelTableProcessor setStartRow(int startRow) {
         this.startRow = startRow;
         return this;

@@ -28,10 +28,11 @@ public class ExportExample_20220208 extends BaseJunitTest {
         List<BizExcelRel> excels = new ArrayList<>();
         excels.add(new BizExcelRel("姓名", "name", 1));
         excels.add(new BizExcelRel("年龄", "age", 2));
-        excels.add(new BizExcelRel("头像", "headPicture", 3, true));
-        CellStyle cellStyle = new CellStyle("F0F0F0");
+        excels.add(new BizExcelRel("头像", "headPicture", 3, true, 20));
+        CellStyle cellStyle = new CellStyle(0,"F0F0F0");
+
         ExcelTableProcessor.build(sheet)
-                .setTitleCellStyle(cellStyle)
+                .addCellStyle(cellStyle)
                 .buildExcel(excels, students);
 
         WebUtil.writeExcelTest(workBook, "ExportExample_20220208_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
