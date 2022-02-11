@@ -1,8 +1,8 @@
-package com.ibiz.excel.picture.support.model;
+package com.ibiz.excel.picture.support.processor;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
-import com.ibiz.excel.picture.support.util.StringUtils;
+import com.ibiz.excel.picture.support.model.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +41,7 @@ public class ExcelTableProcessor {
     /**
      * 构建excel
      *
-     * @param excels excel属性配置
+     * @param excels excel属性配置，会根据excels中的field属性反射取出list中的值
      * @param list   需要导出的集合对象 该对象必须实现接口{@link BizExcelPojoInterface}
      */
     public void buildExcel(List<BizExcelRel> excels, List<? extends BizExcelPojoInterface> list) {
@@ -67,11 +67,15 @@ public class ExcelTableProcessor {
             excels = excels.stream().sorted(Comparator.comparing(BizExcelRel::getOrderNo)).collect(Collectors.toList());
             for (BizExcelRel excel : excels) {
                 Object propertyValue = BeanUtil.getFieldValue(excelPojoInterface, excel.getField());
-                String value = propertyValue == null ? "" : propertyValue.toString();
+                String value;
                 // 是图片
-                if (excel.isPicture() && StringUtils.isNotBlank(value)) {
-                    pictures.add(new Picture(row.getRowNumber(), excel.getOrderNo() - 1, WorkbookConstant.PICTURE_WEIGHT, value));
+                if (excel.isPicture() && Objects.nonNull(propertyValue)) {
+                    // 添加图片
+                    PictureProcessor.build(sheet).addPictures(row, excel.getOrderNo() - 1, propertyValue,
+                            0, WorkbookConstant.PICTURE_WEIGHT, WorkbookConstant.PICTURE_HEIGHT);
                     value = "";
+                } else {
+                    value = propertyValue == null ? "" : propertyValue.toString();
                 }
                 row.setHeight(rowHeight);
                 cells.add(new Cell(num, index++).setValue(value));
@@ -98,11 +102,12 @@ public class ExcelTableProcessor {
      * @param cellStyles
      */
     public void addCellStyle(List<CellStyle> cellStyles) {
-        cellStyles.forEach(cellStyle-> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
+        cellStyles.forEach(cellStyle -> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
     }
 
     /**
      * 添加样式
+     *
      * @param cellStyle
      * @return
      */
