@@ -12,6 +12,7 @@ import com.ibiz.excel.picture.support.listener.CloseListener;
 import com.ibiz.excel.picture.support.listener.ContentListener;
 import com.ibiz.excel.picture.support.listener.FlushListener;
 import com.ibiz.excel.picture.support.listener.InitListener;
+import com.ibiz.excel.picture.support.processor.PictureProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -317,7 +318,7 @@ public class Sheet {
                     // 不是标题 并且 是图片 并且 值不为空
                     if (isPicture && value != null) {
                         // 添加图片
-                        this.addPictures(row, cell.getCellNumber(), value, model);
+                        PictureProcessor.build(Sheet.this).addPictures(row, cell.getCellNumber(), value, model);
                     } else {
                         cell.setValue(value == null ? "" : String.valueOf(value));
                     }
