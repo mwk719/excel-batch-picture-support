@@ -21,10 +21,12 @@ public class Student implements BizExcelPojoInterface {
         this.headPicture = headPicture;
     }
 
-    public Student(String name, Integer age, List<String> album) {
+    public Student(String name, Integer age, String headPicture, List<String> album, Integer performance) {
         this.name = name;
         this.age = age;
+        this.headPicture = headPicture;
         this.album = album;
+        this.performance = performance;
     }
 
     private String name;
@@ -37,6 +39,19 @@ public class Student implements BizExcelPojoInterface {
      * 相册
      */
     private List<String> album;
+
+    /**
+     * 表现 0一般；1良好；2优秀
+     */
+    private Integer performance;
+
+    public Integer getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Integer performance) {
+        this.performance = performance;
+    }
 
     public List<String> getAlbum() {
         return album;

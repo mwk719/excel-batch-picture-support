@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support.processor;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.map.MapUtil;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 
@@ -34,9 +35,20 @@ public class ExcelTableProcessor {
     private int startRow = 0;
 
     /**
+     * 开始单元格
+     */
+    private int startCell = 0;
+
+    /**
      * 样式
      */
     private final Map<Integer, CellStyle> cellStyleMap = new HashMap<>();
+
+    /**
+     * key : 对象的field属性名称
+     * value : 此属性value相关的数据字典
+     */
+    private Map<String, Map<String, String>> fieldEnumMap = new HashMap<>();
 
     /**
      * 构建excel
@@ -48,7 +60,7 @@ public class ExcelTableProcessor {
         // 开始行放标题
         Row row = sheet.createRow(startRow).setCellStyle(cellStyleMap.get(startRow));
         List<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < excels.size(); i++) {
+        for (int i = startCell; i < excels.size(); i++) {
             BizExcelRel rel = excels.get(i);
             cells.add(new Cell(i).setValue(rel.getExcelName()));
             // 设置单元格宽度
@@ -56,13 +68,12 @@ public class ExcelTableProcessor {
         }
         row.autoRowCells(cells);
         int num;
-        List<Picture> pictures = sheet.getPictures();
         for (int j = 0; j < list.size(); j++) {
             // 开始行的下一行放内容
             num = startRow + j + 1;
             row = sheet.createRow(num).setCellStyle(cellStyleMap.get(num));
             cells = new ArrayList<>();
-            int index = 0;
+            int index = startCell;
             BizExcelPojoInterface excelPojoInterface = list.get(j);
             excels = excels.stream().sorted(Comparator.comparing(BizExcelRel::getOrderNo)).collect(Collectors.toList());
             for (BizExcelRel excel : excels) {
@@ -71,18 +82,35 @@ public class ExcelTableProcessor {
                 // 是图片
                 if (excel.isPicture() && Objects.nonNull(propertyValue)) {
                     // 添加图片
-                    PictureProcessor.build(sheet).addPictures(row, excel.getOrderNo() - 1, propertyValue,
+                    PictureProcessor.build(sheet).addPictures(row, index, propertyValue,
                             0, WorkbookConstant.PICTURE_WEIGHT, WorkbookConstant.PICTURE_HEIGHT);
                     value = "";
                 } else {
                     value = propertyValue == null ? "" : propertyValue.toString();
                 }
                 row.setHeight(rowHeight);
+                // 数据字典值获取
+                value = getValueByFiledEnumMap(excel.getField(), value);
                 cells.add(new Cell(num, index++).setValue(value));
                 row.setCells(cells);
             }
 
         }
+    }
+
+    /**
+     * 数据字典值获取
+     *
+     * @param field
+     * @param value
+     * @return
+     */
+    private String getValueByFiledEnumMap(String field, String value) {
+        Map<String, String> enumMap = fieldEnumMap.get(field);
+        if (MapUtil.isNotEmpty(enumMap)) {
+            return enumMap.get(value);
+        }
+        return value;
     }
 
     /**
@@ -124,6 +152,29 @@ public class ExcelTableProcessor {
      */
     public ExcelTableProcessor setStartRow(int startRow) {
         this.startRow = startRow;
+        return this;
+    }
+
+    /**
+     * 设置写入数据开始单元格
+     *
+     * @param startCell
+     * @return
+     */
+    public ExcelTableProcessor setStartCell(int startCell) {
+        this.startCell = startCell;
+        return this;
+    }
+
+    /**
+     * 注入属性字典值
+     *
+     * @param field   属性名
+     * @param enumMap 数据字典值
+     * @return
+     */
+    public ExcelTableProcessor registryEnumMap(String field, Map<String, String> enumMap) {
+        fieldEnumMap.put(field, enumMap);
         return this;
     }
 }
