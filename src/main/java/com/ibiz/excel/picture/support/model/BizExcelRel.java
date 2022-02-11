@@ -32,14 +32,6 @@ public class BizExcelRel {
         this.cellWeight = cellWeight;
     }
 
-    public BizExcelRel(String excelName, String field, boolean isEnum, String lookupCode, int orderNo) {
-        this.excelName = excelName;
-        this.field = field;
-        this.isEnum = isEnum;
-        this.lookupCode = lookupCode;
-        this.orderNo = orderNo;
-    }
-
     /**
      * excel显示的字段名称
      */
@@ -49,16 +41,6 @@ public class BizExcelRel {
      * 字段
      */
     private String field;
-
-    /**
-     * 是否是枚举
-     */
-    private boolean isEnum = false;
-
-    /**
-     * 数据字典code
-     */
-    private String lookupCode;
 
     /**
      * 排序
@@ -97,22 +79,6 @@ public class BizExcelRel {
 
     public void setField(String field) {
         this.field = field;
-    }
-
-    public boolean isEnum() {
-        return isEnum;
-    }
-
-    public void setEnum(boolean anEnum) {
-        isEnum = anEnum;
-    }
-
-    public String getLookupCode() {
-        return lookupCode;
-    }
-
-    public void setLookupCode(String lookupCode) {
-        this.lookupCode = lookupCode;
     }
 
     public int getOrderNo() {
