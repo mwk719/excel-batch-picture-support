@@ -43,7 +43,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 2. ### 示例
 
-   - 最新使用示例代码 
+   - #### 注解使用示例代码 
 
      ```java
      @GetMapping("/export/lastversion/{row}")
@@ -172,6 +172,132 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
          }
      }
      
+     ```
+
+   - #### 动态配置表头excel导出示例代码 
+
+     *实体对象需要实现BizExcelPojoInterface接口*
+
+     ```java
+     @GetMapping("/export/dynamic-config-header")
+         public void exportDynamicConfigHeader(HttpServletResponse response) throws IOException {
+             // 模拟需要导出的数据集合
+             List<Student> students = new ArrayList<>();
+             students.add(new Student("李四", 16, null, null, 0));
+             students.add(new Student("张三", 17, null,
+                     Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
+                     "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"), 1));
+             students.add(new Student("王五", 15, IMG_PATH_1, null, 2));
+     
+             // 配置导出excel的表头、顺序、对应导出的数据集合的字段、是否是图片、单元格宽度等
+             List<BizExcelRel> excels = new ArrayList<>();
+             excels.add(new BizExcelRel("姓名", "name", 2));
+             excels.add(new BizExcelRel("年龄", "age", 3));
+             excels.add(new BizExcelRel("表现", "performance", 4));
+             excels.add(new BizExcelRel("头像", "headPicture", 5, true, 20));
+             excels.add(new BizExcelRel("相册", "album", 6, true));
+     
+             // 创建excel
+             Workbook workBook = Workbook.getInstance(100);
+             Sheet sheet = workBook.createSheet("测试");
+             // 创建样式
+             CellStyle cellStyle = new CellStyle(0, "F0F0F0");
+             // 创建数据字典
+             Map<String, String> performanceMap = new HashMap<>(3);
+             performanceMap.put("0", "一般");
+             performanceMap.put("1", "良好");
+             performanceMap.put("2", "优秀");
+     
+             // 构建sheet
+             ExcelTableProcessor.sheet(sheet)
+                     // 添加样式
+                     .addCellStyle(cellStyle)
+                     // 添加对应属性字段的数据字典
+                     .registryEnumMap("performance", performanceMap)
+                     // 构建excel
+                     .buildExcel(excels, students);
+             WebUtil.writeExcel(workBook, "ExportExampleDynamicConfigHeader".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+         }
+     ```
+
+     ```java
+     public class Student implements BizExcelPojoInterface {
+     
+         public Student(String name, Integer age) {
+             this.name = name;
+             this.age = age;
+         }
+     
+         public Student(String name, Integer age, String headPicture) {
+             this.name = name;
+             this.age = age;
+             this.headPicture = headPicture;
+         }
+     
+         public Student(String name, Integer age, String headPicture, List<String> album, Integer performance) {
+             this.name = name;
+             this.age = age;
+             this.headPicture = headPicture;
+             this.album = album;
+             this.performance = performance;
+         }
+     
+         private String name;
+     
+         private Integer age;
+     
+         private String headPicture;
+     
+         /**
+          * 相册
+          */
+         private List<String> album;
+     
+         /**
+          * 表现 0一般；1良好；2优秀
+          */
+         private Integer performance;
+     
+         public Integer getPerformance() {
+             return performance;
+         }
+     
+         public void setPerformance(Integer performance) {
+             this.performance = performance;
+         }
+     
+         public List<String> getAlbum() {
+             return album;
+         }
+     
+         public void setAlbum(List<String> album) {
+             this.album = album;
+         }
+     
+         public String getHeadPicture() {
+             return headPicture;
+         }
+     
+         public void setHeadPicture(String headPicture) {
+             this.headPicture = headPicture;
+         }
+     
+         public String getName() {
+             return name;
+         }
+     
+         public void setName(String name) {
+             this.name = name;
+         }
+     
+         public Integer getAge() {
+             return age;
+         }
+     
+         public void setAge(Integer age) {
+             this.age = age;
+         }
+     }
      ```
 
    - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
