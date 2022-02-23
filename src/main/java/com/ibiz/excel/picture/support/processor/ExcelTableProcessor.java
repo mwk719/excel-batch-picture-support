@@ -9,6 +9,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * excel表格处理器
+ * 简化并辅助解决动态表头导出问题
+ *
  * @author MinWeikai
  * @date 2022/2/9 11:22
  */
@@ -18,7 +21,7 @@ public class ExcelTableProcessor {
         this.sheet = sheet;
     }
 
-    public static ExcelTableProcessor build(Sheet sheet) {
+    public static ExcelTableProcessor sheet(Sheet sheet) {
         return new ExcelTableProcessor(sheet);
     }
 
