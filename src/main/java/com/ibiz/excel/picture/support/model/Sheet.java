@@ -133,29 +133,6 @@ public class Sheet {
     }
 
     /**
-     * 开始行号
-     *
-     * @param startRowNumber 表示从第几行开始写入数据
-     * @return
-     */
-    public Sheet startRow(int startRowNumber) {
-        writeRow = --startRowNumber;
-        return this;
-    }
-
-    /**
-     * 构建并写入excel信息
-     *
-     * @param <T>
-     * @param head 标题
-     * @return
-     */
-    public <T> Sheet write(Class<T> head) {
-        SHEET_HANDLER.write(head);
-        return this;
-    }
-
-    /**
      * 刷新数据到流
      */
     public void flush() {
