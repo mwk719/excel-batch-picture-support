@@ -1,5 +1,6 @@
 package com.ibiz.excel.picture.support.model;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.ibiz.excel.picture.support.SheetContext;
 import com.ibiz.excel.picture.support.annotation.ExportModel;
 import com.ibiz.excel.picture.support.constants.Alias;
@@ -457,9 +458,12 @@ public class Sheet {
             for (int j = mergeCell.getFirstCol() + 1; j < mergeCell.getLastCol() + 1; j++) {
                 cells.add(new Cell(j, ""));
             }
-            List<Cell> rowCell = this.getRow(i).getCells();
-            rowCell.addAll(cells);
-            this.getRow(i).autoRowCells(rowCell);
+            if(CollectionUtil.isNotEmpty(this.rows)){
+                List<Cell> rowCell = this.getRow(i).getCells();
+                rowCell.addAll(cells);
+                this.getRow(i).autoRowCells(rowCell);
+            }
+
         }
     }
 }
