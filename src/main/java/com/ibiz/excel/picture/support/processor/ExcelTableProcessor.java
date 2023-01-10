@@ -131,9 +131,11 @@ public class ExcelTableProcessor {
      * 批量添加样式
      *
      * @param cellStyles
+     * @return
      */
-    public void addCellStyle(List<CellStyle> cellStyles) {
+    public ExcelTableProcessor addCellStyle(List<CellStyle> cellStyles) {
         cellStyles.forEach(cellStyle -> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
+        return this;
     }
 
     /**

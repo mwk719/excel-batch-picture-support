@@ -30,4 +30,9 @@ public class WorkbookConstant {
      * 下载网络图片超时时间
      */
     public static final int DOWNLOAD_PICTURE_TIME_OUT = 10 * 1000;
+
+    /**
+     * 默认已有cellStyles样式
+     */
+    public static final int S = 1;
 }

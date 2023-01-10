@@ -13,6 +13,11 @@ public class Cell {
     private int colDataNumber;  //列对应值序号
     private String value;    //单元格值
 
+    /**
+     * 该单元格样式
+     */
+    private CellStyle cellStyle;
+
     public Cell(int cellNumber) {
         this.cellNumber = cellNumber;
     }
@@ -95,5 +100,20 @@ public class Cell {
 
     public void setCellNumber(int cellNumber) {
         this.cellNumber = cellNumber;
+    }
+
+    /**
+     * 设置该单元格样式
+     *
+     * @param cellStyle
+     * @return
+     */
+    public Cell setCellStyle(CellStyle cellStyle) {
+        this.cellStyle = cellStyle;
+        return this;
+    }
+
+    public CellStyle getCellStyle() {
+        return cellStyle;
     }
 }

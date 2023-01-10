@@ -4,6 +4,8 @@ import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Font;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
+import java.util.Objects;
+
 /**
  * 样式下标取值
  *
@@ -39,20 +41,22 @@ public class StylesIndex {
      * @param cellStyle
      */
     protected void addCellStyle(CellStyle cellStyle) {
-        // 字体
-        Font font = cellStyle.getFont();
-        if(font != null){
-            this.isSetFont = true;
-        }else {
-            this.isSetFont = false;
-        }
-        this.addIndex(cellStyle);
-        if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
-            cellStyle.setFillId(fillId);
-        }
-        cellStyle.setS(s);
-        if(font != null){
-            font.setFontId(fontId);
+        if(Objects.nonNull(cellStyle)){
+            // 字体
+            Font font = cellStyle.getFont();
+            if(font != null){
+                this.isSetFont = true;
+            }else {
+                this.isSetFont = false;
+            }
+            this.addIndex(cellStyle);
+            if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
+                cellStyle.setFillId(fillId);
+            }
+            cellStyle.setS(s);
+            if(font != null){
+                font.setFontId(fontId);
+            }
         }
     }
 

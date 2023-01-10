@@ -1,5 +1,7 @@
 package com.ibiz.excel.picture.support.model;
 
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
+
 /**
  * 控制该行样式
  *
@@ -17,12 +19,17 @@ public class CellStyle{
     /**
      * 默认已有cellStyles样式
      */
-    private int s = 1;
+    private int s = WorkbookConstant.S;
 
     /**
      * 行号
      */
     private int rowNumber;
+
+    /**
+     * 列号
+     */
+    private Integer colNumber;
 
     /**
      * fgColor rgb颜色
@@ -65,6 +72,12 @@ public class CellStyle{
         this.fgColorRgb = fgColorRgb;
     }
 
+    public CellStyle(int rowNumber, int colNumber, String fgColorRgb) {
+        this.rowNumber = rowNumber;
+        this.colNumber = colNumber;
+        this.fgColorRgb = fgColorRgb;
+    }
+
     public CellStyle(CellStyle cellStyle) {
         this.fgColorRgb = cellStyle.fgColorRgb;
     }
@@ -103,5 +116,13 @@ public class CellStyle{
 
     public void setS(int s) {
         this.s = s;
+    }
+
+    public Integer getColNumber() {
+        return colNumber;
+    }
+
+    public void setColNumber(Integer colNumber) {
+        this.colNumber = colNumber;
     }
 }

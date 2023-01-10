@@ -1,9 +1,6 @@
 package com.ibiz.excel.picture.support.flush;
 
-import com.ibiz.excel.picture.support.model.CellStyle;
-import com.ibiz.excel.picture.support.model.Font;
-import com.ibiz.excel.picture.support.model.Row;
-import com.ibiz.excel.picture.support.model.Sheet;
+import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
 import java.lang.reflect.InvocationHandler;
@@ -62,16 +59,9 @@ public class StylesHandler implements InvocationHandler {
             Sheet sheet = (Sheet) args[0];
             List<Row> rows = sheet.getRows();
             if (!rows.isEmpty()) {
-                rows.stream().forEach(row -> {
-                    CellStyle cellStyle = row.getCellStyle();
-                    if (row.getCellStyle() != null) {
-                        // 追加字体
-                        this.appendFont(cellStyle.getFont());
-                        // 追加背景色样式
-                        this.appendFill(cellStyle);
-                        // 追加调用下标样式
-                        this.appendXf(cellStyle);
-                    }
+                rows.forEach(row -> {
+                    addCellStyle(row.getCellStyle());
+                    row.getCells().forEach(cell -> addCellStyle(cell.getCellStyle()));
                 });
             }
         }else if (method.getName().equals("close")) {
@@ -79,6 +69,17 @@ public class StylesHandler implements InvocationHandler {
             target.append(fonts.append(fills).append(cellXfs).append(cellStyles).toString());
         }
         return method.invoke(target, args);
+    }
+
+    private void addCellStyle(CellStyle cellStyle) {
+        if (cellStyle != null) {
+            // 追加字体
+            this.appendFont(cellStyle.getFont());
+            // 追加背景色样式
+            this.appendFill(cellStyle);
+            // 追加调用下标样式
+            this.appendXf(cellStyle);
+        }
     }
 
     /**

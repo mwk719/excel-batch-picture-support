@@ -8,13 +8,13 @@ import java.util.List;
  * @date 2020/7/217:33
  */
 public class Row {
-    private int rowNumber;	//行号
+    private int rowNumber;    //行号
     private int autoHeight = 30; //默认行高
     /**
      * 默认列头为30
      * setHeight后使用设置的值,必须大于0
      */
-    private int height;	//列高
+    private int height;    //列高
     private List<Cell> cells = new ArrayList<>();
 
     /**
@@ -22,26 +22,31 @@ public class Row {
      */
     private CellStyle cellStyle;
 
-    public Row(){
+    public Row() {
         this(1);
     }
-    public Row(int rowNumber){
+
+    public Row(int rowNumber) {
         this.rowNumber = rowNumber;
     }
+
     public int getHeight() {
         return height <= 0 ? autoHeight : height;
     }
 
     /**
      * 设置行高
+     *
      * @param height
      */
     public void setHeight(int height) {
         this.height = height;
     }
+
     public int getRowNumber() {
         return rowNumber;
     }
+
     public void setRowNumber(int rowNumber) {
         this.rowNumber = rowNumber;
     }
@@ -60,17 +65,17 @@ public class Row {
      * @param cells
      */
     public void autoRowCells(List<Cell> cells) {
-        cells.parallelStream().forEach(cell-> cell.autoSetRowNumber(rowNumber));
+        cells.parallelStream().forEach(cell -> cell.autoSetRowNumber(rowNumber));
         this.cells = cells;
     }
 
-    public Cell createCell(int cellNumber){
-        Cell cell = new Cell(rowNumber,cellNumber);
+    public Cell createCell(int cellNumber) {
+        Cell cell = new Cell(rowNumber, cellNumber);
         cells.add(cell);
         return cell;
     }
 
-    public void clear(){
+    public void clear() {
         this.cells.clear();
     }
 
@@ -80,6 +85,7 @@ public class Row {
 
     /**
      * 设置行样式
+     *
      * @param cellStyle
      * @return
      */
@@ -99,5 +105,15 @@ public class Row {
         cells.add(cell);
         autoRowCells(cells);
         return this;
+    }
+
+    /**
+     * 获取单元格
+     *
+     * @param num 单元格号
+     * @return
+     */
+    public Cell getCell(int num) {
+        return this.getCells().get(num);
     }
 }
