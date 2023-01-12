@@ -324,7 +324,7 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
    *点击可跳转链接可以查看功能使用示例*
 
-   #### 2.4.0(2022.01.12)
+   #### 2.4.0(2023.01.12)
 
    - [添加可以给单个单元格设置样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java)
 
