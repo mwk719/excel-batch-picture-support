@@ -45,7 +45,7 @@ public class ExcelTableProcessor {
     /**
      * 样式
      */
-    private final Map<Integer, CellStyle> cellStyleMap = new HashMap<>();
+    private final List<CellStyle> cellStyles = new ArrayList<>();
 
     /**
      * key : 对象的field属性名称
@@ -61,11 +61,11 @@ public class ExcelTableProcessor {
      */
     public void buildExcel(List<BizExcelRel> excels, List<? extends BizExcelPojoInterface> list) {
         // 开始行放标题
-        Row row = sheet.createRow(startRow).setCellStyle(cellStyleMap.get(startRow));
+        Row row = sheet.createRow(startRow).setCellStyle(getCellStyle(startRow, null));
         List<Cell> cells = new ArrayList<>();
         for (int i = startCell; i < excels.size(); i++) {
             BizExcelRel rel = excels.get(i);
-            cells.add(new Cell(i).setValue(rel.getExcelName()));
+            cells.add(new Cell(i).setValue(rel.getExcelName()).setCellStyle(getCellStyle(startRow, i)));
             // 设置单元格宽度
             sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
         }
@@ -74,7 +74,7 @@ public class ExcelTableProcessor {
         for (int j = 0; j < list.size(); j++) {
             // 开始行的下一行放内容
             num = startRow + j + 1;
-            row = sheet.createRow(num).setCellStyle(cellStyleMap.get(num));
+            row = sheet.createRow(num).setCellStyle(getCellStyle(num, null));
             cells = new ArrayList<>();
             int index = startCell;
             BizExcelPojoInterface excelPojoInterface = list.get(j);
@@ -94,11 +94,17 @@ public class ExcelTableProcessor {
                 row.setHeight(rowHeight);
                 // 数据字典值获取
                 value = getValueByFiledEnumMap(excel.getField(), value);
-                cells.add(new Cell(num, index++).setValue(value));
+                cells.add(new Cell(num, index++).setValue(value).setCellStyle(getCellStyle(num, index)));
                 row.setCells(cells);
             }
 
         }
+    }
+
+    private CellStyle getCellStyle(Integer row, Integer col) {
+        return this.cellStyles.stream()
+                .filter(c -> Objects.equals(c.getRowNumber(), row) && Objects.equals(col, c.getColNumber()))
+                .findFirst().orElse(null);
     }
 
     /**
@@ -134,7 +140,7 @@ public class ExcelTableProcessor {
      * @return
      */
     public ExcelTableProcessor addCellStyle(List<CellStyle> cellStyles) {
-        cellStyles.forEach(cellStyle -> this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle));
+        this.cellStyles.addAll(cellStyles);
         return this;
     }
 
@@ -145,7 +151,7 @@ public class ExcelTableProcessor {
      * @return
      */
     public ExcelTableProcessor addCellStyle(CellStyle cellStyle) {
-        this.cellStyleMap.put(cellStyle.getRowNumber(), cellStyle);
+        this.cellStyles.add(cellStyle);
         return this;
     }
 

@@ -24,7 +24,7 @@ public class CellStyle{
     /**
      * 行号
      */
-    private int rowNumber;
+    private Integer rowNumber;
 
     /**
      * 列号
@@ -94,11 +94,11 @@ public class CellStyle{
         this.fgColorRgb = fgColorRgb;
     }
 
-    public int getRowNumber() {
+    public Integer getRowNumber() {
         return rowNumber;
     }
 
-    public void setRowNumber(int rowNumber) {
+    public void setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
     }
 

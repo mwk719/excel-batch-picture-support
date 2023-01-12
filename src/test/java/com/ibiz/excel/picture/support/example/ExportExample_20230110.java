@@ -69,9 +69,14 @@ public class ExportExample_20230110 extends BaseJunitTest {
         sheet.addMergeCell(new MergeCell(0, 0, 0, 2));
 
         // 创建样式
-        CellStyle cellStyle = new CellStyle(0, "66cc66");
-
-        List<CellStyle> cellStyles = Arrays.asList(cellStyle);
+        List<CellStyle> cellStyles = Arrays.asList(
+                new CellStyle(0, "66cc66"),
+                new CellStyle(0, 3, "9F79EE"),
+                new CellStyle(1, 2, "9F79EE"),
+                new CellStyle(2, 0, "9F79EE"),
+                new CellStyle(2, 1, "9F79EE"),
+                new CellStyle(3, 2, "66cc66")
+        );
 
         // 创建数据字典
         Map<String, String> performanceMap = new HashMap<>();

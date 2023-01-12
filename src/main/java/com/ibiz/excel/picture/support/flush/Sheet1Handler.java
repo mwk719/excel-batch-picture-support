@@ -161,26 +161,17 @@ public class Sheet1Handler implements InvocationHandler {
         // 设置cellStyle样式下标
         stylesIndex.addCellStyle(rowCellStyle);
 
-        int colNumber = Optional.ofNullable(rowCellStyle).map(CellStyle::getColNumber).orElse(-1);
-        CellStyle cellStyle = rowCellStyle;
         for (Cell c : row.getCells()) {
-            CellStyle cellCellStyle = c.getCellStyle();
-            stylesIndex.addCellStyle(cellCellStyle);
-            if (Objects.nonNull(cellCellStyle)) {
-                cellStyle = cellCellStyle;
-                colNumber = c.getCellNumber();
+            CellStyle cellStyle = c.getCellStyle();
+            stylesIndex.addCellStyle(cellStyle);
+            if (Objects.isNull(cellStyle)) {
+                cellStyle = rowCellStyle;
             }
 
-            int s;
-            if(colNumber == -1 || c.getCellNumber() == colNumber){
-                s = Optional.ofNullable(cellStyle).map(CellStyle::getS).orElse(WorkbookConstant.S);
-            }else {
-                s = WorkbookConstant.S;
-            }
             content.append("<c r=\"")
                     .append(c.getColNumber())
                     .append("\" s=\"")
-                    .append(s)
+                    .append(Optional.ofNullable(cellStyle).map(CellStyle::getS).orElse(WorkbookConstant.S))
                     .append("\" t=\"s\">")
                     .append("<v>")
                     .append(c.getColDataNumber())
