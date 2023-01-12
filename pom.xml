@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>top.minwk</groupId>
 	<artifactId>excel-x</artifactId>
-	<version>2.3.1</version>
+	<version>2.4.0</version>
 	<name>excel-x</name>
 	<description>支持excel中批量导出图片</description>
 	<url>https://gitee.com/mwk719/excel-batch-picture-support</url>
@@ -34,7 +34,7 @@
 		<developer>
 			<name>minwk</name>
 			<email>minweikai@gmail.com</email>
-			<organization>凯创未来科技</organization>
+			<organization>影落离风</organization>
 			<url>https://minwk.top/</url>
 		</developer>
 	</developers>
