@@ -322,6 +322,12 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 3. ### 版本更迭
 
+   *点击可跳转链接可以查看功能使用示例*
+
+   #### 2.4.0(2022.01.12)
+
+   - [添加可以给单个单元格设置样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java)
+
    #### 2.3.1(2022.12.19)
 
    - 修复渲染生成列元素A-Z坐标时，使用到Z时，下一列从AA开始
