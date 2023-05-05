@@ -27,6 +27,10 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 经测试，可以生成几个G的文件。（保证生成的文件没问题，文件是否能打开由使用者计算机决定）
 
+## 问题反馈
+
+- [Gitee issue](https://gitee.com/mwk719/excel-batch-picture-support/issues)
+
 ## 快速使用
 
 1. ### Maven导入
