@@ -1,6 +1,7 @@
 package com.ibiz.excel.picture.support.example;
 
 import com.ibiz.excel.picture.support.common.BaseJunitTest;
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.pojo.Student;
 import com.ibiz.excel.picture.support.pojo.UserPicture;
@@ -60,8 +61,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
         excels.add(new BizExcelRel("头像", "headPicture", 5, true, 20));
         excels.add(new BizExcelRel("相册", "album", 6, true));
 
-//        // 设置边框不加粗
-//        WorkbookConstant.BORDER_BOLD = 0;
+        WorkbookConstant.setBorderBold(false);
         // 创建excel
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
@@ -71,8 +71,8 @@ public class ExportExample_20230110 extends BaseJunitTest {
 
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
-                new CellStyle(0, "66cc66"),
-                new CellStyle(0, 3, "9F79EE"),
+                new CellStyle(0, "66cc66", true),
+                new CellStyle(0, 3, "9F79EE", true),
                 new CellStyle(1, 2, "9F79EE"),
                 new CellStyle(2, 0, "9F79EE"),
                 new CellStyle(2, 1, "9F79EE"),
