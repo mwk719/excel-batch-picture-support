@@ -35,4 +35,9 @@ public class WorkbookConstant {
      * 默认已有cellStyles样式
      */
     public static final int S = 1;
+
+    /**
+     * 边框加粗，默认为1加粗，0不加粗
+     */
+    public static int BORDER_BOLD = 1;
 }

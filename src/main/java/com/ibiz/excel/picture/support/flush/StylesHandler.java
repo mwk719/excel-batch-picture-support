@@ -1,5 +1,6 @@
 package com.ibiz.excel.picture.support.flush;
 
+import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
@@ -47,8 +48,8 @@ public class StylesHandler implements InvocationHandler {
             "<cellStyleXfs count=\"1\"><xf borderId=\"0\" fillId=\"0\" fontId=\"0\" numFmtId=\"0\"/></cellStyleXfs>").concat(
             "<cellXfs count=\"3\">").concat(
             "<xf numFmtId=\"0\" fontId=\"0\" applyAlignment=\"1\" applyBorder=\"1\" fillId=\"0\" borderId=\"0\" xfId=\"0\" applyFont=\"1\"><alignment vertical=\"center\"/></xf>").concat(
-            "<xf numFmtId=\"0\" fontId=\"0\" applyAlignment=\"1\" applyBorder=\"1\" fillId=\"0\" borderId=\"1\" xfId=\"0\" applyFont=\"1\"><alignment horizontal=\"center\" vertical=\"center\"/></xf>")
-    );
+            "<xf numFmtId=\"0\" fontId=\"0\" applyAlignment=\"1\" applyBorder=\"1\" fillId=\"0\"").concat(" borderId=\"").concat(String.valueOf(WorkbookConstant.BORDER_BOLD))
+                    .concat("\" xfId=\"0\" applyFont=\"1\"><alignment horizontal=\"center\" vertical=\"center\"/></xf>"));
 
     private final StringBuilder cellStyles = new StringBuilder("</cellXfs>".concat(
             "<cellStyles count=\"1\"><cellStyle builtinId=\"0\" name=\"常规\" xfId=\"0\"/></cellStyles><tableStyles count=\"0\" defaultTableStyle=\"TableStyleMedium2\"/></styleSheet>"));
@@ -93,7 +94,9 @@ public class StylesHandler implements InvocationHandler {
                 .append(Optional.ofNullable(font).map(Font::getFontId).orElse(0))
                 .append("\" fillId=\"")
                 .append(cellStyle.getFillId())
-                .append("\" borderId=\"1\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\" vertical=\"center\"/></xf>");
+                .append("\" borderId=\"")
+                .append(WorkbookConstant.BORDER_BOLD)
+                .append("\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\" vertical=\"center\"/></xf>");
     }
 
     /**
