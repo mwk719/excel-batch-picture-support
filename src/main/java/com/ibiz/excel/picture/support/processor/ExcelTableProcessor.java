@@ -67,7 +67,9 @@ public class ExcelTableProcessor {
             BizExcelRel rel = excels.get(i);
             cells.add(new Cell(i).setValue(rel.getExcelName()).setCellStyle(getCellStyle(startRow, i)));
             // 设置单元格宽度
-            sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
+            if(rel.getCellWeight() > 0){
+                sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
+            }
         }
         row.autoRowCells(cells);
         int num;
