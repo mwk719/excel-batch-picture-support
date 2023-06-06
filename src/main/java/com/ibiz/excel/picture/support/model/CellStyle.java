@@ -8,7 +8,7 @@ import com.ibiz.excel.picture.support.constants.WorkbookConstant;
  * @author MinWeikai
  * @date 2021/1/19 14:04
  */
-public class CellStyle{
+public class CellStyle {
 
     /**
      * 默认已有fill样式
@@ -42,6 +42,8 @@ public class CellStyle{
      */
     private Font font;
 
+    private Integer borderBold;
+
     public CellStyle() {
     }
 
@@ -64,18 +66,27 @@ public class CellStyle{
 
     /**
      * 根据行号设置颜色
+     *
      * @param rowNumber
      * @param fgColorRgb RGB网页颜色在线取色器 https://link.fobshanghai.com/rgbcolor.htm
      */
-    public CellStyle(int rowNumber, String fgColorRgb) {
-        this.rowNumber = rowNumber;
-        this.fgColorRgb = fgColorRgb;
+    public CellStyle(Integer rowNumber, String fgColorRgb) {
+        this(rowNumber, null, fgColorRgb, null);
     }
 
-    public CellStyle(int rowNumber, int colNumber, String fgColorRgb) {
+    public CellStyle(Integer rowNumber, String fgColorRgb, Boolean borderBold) {
+        this(rowNumber, null, fgColorRgb, borderBold);
+    }
+
+    public CellStyle(Integer rowNumber, Integer colNumber, String fgColorRgb) {
+        this(rowNumber, colNumber, fgColorRgb, null);
+    }
+
+    public CellStyle(Integer rowNumber, Integer colNumber, String fgColorRgb, Boolean borderBold) {
         this.rowNumber = rowNumber;
         this.colNumber = colNumber;
         this.fgColorRgb = fgColorRgb;
+        this.setBorderBold(borderBold);
     }
 
     public CellStyle(CellStyle cellStyle) {
@@ -124,5 +135,14 @@ public class CellStyle{
 
     public void setColNumber(Integer colNumber) {
         this.colNumber = colNumber;
+    }
+
+    public Integer getBorderBold() {
+        return this.borderBold;
+    }
+
+    public void setBorderBold(Boolean borderBold) {
+        this.borderBold = borderBold != null ? (borderBold ? 1 : 0) : null;
+        ;
     }
 }

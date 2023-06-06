@@ -11,6 +11,22 @@ public class BizExcelRel {
     public BizExcelRel() {
     }
 
+    /**
+     * 创建标题，默认使用在列表中的添加顺序
+     * @param excelName
+     * @param field
+     */
+    public BizExcelRel(String excelName, String field) {
+        this.excelName = excelName;
+        this.field = field;
+    }
+
+    /**
+     * 创建标题，可自定义列的顺序
+     * @param excelName
+     * @param field
+     * @param orderNo
+     */
     public BizExcelRel(String excelName, String field, int orderNo) {
         this.excelName = excelName;
         this.field = field;

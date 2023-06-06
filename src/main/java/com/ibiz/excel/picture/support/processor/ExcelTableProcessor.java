@@ -63,22 +63,26 @@ public class ExcelTableProcessor {
         // 开始行放标题
         Row row = sheet.createRow(startRow).setCellStyle(getCellStyle(startRow, null));
         List<Cell> cells = new ArrayList<>();
+        BizExcelRel rel;
+        excels = excels.stream().sorted(Comparator.comparing(BizExcelRel::getOrderNo)).collect(Collectors.toList());
         for (int i = startCell; i < excels.size(); i++) {
-            BizExcelRel rel = excels.get(i);
+            rel = excels.get(i);
             cells.add(new Cell(i).setValue(rel.getExcelName()).setCellStyle(getCellStyle(startRow, i)));
             // 设置单元格宽度
-            sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
+            if(rel.getCellWeight() > 0){
+                sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
+            }
         }
         row.autoRowCells(cells);
         int num;
+        BizExcelPojoInterface excelPojoInterface;
         for (int j = 0; j < list.size(); j++) {
             // 开始行的下一行放内容
             num = startRow + j + 1;
             row = sheet.createRow(num).setCellStyle(getCellStyle(num, null));
             cells = new ArrayList<>();
             int index = startCell;
-            BizExcelPojoInterface excelPojoInterface = list.get(j);
-            excels = excels.stream().sorted(Comparator.comparing(BizExcelRel::getOrderNo)).collect(Collectors.toList());
+            excelPojoInterface = list.get(j);
             for (BizExcelRel excel : excels) {
                 Object propertyValue = BeanUtil.getFieldValue(excelPojoInterface, excel.getField());
                 String value;

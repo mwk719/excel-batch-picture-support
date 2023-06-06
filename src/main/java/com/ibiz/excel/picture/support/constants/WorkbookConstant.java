@@ -9,7 +9,9 @@ public class WorkbookConstant {
     public static final String FILE_SEPARATOR = "/";
     public static final String DEST_FILE_NAME_SUFFIX = ".xlsx";
     public static final String MEDIA_IMAGE_TYPE = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image";
-    /**有图片的行高设置为100*/
+    /**
+     * 有图片的行高设置为100
+     */
     public static final int PICTURE_ROW_HEIGHT = 100;
 
     /**
@@ -35,4 +37,17 @@ public class WorkbookConstant {
      * 默认已有cellStyles样式
      */
     public static final int S = 1;
+
+    /**
+     * 边框加粗，默认为1加粗，0不加粗
+     */
+    public static int BORDER_BOLD = 1;
+
+    /**
+     * 边框加粗，true加粗，false不加粗
+     * @param borderBold
+     */
+    public static void setBorderBold(boolean borderBold) {
+        BORDER_BOLD = borderBold ? 1 : 0;
+    }
 }
