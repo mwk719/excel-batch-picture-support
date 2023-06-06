@@ -324,6 +324,12 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
    *点击可跳转链接可以查看功能使用示例*
 
+   #### 2.4.1(2023.06.06)
+
+   - [添加对全局边框进行加粗、对单元格边框加粗配置](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java#L64)
+   - 修复Microsoft Excel2010打开单元格超宽问题
+   - 优化创建标题时控制列顺序
+
    #### 2.4.0(2023.01.12)
 
    - [添加可以给单个单元格设置样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java)

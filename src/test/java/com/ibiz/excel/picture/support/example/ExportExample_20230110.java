@@ -61,6 +61,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
         excels.add(new BizExcelRel("头像", "headPicture", 5, true, 20));
         excels.add(new BizExcelRel("相册", "album", 6, true));
 
+        // 设置对全局操作边框是否加粗
         WorkbookConstant.setBorderBold(false);
         // 创建excel
         Workbook workBook = Workbook.getInstance(100);
