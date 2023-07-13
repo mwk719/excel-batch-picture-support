@@ -96,7 +96,10 @@ public class StylesHandler implements InvocationHandler {
                 .append(cellStyle.getFillId())
                 .append("\" borderId=\"")
                 .append(Optional.ofNullable(cellStyle.getBorderBold()).orElse(WorkbookConstant.BORDER_BOLD))
-                .append("\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\"><alignment horizontal=\"center\" vertical=\"center\"/></xf>");
+                .append("\" xfId=\"0\" applyFont=\"1\" applyAlignment=\"1\">")
+                .append(cellStyle.getAlignmentNullDefault().toXmlString())
+                .append("</xf>");
+
     }
 
     /**

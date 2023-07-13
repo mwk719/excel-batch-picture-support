@@ -51,7 +51,7 @@ public class ExcelTableProcessor {
      * key : 对象的field属性名称
      * value : 此属性value相关的数据字典
      */
-    private Map<String, Map<String, String>> fieldEnumMap = new HashMap<>();
+    private final Map<String, Map<String, String>> fieldEnumMap = new HashMap<>();
 
     /**
      * 构建excel

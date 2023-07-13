@@ -1,6 +1,9 @@
 package com.ibiz.excel.picture.support.model;
 
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
+import com.ibiz.excel.picture.support.model.style.Alignment;
+
+import java.util.Optional;
 
 /**
  * 控制该行样式
@@ -9,6 +12,10 @@ import com.ibiz.excel.picture.support.constants.WorkbookConstant;
  * @date 2021/1/19 14:04
  */
 public class CellStyle {
+
+    public static CellStyle builder() {
+        return new CellStyle();
+    }
 
     /**
      * 默认已有fill样式
@@ -27,6 +34,11 @@ public class CellStyle {
     private Integer rowNumber;
 
     /**
+     * 开始行
+     */
+    private Integer startRow;
+
+    /**
      * 列号
      */
     private Integer colNumber;
@@ -43,6 +55,11 @@ public class CellStyle {
     private Font font;
 
     private Integer borderBold;
+
+    /**
+     * 设置内容对齐方式
+     */
+    private Alignment alignment;
 
     public CellStyle() {
     }
@@ -100,17 +117,21 @@ public class CellStyle {
     /**
      * fgColor rgb颜色
      * RGB网页颜色在线取色器 https://link.fobshanghai.com/rgbcolor.htm
+     *
+     * @return
      */
-    public void setFgColorRgb(String fgColorRgb) {
+    public CellStyle setFgColorRgb(String fgColorRgb) {
         this.fgColorRgb = fgColorRgb;
+        return this;
     }
 
     public Integer getRowNumber() {
         return rowNumber;
     }
 
-    public void setRowNumber(Integer rowNumber) {
+    public CellStyle setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
+        return this;
     }
 
     public int getFillId() {
@@ -133,16 +154,50 @@ public class CellStyle {
         return colNumber;
     }
 
-    public void setColNumber(Integer colNumber) {
+    public CellStyle setColNumber(Integer colNumber) {
         this.colNumber = colNumber;
+        return this;
     }
 
     public Integer getBorderBold() {
         return this.borderBold;
     }
 
-    public void setBorderBold(Boolean borderBold) {
+    /**
+     * 设置边框是否加粗
+     *
+     * @param borderBold
+     * @return
+     */
+    public CellStyle setBorderBold(Boolean borderBold) {
         this.borderBold = borderBold != null ? (borderBold ? 1 : 0) : null;
-        ;
+        return this;
+    }
+
+    public Integer getStartRow() {
+        return startRow;
+    }
+
+    public CellStyle setStartRow(Integer startRow) {
+        this.startRow = startRow;
+        return this;
+    }
+
+    public Alignment getAlignment() {
+        return alignment;
+    }
+
+    public Alignment getAlignmentNullDefault() {
+        return Optional.ofNullable(getAlignment()).orElse(new Alignment());
+    }
+
+    /**
+     * 设置内容对齐方式
+     * @param alignment
+     * @return
+     */
+    public CellStyle setAlignment(Alignment alignment) {
+        this.alignment = alignment;
+        return this;
     }
 }

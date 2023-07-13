@@ -3,6 +3,7 @@ package com.ibiz.excel.picture.support.example;
 import com.ibiz.excel.picture.support.common.BaseJunitTest;
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
 import com.ibiz.excel.picture.support.model.*;
+import com.ibiz.excel.picture.support.model.style.Alignment;
 import com.ibiz.excel.picture.support.pojo.Student;
 import com.ibiz.excel.picture.support.pojo.UserPicture;
 import com.ibiz.excel.picture.support.processor.ExcelTableProcessor;
@@ -14,7 +15,7 @@ import java.util.*;
 
 /**
  * @author MinWeikai
- * @date  2023-01-10 17:07:51
+ * @date 2023-01-10 17:07:51
  * @description 单个单元格添加样式示例
  */
 @Ignore
@@ -49,7 +50,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
     public void export1() {
         // 模拟需要导出的数据集合
         List<Student> students = new ArrayList<>();
-        students.add(new Student("李四", 16, null, null, 0));
+        students.add(new Student("李四qweqweqweqweqwe12312312321", 16, null, null, 0));
         students.add(new Student("张三", 17, null, getPictures(5), 1));
         students.add(new Student("王五", 15, IMG_PATH_1, null, 2));
 
@@ -63,6 +64,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
 
         // 设置对全局操作边框是否加粗
         WorkbookConstant.setBorderBold(false);
+        WorkbookConstant.WRAP_TEXT = 1;
         // 创建excel
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
@@ -72,12 +74,8 @@ public class ExportExample_20230110 extends BaseJunitTest {
 
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
-                new CellStyle(0, "66cc66", true),
-                new CellStyle(0, 3, "9F79EE", true),
-                new CellStyle(1, 2, "9F79EE"),
-                new CellStyle(2, 0, "9F79EE"),
-                new CellStyle(2, 1, "9F79EE"),
-                new CellStyle(3, 2, "66cc66")
+                new CellStyle(0, "66cc66"),
+                CellStyle.builder().setColNumber(1).setRowNumber(1).setFgColorRgb("9F79EE").setAlignment(Alignment.builder().setWrapText(1))
         );
 
         // 创建数据字典
