@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "alignment")
 public class Alignment extends XmlAbstract {
 
-    public static Alignment builder() {
+    public static Alignment build() {
         return new Alignment();
     }
 
@@ -38,6 +38,12 @@ public class Alignment extends XmlAbstract {
         return wrapText;
     }
 
+    /**
+     * 1自动换行，0不换行
+     *
+     * @param wrapText
+     * @return
+     */
     public Alignment setWrapText(Integer wrapText) {
         this.wrapText = wrapText;
         return this;
@@ -61,5 +67,15 @@ public class Alignment extends XmlAbstract {
     public Alignment setHorizontal(String horizontal) {
         this.horizontal = horizontal;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Alignment{");
+        sb.append("wrapText=").append(wrapText);
+        sb.append(", vertical='").append(vertical).append('\'');
+        sb.append(", horizontal='").append(horizontal).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

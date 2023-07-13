@@ -2,9 +2,11 @@ package com.ibiz.excel.picture.support.flush;
 
 import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Font;
+import com.ibiz.excel.picture.support.model.style.Alignment;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 样式下标取值
@@ -14,88 +16,58 @@ import java.util.Objects;
  */
 public class StylesIndex {
 
-    /**
-     * 默认已有fill样式
-     * 与对应{@link com.ibiz.excel.picture.support.module.Styles}
-     */
-    private int fillId = 0;
+    private int fillId = 2;
+    private int s = 2;
+    private int fontId = 1;
 
-    /**
-     * 默认已有cellStyles样式
-     */
-    private int s = 1;
+    private final Map<String, CellStyle> styleIndexMap = new HashMap<>();
 
-    /**
-     * 字体id
-     */
-    private int fontId = 0;
-
-    /**
-     * 是否设置字体
-     */
-    private boolean isSetFont;
-
-    /**
-     * 设置下标样式
-     *
-     * @param cellStyle
-     */
     protected void addCellStyle(CellStyle cellStyle) {
-        if(Objects.nonNull(cellStyle)){
-            // 字体
-            Font font = cellStyle.getFont();
-            if(font != null){
-                this.isSetFont = true;
-            }else {
-                this.isSetFont = false;
-            }
-            this.addIndex(cellStyle);
-            if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
-                cellStyle.setFillId(fillId);
-            }
-            cellStyle.setS(s);
-            if(font != null){
-                font.setFontId(fontId);
-            }
+        if (cellStyle == null) {
+            return;
+        }
+
+        String styleKey = getStyleKey(cellStyle);
+        if (styleIndexMap.containsKey(styleKey)) {
+            CellStyle style = styleIndexMap.get(styleKey);
+            cellStyle.setS(style.getS());
+            cellStyle.setFillId(style.getFillId());
+            cellStyle.setExist(true);
+            return;
+        }
+
+        if (StringUtils.isNotBlank(cellStyle.getFgColorRgb())) {
+            cellStyle.setFillId(fillId);
+            fillId++;
+        }
+
+        cellStyle.setS(s);
+        styleIndexMap.put(styleKey, cellStyle);
+        s++;
+
+        Font font = cellStyle.getFont();
+        if (font != null) {
+            font.setFontId(fontId);
+            fontId++;
         }
     }
 
-    protected void addIndex(CellStyle cellStyle) {
-        // fillId+1，生成下一个编号
-        if(StringUtils.isNotBlank(cellStyle.getFgColorRgb())){
-            fillId = (fillId == 0 ? 1 : fillId) + 1;
+    private String getStyleKey(CellStyle cellStyle) {
+        StringBuilder builder = new StringBuilder();
+        if (StringUtils.isNotBlank(cellStyle.getFgColorRgb())) {
+            builder.append(cellStyle.getFgColorRgb());
         }
-        s = s + 1;
-        if(isSetFont){
-            fontId = fontId + 1;
+
+        Font font = cellStyle.getFont();
+        if (font != null) {
+            builder.append(font);
         }
+
+        Alignment alignment = cellStyle.getAlignment();
+        if (alignment != null) {
+            builder.append(alignment);
+        }
+        return builder.toString();
     }
 
-    public int getFillId() {
-        return fillId;
-    }
-
-    public void setFillId(int fillId) {
-        this.fillId = fillId;
-    }
-
-    public int getS() {
-        return s;
-    }
-
-    public void setS(int s) {
-        this.s = s;
-    }
-
-    public int getFontId() {
-        return fontId;
-    }
-
-    public void setFontId(int fontId) {
-        this.fontId = fontId;
-    }
-
-    public void setSetFont(boolean setFont) {
-        isSetFont = setFont;
-    }
 }

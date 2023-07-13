@@ -13,13 +13,8 @@ import org.junit.Test;
 
 import java.util.*;
 
-/**
- * @author MinWeikai
- * @date 2023-01-10 17:07:51
- * @description 单个单元格添加样式示例
- */
 @Ignore
-public class ExportExample_20230110 extends BaseJunitTest {
+public class ExportExample_20230713 extends BaseJunitTest {
 
     @Test
     public void export() {
@@ -31,19 +26,20 @@ public class ExportExample_20230110 extends BaseJunitTest {
         for (int r = 0; r < 5; r++) {
             userPicture = new UserPicture();
             userPicture.setAge(15);
-            userPicture.setName("测试-" + r);
+            userPicture.setName("测试哈哈哈啊哈哈啊哈测试哈哈哈啊哈哈啊哈-" + r);
             // 导出本地单张图片
             userPicture.setPicture(IMG_PATH_1);
             // 导出url单张图片
-            userPicture.setHeaderPicture(getUrl());
+//            userPicture.setHeaderPicture(getUrl());
             // 导出本地图片集合
-            userPicture.setPictures(getPictures(new Random().nextInt(5)));
+//            userPicture.setPictures(getPictures(new Random().nextInt(5)));
             // 导出url图片集合
-            userPicture.setUrlPictures(getUrls(5));
+//            userPicture.setUrlPictures(getUrls(5));
 //            sheet.createRow(userPicture);
-            sheet.createRow(userPicture).getCell(0).setCellStyle(new CellStyle("9F79EE"));
+            sheet.createRow(userPicture).getCell(0).setCellStyle(CellStyle.build().setColNumber(1).setRowNumber(1).setFgColorRgb("9F79EE")
+                    .setAlignment(Alignment.build().setWrapText(1)));
         }
-        WebUtil.writeExcelTest(workBook, "ExportExample_20230110_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
+        WebUtil.writeExcelTest(workBook, "ExportExample_20230713_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
     @Test
@@ -53,6 +49,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
         students.add(new Student("李四qweqweqweqweqwe12312312321", 16, null, null, 0));
         students.add(new Student("张三", 17, null, getPictures(5), 1));
         students.add(new Student("王五", 15, IMG_PATH_1, null, 2));
+        students.add(new Student("王五u五五五五五五五五五五呀呀呀呀呀呀呀", 18, IMG_PATH_1, null, 0));
 
         // 配置导出excel的表头、顺序、对应导出的数据集合的字段、是否是图片、单元格宽度等
         List<BizExcelRel> excels = new ArrayList<>();
@@ -64,7 +61,6 @@ public class ExportExample_20230110 extends BaseJunitTest {
 
         // 设置对全局操作边框是否加粗
         WorkbookConstant.setBorderBold(false);
-        WorkbookConstant.WRAP_TEXT = 1;
         // 创建excel
         Workbook workBook = Workbook.getInstance(100);
         Sheet sheet = workBook.createSheet("测试");
@@ -74,8 +70,8 @@ public class ExportExample_20230110 extends BaseJunitTest {
 
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
-                new CellStyle(0, "66cc66"),
-                CellStyle.build().setColNumber(0).setRowNumber(1).setFgColorRgb("9F79EE").setAlignment(Alignment.build().setWrapText(1))
+                new CellStyle(0, "66cc66")
+                , CellStyle.build().setColNumber(0).setRowNumber(1).setStartRow(1).setFgColorRgb("9F79EE")
         );
 
         // 创建数据字典
@@ -93,7 +89,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
                 // 构建excel
                 .buildExcel(excels, students);
 
-        WebUtil.writeExcelTest(workBook, "ExportExample_20230110_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
+        WebUtil.writeExcelTest(workBook, "ExportExample_20230713_".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), TEMP_PATH);
     }
 
 

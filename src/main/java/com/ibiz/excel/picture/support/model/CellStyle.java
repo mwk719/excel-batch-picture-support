@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public class CellStyle {
 
-    public static CellStyle builder() {
+    public static CellStyle build() {
         return new CellStyle();
     }
 
@@ -57,6 +57,11 @@ public class CellStyle {
     private Integer borderBold;
 
     /**
+     * 存在
+     */
+    private boolean exist = false;
+
+    /**
      * 设置内容对齐方式
      */
     private Alignment alignment;
@@ -68,8 +73,9 @@ public class CellStyle {
         return font;
     }
 
-    public void setFont(Font font) {
+    public CellStyle setFont(Font font) {
         this.font = font;
+        return this;
     }
 
     /**
@@ -199,5 +205,13 @@ public class CellStyle {
     public CellStyle setAlignment(Alignment alignment) {
         this.alignment = alignment;
         return this;
+    }
+
+    public boolean isExist() {
+        return exist;
+    }
+
+    public void setExist(boolean exist) {
+        this.exist = exist;
     }
 }

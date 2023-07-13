@@ -69,13 +69,14 @@ public class ExcelTableProcessor {
             rel = excels.get(i);
             cells.add(new Cell(i).setValue(rel.getExcelName()).setCellStyle(getCellStyle(startRow, i)));
             // 设置单元格宽度
-            if(rel.getCellWeight() > 0){
+            if (rel.getCellWeight() > 0) {
                 sheet.setColumnWidth(rel.getOrderNo(), rel.getCellWeight());
             }
         }
         row.autoRowCells(cells);
         int num;
         BizExcelPojoInterface excelPojoInterface;
+        Map<Integer, CellStyle> cellStyleMap = new HashMap<>();
         for (int j = 0; j < list.size(); j++) {
             // 开始行的下一行放内容
             num = startRow + j + 1;
@@ -98,7 +99,20 @@ public class ExcelTableProcessor {
                 row.setHeight(rowHeight);
                 // 数据字典值获取
                 value = getValueByFiledEnumMap(excel.getField(), value);
-                cells.add(new Cell(num, index++).setValue(value).setCellStyle(getCellStyle(num, index)));
+                // 设置以下数据样式
+                CellStyle cellStyle = getCellStyle(num, index);
+                Cell cell = new Cell(num, index++).setValue(value);
+                if (cellStyle != null && cellStyle.getStartRow() != null) {
+                    cellStyleMap.put(index, cellStyle);
+                }
+
+                CellStyle style = cellStyleMap.get(index);
+                if (style != null) {
+                    style = BeanUtil.copyProperties(style, CellStyle.class);
+                }else {
+                    style = cellStyle;
+                }
+                cells.add(cell.setCellStyle(style));
                 row.setCells(cells);
             }
 

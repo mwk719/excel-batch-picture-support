@@ -1,7 +1,10 @@
 package com.ibiz.excel.picture.support.flush;
 
 import com.ibiz.excel.picture.support.constants.WorkbookConstant;
-import com.ibiz.excel.picture.support.model.*;
+import com.ibiz.excel.picture.support.model.CellStyle;
+import com.ibiz.excel.picture.support.model.Font;
+import com.ibiz.excel.picture.support.model.Row;
+import com.ibiz.excel.picture.support.model.Sheet;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
 import java.lang.reflect.InvocationHandler;
@@ -73,7 +76,7 @@ public class StylesHandler implements InvocationHandler {
     }
 
     private void addCellStyle(CellStyle cellStyle) {
-        if (cellStyle != null) {
+        if (cellStyle != null && !cellStyle.isExist()) {
             // 追加字体
             this.appendFont(cellStyle.getFont());
             // 追加背景色样式
