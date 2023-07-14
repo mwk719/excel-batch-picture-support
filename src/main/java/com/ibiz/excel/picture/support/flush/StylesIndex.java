@@ -2,7 +2,6 @@ package com.ibiz.excel.picture.support.flush;
 
 import com.ibiz.excel.picture.support.model.CellStyle;
 import com.ibiz.excel.picture.support.model.Font;
-import com.ibiz.excel.picture.support.model.style.Alignment;
 import com.ibiz.excel.picture.support.util.StringUtils;
 
 import java.util.HashMap;
@@ -53,21 +52,7 @@ public class StylesIndex {
     }
 
     private String getStyleKey(CellStyle cellStyle) {
-        StringBuilder builder = new StringBuilder();
-        if (StringUtils.isNotBlank(cellStyle.getFgColorRgb())) {
-            builder.append(cellStyle.getFgColorRgb());
-        }
-
-        Font font = cellStyle.getFont();
-        if (font != null) {
-            builder.append(font);
-        }
-
-        Alignment alignment = cellStyle.getAlignment();
-        if (alignment != null) {
-            builder.append(alignment);
-        }
-        return builder.toString();
+        return cellStyle.toString();
     }
 
 }

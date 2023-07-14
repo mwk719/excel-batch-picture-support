@@ -29,14 +29,20 @@ public class CellStyle {
     private int s = WorkbookConstant.S;
 
     /**
+     * 存在
+     */
+    private boolean exist = false;
+
+
+    /**
      * 行号
      */
     private Integer rowNumber;
 
     /**
-     * 开始行
+     * 是否持续向下该列样式
      */
-    private Integer startRow;
+    private boolean colLast;
 
     /**
      * 列号
@@ -54,12 +60,10 @@ public class CellStyle {
      */
     private Font font;
 
-    private Integer borderBold;
-
     /**
-     * 存在
+     * 边框加粗，默认为1加粗，0不加粗
      */
-    private boolean exist = false;
+    private Integer borderBold;
 
     /**
      * 设置内容对齐方式
@@ -110,10 +114,6 @@ public class CellStyle {
         this.colNumber = colNumber;
         this.fgColorRgb = fgColorRgb;
         this.setBorderBold(borderBold);
-    }
-
-    public CellStyle(CellStyle cellStyle) {
-        this.fgColorRgb = cellStyle.fgColorRgb;
     }
 
     public String getFgColorRgb() {
@@ -180,12 +180,17 @@ public class CellStyle {
         return this;
     }
 
-    public Integer getStartRow() {
-        return startRow;
+    public boolean isColLast() {
+        return colLast;
     }
 
-    public CellStyle setStartRow(Integer startRow) {
-        this.startRow = startRow;
+    /**
+     * 是否持续向下该列样式
+     * @param colLast
+     * @return
+     */
+    public CellStyle setColLast(boolean colLast) {
+        this.colLast = colLast;
         return this;
     }
 
@@ -213,5 +218,16 @@ public class CellStyle {
 
     public void setExist(boolean exist) {
         this.exist = exist;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CellStyle{");
+        sb.append("fgColorRgb='").append(fgColorRgb).append('\'');
+        sb.append(", font=").append(font);
+        sb.append(", borderBold=").append(borderBold);
+        sb.append(", alignment=").append(alignment);
+        sb.append('}');
+        return sb.toString();
     }
 }

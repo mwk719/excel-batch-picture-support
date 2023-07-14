@@ -71,7 +71,8 @@ public class ExportExample_20230713 extends BaseJunitTest {
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
                 new CellStyle(0, "66cc66")
-                , CellStyle.build().setColNumber(0).setRowNumber(1).setStartRow(1).setFgColorRgb("9F79EE")
+                // 表示在excel中从第2列，第3行开始一直往下，该列都保持该样式背景色#9F79EE
+                , CellStyle.build().setColNumber(1).setRowNumber(2).setColLast(true).setFgColorRgb("9F79EE")
         );
 
         // 创建数据字典

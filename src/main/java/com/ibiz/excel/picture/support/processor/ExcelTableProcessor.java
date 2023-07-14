@@ -102,7 +102,7 @@ public class ExcelTableProcessor {
                 // 设置以下数据样式
                 CellStyle cellStyle = getCellStyle(num, index);
                 Cell cell = new Cell(num, index++).setValue(value);
-                if (cellStyle != null && cellStyle.getStartRow() != null) {
+                if (cellStyle != null && cellStyle.isColLast()) {
                     cellStyleMap.put(index, cellStyle);
                 }
 
