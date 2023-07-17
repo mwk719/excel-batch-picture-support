@@ -29,9 +29,9 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 ## 快速使用
 
-1. ### Maven导入
+### Maven导入
 
-   在项目的pom.xml的dependencies中加入以下内容: 点击查看[最新版本 ${excel-x.version}](https://search.maven.org/artifact/top.minwk/excel-x)
+在项目的pom.xml的dependencies中加入以下内容: 点击查看[最新版本 ${excel-x.version}](https://search.maven.org/artifact/top.minwk/excel-x)
 
 ```xml
 <dependency>
@@ -41,358 +41,360 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 </dependency>
 ```
 
-2. ### 示例
+### 示例
 
-   - #### 注解使用示例代码 
+*[具体功能使用示例可见版本更迭](https://gitee.com/mwk719/excel-batch-picture-support#%E7%89%88%E6%9C%AC%E6%9B%B4%E8%BF%AD)*
 
-     ```java
-     @GetMapping("/export/lastversion/{row}")
-     public void exportLastVersion(HttpServletResponse response, @PathVariable int row) throws IOException {
-          /*
-          操作窗口
-          当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
-          会刷新数据到流,调用该方法
-          {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
-          将图片刷新在磁盘中
-          不会占用内存空间
-          flushSize = -1 时不刷新流
-          */
-          Workbook workBook = Workbook.getInstance(1);
-          Sheet sheet = workBook.createSheet("测试");
-          // 给标题行加上背景色，加颜色时，会对字体加粗
-          sheet.addCellStyle(new CellStyle(0, "66cc66"));
-          List<UserPicture> list = new ArrayList<>();
-          UserPicture userPicture;
-          for (int r = 0; r < row; r++) {
-              userPicture = new UserPicture();
-              userPicture.setAge(15);
-              userPicture.setName("测试-" + r);
-              // 导出本地单张图片
-              userPicture.setPicture("E:\\test\\img\\1.jpg");
-              // 导出url单张图片
-              userPicture.setHeaderPicture("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
-              // 导出本地图片集合
-              userPicture.setPictures(Arrays.asList("E:\\test\\img\\1.jpg","E:\\test\\img\\2.jpg"));
-              // 导出url图片集合
-              userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
-                      "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
-              list.add(userPicture);
-          }
-          sheet.write(UserPicture.class).createRow(list);
-          WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+- #### 注解使用示例代码 
+
+  ```java
+  @GetMapping("/export/lastversion/{row}")
+  public void exportLastVersion(HttpServletResponse response, @PathVariable int row) throws IOException {
+       /*
+       操作窗口
+       当写入excel数据行数大于flushSize时{@link Sheet.SheetHandler#createRow(int)},
+       会刷新数据到流,调用该方法
+       {@link  com.ibiz.excel.picture.support.flush.DrawingXmlRelsHandler#copyPictureAppendDrawingRelsXML(Sheet, Picture)}
+       将图片刷新在磁盘中
+       不会占用内存空间
+       flushSize = -1 时不刷新流
+       */
+       Workbook workBook = Workbook.getInstance(1);
+       Sheet sheet = workBook.createSheet("测试");
+       // 给标题行加上背景色，加颜色时，会对字体加粗
+       sheet.addCellStyle(new CellStyle(0, "66cc66"));
+       List<UserPicture> list = new ArrayList<>();
+       UserPicture userPicture;
+       for (int r = 0; r < row; r++) {
+           userPicture = new UserPicture();
+           userPicture.setAge(15);
+           userPicture.setName("测试-" + r);
+           // 导出本地单张图片
+           userPicture.setPicture("E:\\test\\img\\1.jpg");
+           // 导出url单张图片
+           userPicture.setHeaderPicture("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
+           // 导出本地图片集合
+           userPicture.setPictures(Arrays.asList("E:\\test\\img\\1.jpg","E:\\test\\img\\2.jpg"));
+           // 导出url图片集合
+           userPicture.setUrlPictures(Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
+                   "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"));
+           list.add(userPicture);
+       }
+       sheet.write(UserPicture.class).createRow(list);
+       WebUtil.writeExcel(workBook, "最新使用示例代码导出".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+   }
+  ```
+
+  ```java
+  /**
+   * @auther 喻场
+   * @date 2020/7/813:41
+   */
+  public class UserPicture {
+  
+      public UserPicture() {
       }
-     ```
+  
+      @ExportModel( sort = 0, title = "姓名")
+      private String name;
+      @ExportModel(sort = 1, title = "年龄")
+      private Integer age;
+      @ExportModel(sort = 3, title = "部门")
+      private String department;
+      @ExportModel(sort = 2, isPicture = true, title = "图片1")
+      private String picture;
+      @ExportModel(sort = 4, isPicture = true, title = "图片2")
+      private String headerPicture;
+      @ExportModel(sort = 5, isPicture = true, title = "多图片")
+      private List<String> pictures;
+      @ExportModel(sort = 6, isPicture = true, title = "url多图片")
+      private List<String> urlPictures;
+  
+      public UserPicture(String name, Integer age, String department, String picture) {
+          this.name = name;
+          this.age = age;
+          this.department = department;
+          this.picture = picture;
+      }
+  
+      public String getName() {
+          return name;
+      }
+  
+      public void setName(String name) {
+          this.name = name;
+      }
+  
+      public Integer getAge() {
+          return age;
+      }
+  
+      public void setAge(Integer age) {
+          this.age = age;
+      }
+  
+      public String getDepartment() {
+          return department;
+      }
+  
+      public void setDepartment(String department) {
+          this.department = department;
+      }
+  
+      public String getPicture() {
+          return picture;
+      }
+  
+      public void setPicture(String picture) {
+          this.picture = picture;
+      }
+  
+      public String getHeaderPicture() {
+          return headerPicture;
+      }
+  
+      public void setHeaderPicture(String headerPicture) {
+          this.headerPicture = headerPicture;
+      }
+  
+      public List<String> getPictures() {
+          return pictures;
+      }
+  
+      public void setPictures(List<String> pictures) {
+          this.pictures = pictures;
+      }
+  
+      public List<String> getUrlPictures() {
+          return urlPictures;
+      }
+  
+      public void setUrlPictures(List<String> urlPictures) {
+          this.urlPictures = urlPictures;
+      }
+  }
+  
+  ```
 
-     ```java
-     /**
-      * @auther 喻场
-      * @date 2020/7/813:41
-      */
-     public class UserPicture {
-     
-         public UserPicture() {
-         }
-     
-         @ExportModel( sort = 0, title = "姓名")
-         private String name;
-         @ExportModel(sort = 1, title = "年龄")
-         private Integer age;
-         @ExportModel(sort = 3, title = "部门")
-         private String department;
-         @ExportModel(sort = 2, isPicture = true, title = "图片1")
-         private String picture;
-         @ExportModel(sort = 4, isPicture = true, title = "图片2")
-         private String headerPicture;
-         @ExportModel(sort = 5, isPicture = true, title = "多图片")
-         private List<String> pictures;
-         @ExportModel(sort = 6, isPicture = true, title = "url多图片")
-         private List<String> urlPictures;
-     
-         public UserPicture(String name, Integer age, String department, String picture) {
-             this.name = name;
-             this.age = age;
-             this.department = department;
-             this.picture = picture;
-         }
-     
-         public String getName() {
-             return name;
-         }
-     
-         public void setName(String name) {
-             this.name = name;
-         }
-     
-         public Integer getAge() {
-             return age;
-         }
-     
-         public void setAge(Integer age) {
-             this.age = age;
-         }
-     
-         public String getDepartment() {
-             return department;
-         }
-     
-         public void setDepartment(String department) {
-             this.department = department;
-         }
-     
-         public String getPicture() {
-             return picture;
-         }
-     
-         public void setPicture(String picture) {
-             this.picture = picture;
-         }
-     
-         public String getHeaderPicture() {
-             return headerPicture;
-         }
-     
-         public void setHeaderPicture(String headerPicture) {
-             this.headerPicture = headerPicture;
-         }
-     
-         public List<String> getPictures() {
-             return pictures;
-         }
-     
-         public void setPictures(List<String> pictures) {
-             this.pictures = pictures;
-         }
-     
-         public List<String> getUrlPictures() {
-             return urlPictures;
-         }
-     
-         public void setUrlPictures(List<String> urlPictures) {
-             this.urlPictures = urlPictures;
-         }
-     }
-     
-     ```
+- #### 动态配置表头excel导出示例代码 
 
-   - #### 动态配置表头excel导出示例代码 
+  *实体对象需要实现BizExcelPojoInterface接口*
 
-     *实体对象需要实现BizExcelPojoInterface接口*
+  ```java
+  @GetMapping("/export/dynamic-config-header")
+      public void exportDynamicConfigHeader(HttpServletResponse response) throws IOException {
+          // 模拟需要导出的数据集合
+          List<Student> students = new ArrayList<>();
+          students.add(new Student("李四", 16, null, null, 0));
+          students.add(new Student("张三", 17, null,
+                  Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
+                  "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"), 1));
+          students.add(new Student("王五", 15, IMG_PATH_1, null, 2));
+  
+          // 配置导出excel的表头、顺序、对应导出的数据集合的字段、是否是图片、单元格宽度等
+          List<BizExcelRel> excels = new ArrayList<>();
+          excels.add(new BizExcelRel("姓名", "name", 2));
+          excels.add(new BizExcelRel("年龄", "age", 3));
+          excels.add(new BizExcelRel("表现", "performance", 4));
+          excels.add(new BizExcelRel("头像", "headPicture", 5, true, 20));
+          excels.add(new BizExcelRel("相册", "album", 6, true));
+  
+          // 创建excel
+          Workbook workBook = Workbook.getInstance(100);
+          Sheet sheet = workBook.createSheet("测试");
+          // 创建样式
+          CellStyle cellStyle = new CellStyle(0, "F0F0F0");
+          // 创建数据字典
+          Map<String, String> performanceMap = new HashMap<>(3);
+          performanceMap.put("0", "一般");
+          performanceMap.put("1", "良好");
+          performanceMap.put("2", "优秀");
+  
+          // 构建sheet
+          ExcelTableProcessor.sheet(sheet)
+                  // 添加样式
+                  .addCellStyle(cellStyle)
+                  // 添加对应属性字段的数据字典
+                  .registryEnumMap("performance", performanceMap)
+                  // 构建excel
+                  .buildExcel(excels, students);
+          WebUtil.writeExcel(workBook, "ExportExampleDynamicConfigHeader".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
+      }
+  ```
 
-     ```java
-     @GetMapping("/export/dynamic-config-header")
-         public void exportDynamicConfigHeader(HttpServletResponse response) throws IOException {
-             // 模拟需要导出的数据集合
-             List<Student> students = new ArrayList<>();
-             students.add(new Student("李四", 16, null, null, 0));
-             students.add(new Student("张三", 17, null,
-                     Arrays.asList("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png",
-                     "https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto"), 1));
-             students.add(new Student("王五", 15, IMG_PATH_1, null, 2));
-     
-             // 配置导出excel的表头、顺序、对应导出的数据集合的字段、是否是图片、单元格宽度等
-             List<BizExcelRel> excels = new ArrayList<>();
-             excels.add(new BizExcelRel("姓名", "name", 2));
-             excels.add(new BizExcelRel("年龄", "age", 3));
-             excels.add(new BizExcelRel("表现", "performance", 4));
-             excels.add(new BizExcelRel("头像", "headPicture", 5, true, 20));
-             excels.add(new BizExcelRel("相册", "album", 6, true));
-     
-             // 创建excel
-             Workbook workBook = Workbook.getInstance(100);
-             Sheet sheet = workBook.createSheet("测试");
-             // 创建样式
-             CellStyle cellStyle = new CellStyle(0, "F0F0F0");
-             // 创建数据字典
-             Map<String, String> performanceMap = new HashMap<>(3);
-             performanceMap.put("0", "一般");
-             performanceMap.put("1", "良好");
-             performanceMap.put("2", "优秀");
-     
-             // 构建sheet
-             ExcelTableProcessor.sheet(sheet)
-                     // 添加样式
-                     .addCellStyle(cellStyle)
-                     // 添加对应属性字段的数据字典
-                     .registryEnumMap("performance", performanceMap)
-                     // 构建excel
-                     .buildExcel(excels, students);
-             WebUtil.writeExcel(workBook, "ExportExampleDynamicConfigHeader".concat(String.valueOf(System.currentTimeMillis())).concat(".xlsx"), response);
-         }
-     ```
+  ```java
+  public class Student implements BizExcelPojoInterface {
+  
+      public Student(String name, Integer age) {
+          this.name = name;
+          this.age = age;
+      }
+  
+      public Student(String name, Integer age, String headPicture) {
+          this.name = name;
+          this.age = age;
+          this.headPicture = headPicture;
+      }
+  
+      public Student(String name, Integer age, String headPicture, List<String> album, Integer performance) {
+          this.name = name;
+          this.age = age;
+          this.headPicture = headPicture;
+          this.album = album;
+          this.performance = performance;
+      }
+  
+      private String name;
+  
+      private Integer age;
+  
+      private String headPicture;
+  
+      /**
+       * 相册
+       */
+      private List<String> album;
+  
+      /**
+       * 表现 0一般；1良好；2优秀
+       */
+      private Integer performance;
+  
+      public Integer getPerformance() {
+          return performance;
+      }
+  
+      public void setPerformance(Integer performance) {
+          this.performance = performance;
+      }
+  
+      public List<String> getAlbum() {
+          return album;
+      }
+  
+      public void setAlbum(List<String> album) {
+          this.album = album;
+      }
+  
+      public String getHeadPicture() {
+          return headPicture;
+      }
+  
+      public void setHeadPicture(String headPicture) {
+          this.headPicture = headPicture;
+      }
+  
+      public String getName() {
+          return name;
+      }
+  
+      public void setName(String name) {
+          this.name = name;
+      }
+  
+      public Integer getAge() {
+          return age;
+      }
+  
+      public void setAge(Integer age) {
+          this.age = age;
+      }
+  }
+  ```
 
-     ```java
-     public class Student implements BizExcelPojoInterface {
-     
-         public Student(String name, Integer age) {
-             this.name = name;
-             this.age = age;
-         }
-     
-         public Student(String name, Integer age, String headPicture) {
-             this.name = name;
-             this.age = age;
-             this.headPicture = headPicture;
-         }
-     
-         public Student(String name, Integer age, String headPicture, List<String> album, Integer performance) {
-             this.name = name;
-             this.age = age;
-             this.headPicture = headPicture;
-             this.album = album;
-             this.performance = performance;
-         }
-     
-         private String name;
-     
-         private Integer age;
-     
-         private String headPicture;
-     
-         /**
-          * 相册
-          */
-         private List<String> album;
-     
-         /**
-          * 表现 0一般；1良好；2优秀
-          */
-         private Integer performance;
-     
-         public Integer getPerformance() {
-             return performance;
-         }
-     
-         public void setPerformance(Integer performance) {
-             this.performance = performance;
-         }
-     
-         public List<String> getAlbum() {
-             return album;
-         }
-     
-         public void setAlbum(List<String> album) {
-             this.album = album;
-         }
-     
-         public String getHeadPicture() {
-             return headPicture;
-         }
-     
-         public void setHeadPicture(String headPicture) {
-             this.headPicture = headPicture;
-         }
-     
-         public String getName() {
-             return name;
-         }
-     
-         public void setName(String name) {
-             this.name = name;
-         }
-     
-         public Integer getAge() {
-             return age;
-         }
-     
-         public void setAge(Integer age) {
-             this.age = age;
-         }
-     }
-     ```
+- [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
 
-   - [excel含图片导出demo地址](https://gitee.com/mwk719/excel-batch-picture-support/tree/dev/src/test/java/com/ibiz/excel/picture/support/example)，具体使用以后缀最新日期为准，其他示例仅供测试
+- [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
 
-   - [微云-6767张图片共800mb资源.rar 可用于测试](https://minwk.top/big-size-img/) 
+- [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
 
-   - [项目中导出下载excel使用示例](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java)
+#### 项目中测试使用
 
-   #### 项目中测试使用
+1. 设置项目jvm堆栈大小都是20m
 
-   1. 设置项目jvm堆栈大小都是20m
+   ```bash
+   -Xms20m -Xmx20m -Dfile.encoding=UTF-8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:\log\springlearn.hprof
+   ```
 
-      ```bash
-      -Xms20m -Xmx20m -Dfile.encoding=UTF-8 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:\log\springlearn.hprof
-      ```
+2. 复制上方 【最新使用示例代码】到项目中
 
-   2. 复制上方 【最新使用示例代码】到项目中
+3. 找一堆图片随机添加到UserPicture中
 
-   3. 找一堆图片随机添加到UserPicture中
+4. 导出一个5000条的记录，在最大堆栈占用为20m的情况下，导出excel大小为700m，未发生内存溢出情况
 
-   4. 导出一个5000条的记录，在最大堆栈占用为20m的情况下，导出excel大小为700m，未发生内存溢出情况
+## 版本更迭
 
-3. ### 版本更迭
+*点击可跳转链接可以查看功能使用示例*
 
-   *点击可跳转链接可以查看功能使用示例*
+#### 2.4.1(2023.06.06)
 
-   #### 2.4.1(2023.06.06)
+- [添加对全局边框进行加粗、对单元格边框加粗配置](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java#L64)
+- 修复Microsoft Excel2010打开单元格超宽问题
+- 优化创建标题时控制列顺序
 
-   - [添加对全局边框进行加粗、对单元格边框加粗配置](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java#L64)
-   - 修复Microsoft Excel2010打开单元格超宽问题
-   - 优化创建标题时控制列顺序
+#### 2.4.0(2023.01.12)
 
-   #### 2.4.0(2023.01.12)
+- [添加可以给单个单元格设置样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java)
 
-   - [添加可以给单个单元格设置样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230110.java)
+#### 2.3.1(2022.12.19)
 
-   #### 2.3.1(2022.12.19)
+- 修复渲染生成列元素A-Z坐标时，使用到Z时，下一列从AA开始
+- 修复行元素为空时合并单元格错误
 
-   - 修复渲染生成列元素A-Z坐标时，使用到Z时，下一列从AA开始
-   - 修复行元素为空时合并单元格错误
+#### 2.3.0(2022.02.23)
 
-   #### 2.3.0(2022.02.23)
+- [添加可动态配置表头excel导出](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L285)
 
-   - [添加可动态配置表头excel导出](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L285)
+#### 2.2.2(2022.02.08)
 
-   #### 2.2.2(2022.02.08)
+- 修复合并后的单元格没有边框线
 
-   - 修复合并后的单元格没有边框线
+#### 2.2.1(2022.01.28)
 
-   #### 2.2.1(2022.01.28)
+- [优化对合并单元格的处理](https://gitee.com/mwk719/excel-batch-picture-support/blob/master/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20220128.java#L30)
 
-   - [优化对合并单元格的处理](https://gitee.com/mwk719/excel-batch-picture-support/blob/master/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20220128.java#L30)
+#### 2.2.0(2022.01.27)
 
-   #### 2.2.0(2022.01.27)
+- [添加导出excel中字体设置](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L243)
 
-   - [添加导出excel中字体设置](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L243)
+#### 2.1.0(2022.01.14)
 
-   #### 2.1.0(2022.01.14)
+- [添加导出网络链接图片到excel中](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L146)
+- [添加createRow集合列表生成excel方法](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L191)
+- 修改CellStyle样式的使用
 
-   - [添加导出网络链接图片到excel中](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L146)
-   - [添加createRow集合列表生成excel方法](https://gitee.com/mwk719/spring-learn/blob/master/src/main/java/com/mwk/external/controller/ExcelController.java#L191)
-   - 修改CellStyle样式的使用
+#### 2.0.0(2021.12.30)
 
-   #### 2.0.0(2021.12.30)
+- [添加用户可自定义背景色样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
+- [添加使用注解可对图片集合进行导出](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
+- 添加自定义图片的高度；图片高度和单元格高度自适应
+- 修复导出图片集合变多时单元格宽度不够
+- 修复导出数据行数大于100 excel打开异常
+- 修复导出多组图片excel中缺失部分图片问题
 
-   - [添加用户可自定义背景色样式](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
-   - [添加使用注解可对图片集合进行导出](https://gitee.com/mwk719/excel-batch-picture-support/blob/dev/src/test/java/com/ibiz/excel/picture/support/example/AnnotationPicturesExportExample.java)
-   - 添加自定义图片的高度；图片高度和单元格高度自适应
-   - 修复导出图片集合变多时单元格宽度不够
-   - 修复导出数据行数大于100 excel打开异常
-   - 修复导出多组图片excel中缺失部分图片问题
+#### 1.0.4(2021.12.08)
 
-   #### 1.0.4(2021.12.08)
+- 添加使用注解导出含图片或文本的使用示例
+- 修复图片遮挡所在单元格边框线
+- 修复f使用注解导出图片所在下边框不是加粗实线
 
-   - 添加使用注解导出含图片或文本的使用示例
-   - 修复图片遮挡所在单元格边框线
-   - 修复f使用注解导出图片所在下边框不是加粗实线
+#### 1.0.3(2021.02.26)
 
-   #### 1.0.3(2021.02.26)
+- 简化使用示例
+- 修复flushSize = -1 时不刷新流
+- 修复其他未知问题
 
-   - 简化使用示例
-   - 修复flushSize = -1 时不刷新流
-   - 修复其他未知问题
+#### 1.0.2(2021.01.26)
 
-   #### 1.0.2(2021.01.26)
+-  修复MD5时未关闭流
 
-   -  修复MD5时未关闭流
+#### 1.0.1(2021.01.23)
 
-   #### 1.0.1(2021.01.23)
-
-   - 添加合并单元列值
-   - 添加设置单元格背景色
-   - 添加可自定义单元格宽度
-   - 添加设置字体，目前有默认字体
-   - 修复office打开提示需修复的问题
+- 添加合并单元列值
+- 添加设置单元格背景色
+- 添加可自定义单元格宽度
+- 添加设置字体，目前有默认字体
+- 修复office打开提示需修复的问题
 
 ## 组件介绍
 
