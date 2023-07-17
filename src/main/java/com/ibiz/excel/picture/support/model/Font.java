@@ -82,5 +82,15 @@ public class Font{
     }
 
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Font{");
+        sb.append("fontId=").append(fontId);
+        sb.append(", fontName='").append(fontName).append('\'');
+        sb.append(", boldWeight=").append(boldWeight);
+        sb.append(", color='").append(color).append('\'');
+        sb.append(", fontHeightInPoints=").append(fontHeightInPoints);
+        sb.append('}');
+        return sb.toString();
+    }
 }

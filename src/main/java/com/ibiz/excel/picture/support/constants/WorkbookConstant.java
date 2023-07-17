@@ -44,6 +44,24 @@ public class WorkbookConstant {
     public static int BORDER_BOLD = 1;
 
     /**
+     * 设置自动换行
+     * 1表示自动换行
+     */
+    public static int WRAP_TEXT = 0;
+
+    /**
+     * 垂直对齐方式
+     * 默认居中对齐
+     */
+    public static String VERTICAL = "center";
+
+    /**
+     * 水平对齐方式
+     * 默认居中对齐
+     */
+    public static String HORIZONTAL = "center";
+
+    /**
      * 边框加粗，true加粗，false不加粗
      * @param borderBold
      */

@@ -5,7 +5,6 @@ package com.ibiz.excel.picture.support.model;
  * @date 2020/7/217:31
  */
 public class Cell {
-    private final String[] CELL_NUMBER_LINE = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private int cellNumber;//第几列
     private int rowNumber;//行号
     private String colNumber = "";//列号 例 A1  B1
@@ -41,14 +40,15 @@ public class Cell {
      * @param cellNumber
      */
     public void autoSetCell(int rowNumber, int cellNumber) {
-        int line = cellNumber;
-        if (cellNumber >= CELL_NUMBER_LINE.length) {
-            line = cellNumber - CELL_NUMBER_LINE.length;
-            colNumber += "A";
+        StringBuilder colName = new StringBuilder();
+        int mod;
+        while (cellNumber > 0) {
+            mod = (cellNumber - 1) % 26;
+            colName.insert(0, (char) ('A' + mod));
+            cellNumber = (cellNumber - 1) / 26;
         }
-        col += colNumber + CELL_NUMBER_LINE[line];
-        colNumber = "";
-        colNumber += CELL_NUMBER_LINE[line] + (rowNumber + 1);
+        colNumber = colName.toString();
+        col += colNumber + (rowNumber + 1);
     }
 
     public String getColNumber() {
