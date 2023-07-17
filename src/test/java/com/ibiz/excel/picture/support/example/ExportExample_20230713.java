@@ -71,6 +71,9 @@ public class ExportExample_20230713 extends BaseJunitTest {
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
                 new CellStyle(0, "66cc66")
+                , CellStyle.build().setColNumber(0).setRowNumber(1).setColLast(true).setFgColorRgb("FFEFDB")
+                        // 表示自动换行，左对齐+底端对齐
+                .setAlignment(Alignment.build().setWrapText(1).setHorizontal(Alignment.LEFT).setVertical(Alignment.BOTTOM))
                 // 表示在excel中从第2列，第3行开始一直往下，该列都保持该样式背景色#9F79EE
                 , CellStyle.build().setColNumber(1).setRowNumber(2).setColLast(true).setFgColorRgb("9F79EE")
         );

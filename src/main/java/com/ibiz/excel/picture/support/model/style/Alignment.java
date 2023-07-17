@@ -14,6 +14,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "alignment")
 public class Alignment extends XmlAbstract {
 
+    /**
+     * 对齐方向默认值
+     */
+    public static final String CENTER = "center";
+    public static final String LEFT = "left";
+    public static final String RIGHT = "right";
+    public static final String TOP = "top";
+    public static final String BOTTOM = "bottom";
+
     public static Alignment build() {
         return new Alignment();
     }
