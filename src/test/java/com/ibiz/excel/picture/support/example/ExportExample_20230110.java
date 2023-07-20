@@ -33,7 +33,7 @@ public class ExportExample_20230110 extends BaseJunitTest {
             userPicture.setAge(15);
             userPicture.setName("测试-" + r);
             // 导出本地单张图片
-            userPicture.setPicture(IMG_PATH_1);
+//            userPicture.setPicture(IMG_PATH_1);
             // 导出url单张图片
             userPicture.setHeaderPicture(getUrl());
             // 导出本地图片集合
@@ -70,8 +70,8 @@ public class ExportExample_20230110 extends BaseJunitTest {
         Sheet sheet = workBook.createSheet("测试");
 
         //要进行合并的列
-        sheet.addMergeCell(new MergeCell(0, 0, 0, 2));
-
+        sheet.addMergeCell(new MergeCell(1, 0, 3, 0));
+        sheet.addMergeCell(new MergeCell(0, 1, 0, 3));
         // 创建样式
         List<CellStyle> cellStyles = Arrays.asList(
                 new CellStyle(0, "66cc66"),

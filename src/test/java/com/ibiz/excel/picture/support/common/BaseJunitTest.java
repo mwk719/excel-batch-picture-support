@@ -35,9 +35,7 @@ public class BaseJunitTest {
 
     static {
         URLS.add("https://portrait.gitee.com/uploads/avatars/user/552/1657608_mwk719_1641537497.png");
-        URLS.add("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F060421091316%2F210604091316-6-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644142768&t=82062e20360f72b0fd8d5fd7e2fc9885");
         URLS.add("https://img2.baidu.com/it/u=121102239,1207969661&fm=253&fmt=auto&app=120&f=JPEG?w=1195&h=500");
-        URLS.add("https://img2.baidu.com/it/u=2602880481,728201544&fm=26&fmt=auto");
 
         LOCAL_TEST_FILES = FileUtil.ls(IMAGES_PATH);
     }

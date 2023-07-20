@@ -90,9 +90,9 @@ public class Sheet1Handler implements InvocationHandler {
                     Cell start = new Cell(m.getFirstRow(), m.getFirstCol());
                     Cell end = new Cell(m.getLastRow(), m.getLastCol());
                     content.append("<mergeCell ref=\"")
-                            .append(start.getColNumber())
+                            .append(start.getCol())
                             .append(":")
-                            .append(end.getColNumber())
+                            .append(end.getCol())
                             .append("\"/>");
                 } else {
                     colCells.forEach(c -> content
