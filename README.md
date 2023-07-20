@@ -330,6 +330,10 @@ excel文件由声明,表数据,单元格数据,媒体文件等等组件组成,
 
 *点击可跳转链接可以查看功能使用示例*
 
+### 2.4.3(2023.07.20)
+
+- 修复单元格合并错误
+
 #### 2.4.2(2023.07.17)
 
 - [添加内容对齐操作(自动换行、上下左右)](https://gitee.com/mwk719/excel-batch-picture-support/blob/master/src/test/java/com/ibiz/excel/picture/support/example/ExportExample_20230713.java#L74)（[issues#I7IO5K](https://gitee.com/mwk719/excel-batch-picture-support/issues/I7IO5K)）
